@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課程 Khóa học - POC - WZULTC</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .course-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        .course-card h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+        }
+        .course-card p {
+            margin: 5px 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        .course-card.course-00 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .course-card.course-01 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .course-card.course-02 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        .course-card.course-03 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        .nav-links {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+        .nav-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 台越照護華語課程</h1>
+        <p class="subtitle">Khóa học Hoa ngữ Chăm sóc Đài - Việt</p>
+
+        <div class="course-grid">
+            <a href="00/" class="course-card course-00">
+                <h2>第零課</h2>
+                <p>Bài học 0</p>
+                <p>入門級</p>
+            </a>
+
+            <a href="01/" class="course-card course-01">
+                <h2>第一課</h2>
+                <p>Bài học 1</p>
+                <p>入門級</p>
+            </a>
+
+            <a href="02/" class="course-card course-02">
+                <h2>第二課</h2>
+                <p>Bài học 2</p>
+                <p>入門級</p>
+            </a>
+
+            <a href="03/" class="course-card course-03">
+                <h2>第三課</h2>
+                <p>Bài học 3</p>
+                <p>入門級</p>
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="../">← 返回 POC 首頁</a>
+            <a href="/">返回網站首頁</a>
+        </div>
+    </div>
+</body>
+</html>
