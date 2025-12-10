@@ -12,7 +12,7 @@
 // Google Analytics 4 配置
 // ============================================
 // 請將下方的 'G-XXXXXXXXXX' 替換成您的 GA4 測量 ID
-window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+window.GA_MEASUREMENT_ID = 'G-BVRSLNTQWS';
 
 // 初始化 Google Analytics
 function initGA4() {
