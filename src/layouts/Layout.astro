@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'WZULTC 文藻跨語照護計畫 - 提供越南移工華語教學與文化適應支援' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- SEO -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen flex flex-col bg-gray-50">
+    <Header />
+
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Google Analytics -->
+    <script src="/assets/js/analytics.js" is:inline></script>
+  </body>
+</html>

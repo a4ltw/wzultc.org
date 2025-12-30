@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="活動剪影 - WZULTC" description="文藻跨語照護計畫活動照片與精彩回顧">
+  <div class="container mx-auto px-4 py-12 max-w-6xl">
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        活動剪影
+      </h1>
+      <p class="text-xl text-gray-600">
+        記錄我們的精彩時刻
+      </p>
+    </div>
+
+    <!-- Coming Soon Message -->
+    <section class="bg-white rounded-xl shadow-lg p-12 text-center">
+      <div class="max-w-2xl mx-auto">
+        <div class="w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">
+          精彩內容即將上線
+        </h2>
+        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+          我們正在整理歷次活動的精彩照片與影片，
+          很快就會在這裡與大家分享。
+          敬請期待！
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/news"
+            class="inline-block bg-pink-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
+          >
+            查看最新消息
+          </a>
+          <a
+            href="/"
+            class="inline-block bg-gray-200 text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+          >
+            返回首頁
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activity Categories -->
+    <section class="mt-12 grid md:grid-cols-3 gap-6">
+      <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl p-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-3">教學活動</h3>
+        <p class="text-gray-600">華語課程、工作坊與實務訓練的精彩瞬間</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-3">文化交流</h3>
+        <p class="text-gray-600">台越文化交流活動與節慶慶祝</p>
+      </div>
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-3">學伴相見歡</h3>
+        <p class="text-gray-600">學伴團隊聚會與互動活動</p>
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="媒體報導 - WZULTC" description="文藻跨語照護計畫媒體報導與新聞">
+  <div class="container mx-auto px-4 py-12 max-w-5xl">
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        媒體報導
+      </h1>
+      <p class="text-xl text-gray-600">
+        媒體關注與報導
+      </p>
+    </div>
+
+    <!-- Coming Soon -->
+    <section class="bg-white rounded-xl shadow-lg p-12 text-center">
+      <div class="max-w-2xl mx-auto">
+        <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+          </svg>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">
+          媒體報導即將整理上線
+        </h2>
+        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+          我們正在彙整各大媒體對本計畫的報導與專訪內容，
+          很快就會在這裡分享給大家。
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/news"
+            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+          >
+            查看最新消息
+          </a>
+          <a
+            href="/about"
+            class="inline-block bg-gray-200 text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+          >
+            關於計畫
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Media Types -->
+    <section class="mt-12 grid md:grid-cols-3 gap-6">
+      <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl p-6 text-center">
+        <svg class="w-12 h-12 mx-auto mb-3 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+        </svg>
+        <h3 class="text-lg font-bold text-gray-800 mb-2">平面媒體</h3>
+        <p class="text-gray-600 text-sm">報紙、雜誌專題報導</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 text-center">
+        <svg class="w-12 h-12 mx-auto mb-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+        <h3 class="text-lg font-bold text-gray-800 mb-2">影音媒體</h3>
+        <p class="text-gray-600 text-sm">電視新聞、專訪影片</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 text-center">
+        <svg class="w-12 h-12 mx-auto mb-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        </svg>
+        <h3 class="text-lg font-bold text-gray-800 mb-2">網路媒體</h3>
+        <p class="text-gray-600 text-sm">線上新聞、社群報導</p>
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="合作場域 - WZULTC" description="文藻跨語照護計畫合作夥伴與場域">
+  <div class="container mx-auto px-4 py-12 max-w-6xl">
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        合作場域
+      </h1>
+      <p class="text-xl text-gray-600">
+        攜手共創跨文化照護環境
+      </p>
+    </div>
+
+    <!-- Introduction -->
+    <section class="bg-white rounded-xl shadow-lg p-8 mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+        合作夥伴
+      </h2>
+      <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+        <p>
+          本計畫與多個長照機構、社福團體及教育單位合作，
+          共同為越南移工提供華語學習與文化適應支援。
+        </p>
+        <p>
+          透過產學合作模式，我們將理論與實務結合，
+          為移工創造更友善的工作環境，同時提升照護服務品質。
+        </p>
+      </div>
+    </section>
+
+    <!-- Partners Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div class="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-8 text-center">
+        <div class="w-20 h-20 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-md">
+          <svg class="w-10 h-10 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800">長照機構</h3>
+        <p class="text-gray-600 mt-2 text-sm">提供實習與實務訓練場域</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 text-center">
+        <div class="w-20 h-20 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-md">
+          <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800">社福團體</h3>
+        <p class="text-gray-600 mt-2 text-sm">移工服務與支持網絡</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 text-center">
+        <div class="w-20 h-20 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-md">
+          <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800">教育單位</h3>
+        <p class="text-gray-600 mt-2 text-sm">學術研究與教學合作</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl p-8 text-center text-white">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">
+        有興趣成為合作夥伴？
+      </h2>
+      <p class="text-lg mb-6 opacity-90">
+        歡迎與我們聯繫，共同為移工朋友創造更好的學習環境
+      </p>
+      <a
+        href="/contact"
+        class="inline-block bg-white text-pink-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+      >
+        聯絡我們
+      </a>
+    </section>
+  </div>
+</Layout>

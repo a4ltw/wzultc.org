@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// 團隊成員資料（可以之後替換成真實資料）
+const teamMembers = [
+  {
+    name: '計畫主持人',
+    title: '文藻外語大學',
+    role: '教授',
+    image: '/assets/team/placeholder.jpg',
+  },
+  {
+    name: '協同主持人',
+    title: '文藻外語大學',
+    role: '副教授',
+    image: '/assets/team/placeholder.jpg',
+  },
+  {
+    name: '研究助理',
+    title: '文藻外語大學',
+    role: '研究團隊',
+    image: '/assets/team/placeholder.jpg',
+  },
+];
+---
+
+<Layout title="主持團隊 - WZULTC" description="文藻跨語照護計畫團隊成員介紹">
+  <div class="container mx-auto px-4 py-12 max-w-6xl">
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        主持團隊
+      </h1>
+      <p class="text-xl text-gray-600">
+        專業、熱忱的計畫團隊
+      </p>
+    </div>
+
+    <!-- Team Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      {teamMembers.map((member) => (
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="aspect-square bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center">
+            <svg class="w-32 h-32 text-white opacity-50" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+          </div>
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">{member.name}</h3>
+            <p class="text-gray-600 mb-1">{member.title}</p>
+            <p class="text-pink-600 font-semibold">{member.role}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Team Description -->
+    <section class="bg-white rounded-xl shadow-lg p-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+        關於我們的團隊
+      </h2>
+      <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-4">
+        <p>
+          本計畫團隊由文藻外語大學多位專業教師與研究人員組成，
+          結合華語教學、跨文化溝通、社會工作等多元專業背景。
+        </p>
+        <p>
+          我們致力於提供越南移工最優質的華語教學與文化適應支援，
+          透過專業的教學設計與溫暖的陪伴，協助每位學習者在台灣安心生活、專業成長。
+        </p>
+      </div>
+    </section>
+  </div>
+</Layout>

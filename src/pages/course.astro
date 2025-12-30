@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const courses = [
+  { number: '零', vietnamese: 'Bài học 0', gradient: 'from-pink-400 to-rose-500', href: '/course/00' },
+  { number: '一', vietnamese: 'Bài học 1', gradient: 'from-blue-400 to-cyan-500', href: '/course/01' },
+  { number: '二', vietnamese: 'Bài học 2', gradient: 'from-green-400 to-emerald-500', href: '/course/02' },
+  { number: '三', vietnamese: 'Bài học 3', gradient: 'from-yellow-400 to-orange-500', href: '/course/03' },
+  { number: '四', vietnamese: 'Bài học 4', gradient: 'from-purple-500 to-indigo-600', href: '/course/04' },
+  { number: '五', vietnamese: 'Bài học 5', gradient: 'from-orange-300 to-purple-500', href: '/course/05' },
+  { number: '六', vietnamese: 'Bài học 6', gradient: 'from-indigo-300 to-blue-400', href: '/course/06' },
+];
+---
+
+<Layout title="華語教材 - WZULTC" description="文藻跨語照護華語課程，專為越南移工設計的照護華語教材">
+  <div class="container mx-auto px-4 py-12">
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        照護華語課程
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-600">
+        Khóa học Hoa ngữ Chăm sóc
+      </p>
+    </div>
+
+    <!-- Course Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      {courses.map((course) => (
+        <a
+          href={course.href}
+          class={`group bg-gradient-to-br ${course.gradient} rounded-xl p-8 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2`}
+        >
+          <h2 class="text-3xl font-bold mb-2">第{course.number}課</h2>
+          <p class="text-lg opacity-90 mb-2">{course.vietnamese}</p>
+          <p class="text-sm opacity-80">入門級</p>
+          <div class="mt-4 flex justify-end">
+            <svg
+              class="w-6 h-6 transform group-hover:translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Back Link -->
+    <div class="text-center mt-12">
+      <a
+        href="/"
+        class="inline-flex items-center text-pink-600 hover:text-pink-700 font-medium transition-colors"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        返回網站首頁
+      </a>
+    </div>
+  </div>
+</Layout>
