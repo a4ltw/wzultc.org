@@ -30,3 +30,6 @@ pnpm-debug.log*
 # backup
 docs_old_backup/
 astro-temp/
+t_newmaterial/
+t_20251215slide/
+t_recording/
