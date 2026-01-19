@@ -10,7 +10,8 @@ export default defineConfig({
 
   redirects: {
     '/fb': 'https://www.facebook.com/whc.usr',
-    '/yt': 'https://www.youtube.com/@wzuusr'
+    '/yt': 'https://www.youtube.com/@wzuusr',
+    '/ig': 'https://www.instagram.com/whc_usr/'
   },
 
   build: {
