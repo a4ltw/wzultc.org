@@ -26,7 +26,6 @@ const navItems = [
     ]
   },
   { href: '/enroll', label: '招募' },
-  { href: '/news', label: '最新消息' },
   { href: '/contact', label: '聯絡我們' },
 ];
 
@@ -39,7 +38,7 @@ const currentPath = Astro.url.pathname;
       <!-- Logo -->
       <a href="/" class="flex items-center space-x-3">
         <img src="/assets/logo.png" alt="WZULTC Logo" class="h-12 md:h-14 w-auto" />
-        <div class="text-xl md:text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent hidden sm:block">
+        <div class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 bg-clip-text text-transparent hidden sm:block">
           跨語照護
         </div>
       </a>
@@ -50,7 +49,7 @@ const currentPath = Astro.url.pathname;
           <li class="relative group">
             {item.children ? (
               <>
-                <button class="text-gray-700 hover:text-pink-600 font-medium transition-colors flex items-center">
+                <button class="text-gray-700 hover:text-teal-600 font-medium transition-colors flex items-center">
                   {item.label}
                   <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -61,7 +60,7 @@ const currentPath = Astro.url.pathname;
                     <li>
                       <a
                         href={child.href}
-                        class="block px-4 py-2 text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition-colors first:rounded-t-lg last:rounded-b-lg"
+                        class="block px-4 py-2 text-gray-700 hover:bg-cyan-50 hover:text-teal-600 transition-colors first:rounded-t-lg last:rounded-b-lg"
                       >
                         {child.label}
                       </a>
@@ -72,8 +71,8 @@ const currentPath = Astro.url.pathname;
             ) : (
               <a
                 href={item.href}
-                class={`text-gray-700 hover:text-pink-600 font-medium transition-colors ${
-                  currentPath === item.href ? 'text-pink-600' : ''
+                class={`text-gray-700 hover:text-teal-600 font-medium transition-colors ${
+                  currentPath === item.href ? 'text-teal-600' : ''
                 }`}
               >
                 {item.label}
@@ -86,7 +85,7 @@ const currentPath = Astro.url.pathname;
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden text-gray-700 hover:text-pink-600 focus:outline-none"
+        class="md:hidden text-gray-700 hover:text-teal-600 focus:outline-none"
         aria-label="開啟選單"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,7 +107,7 @@ const currentPath = Astro.url.pathname;
                     <li>
                       <a
                         href={child.href}
-                        class="block py-2 text-gray-600 hover:text-pink-600 transition-colors"
+                        class="block py-2 text-gray-600 hover:text-teal-600 transition-colors"
                       >
                         {child.label}
                       </a>
@@ -119,8 +118,8 @@ const currentPath = Astro.url.pathname;
             ) : (
               <a
                 href={item.href}
-                class={`block py-2 text-gray-700 hover:text-pink-600 transition-colors ${
-                  currentPath === item.href ? 'text-pink-600 font-semibold' : ''
+                class={`block py-2 text-gray-700 hover:text-teal-600 transition-colors ${
+                  currentPath === item.href ? 'text-teal-600 font-semibold' : ''
                 }`}
               >
                 {item.label}

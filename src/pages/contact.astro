@@ -18,13 +18,13 @@ import Layout from '../layouts/Layout.astro';
     <div class="grid md:grid-cols-3 gap-8 mb-12">
       <!-- Email -->
       <div class="bg-white rounded-xl shadow-lg p-8">
-        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6">
+        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500 rounded-full flex items-center justify-center mb-6">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
         </div>
         <h3 class="text-xl font-bold text-gray-800 mb-3">電子郵件</h3>
-        <a href="mailto:wzultc@gmail.com" class="text-pink-600 hover:text-pink-700 font-medium text-lg break-all">
+        <a href="mailto:wzultc@gmail.com" class="text-teal-600 hover:text-teal-700 font-medium text-lg break-all">
           wzultc@gmail.com
         </a>
       </div>
@@ -69,16 +69,16 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <!-- Quick Links -->
-    <section class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-8">
+    <section class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-8">
       <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
         快速連結
       </h2>
       <div class="grid sm:grid-cols-2 gap-4">
         <a
           href="/enroll"
-          class="bg-white hover:bg-pink-50 rounded-lg p-6 text-center shadow transition-colors group"
+          class="bg-white hover:bg-cyan-50 rounded-lg p-6 text-center shadow transition-colors group"
         >
-          <svg class="w-12 h-12 mx-auto mb-3 text-pink-600 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-12 h-12 mx-auto mb-3 text-teal-600 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
           </svg>
           <h3 class="text-lg font-semibold text-gray-800">招募資訊</h3>
@@ -98,33 +98,5 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="bg-white rounded-xl shadow-lg p-8 mt-8">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6">
-        常見問題
-      </h2>
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">如何報名成為越南學伴？</h3>
-          <p class="text-gray-600 leading-relaxed">
-            請前往<a href="/enroll" class="text-pink-600 hover:underline">招募頁面</a>填寫報名表單，
-            我們會盡快與您聯繫安排面試。
-          </p>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">課程是免費的嗎？</h3>
-          <p class="text-gray-600 leading-relaxed">
-            是的，本計畫提供的華語課程完全免費，歡迎符合資格的越南移工參加。
-          </p>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">如何取得更多資訊？</h3>
-          <p class="text-gray-600 leading-relaxed">
-            您可以寄信至 <a href="mailto:wzultc@gmail.com" class="text-pink-600 hover:underline">wzultc@gmail.com</a>，
-            或加入我們的 LINE 群組獲取最新消息。
-          </p>
-        </div>
-      </div>
-    </section>
   </div>
 </Layout>

@@ -3,27 +3,23 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="WZULTC - 文藻跨語照護計畫">
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-white py-20">
-    <div class="container mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6">
-        文藻跨語照護計畫
-      </h1>
-      <p class="text-xl md:text-2xl mb-8 opacity-90">
-        WZULTC - 跨文化華語教學與社會共融
-      </p>
-      <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto">
-        提供越南移工優質的華語教學與文化適應支援，促進跨文化理解與社會共融
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/about" class="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+  <!-- Hero Banner -->
+  <section class="bg-white">
+    <img
+      src="/assets/banner.jpg"
+      alt="台灣長照產業跨域整合 - 跨國移工文化適應與專業照護技能升級，合作單位：文藻外語大學、國家科學及技術委員會、高雄榮民總醫院"
+      class="w-full"
+    />
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center py-8">
+        <a href="/about" class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-teal-700 transition-all">
           了解計畫
         </a>
-        <a href="/enroll" class="bg-pink-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-pink-800 transition-colors">
+        <a href="/enroll" class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all">
           加入我們
         </a>
       </div>
-    </div>
+      </div>
   </section>
 
   <!-- Features Section -->
@@ -34,7 +30,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- Feature 1 -->
       <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
-        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500 rounded-full flex items-center justify-center mb-4">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
@@ -81,7 +77,7 @@ import Layout from '../layouts/Layout.astro';
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Link 1 -->
-        <a href="/course" class="group bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl p-6 text-white hover:shadow-2xl transition-all hover:-translate-y-1">
+        <a href="/course" class="group bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl p-6 text-white hover:shadow-2xl transition-all hover:-translate-y-1">
           <h3 class="text-2xl font-bold mb-2">華語教材</h3>
           <p class="opacity-90">查看課程內容</p>
           <div class="mt-4 text-right">
@@ -129,15 +125,15 @@ import Layout from '../layouts/Layout.astro';
 
   <!-- CTA Section -->
   <section class="py-16 container mx-auto px-4">
-    <div class="bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl p-12 text-center text-white">
+    <div class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 rounded-2xl p-12 text-center text-white">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">
         一起為跨文化交流貢獻心力
       </h2>
       <p class="text-lg md:text-xl mb-8 opacity-90">
-        加入 WZULTC，成為台越文化交流的橋樑
+        加入跨語照護計畫，成為台越文化交流的橋樑
       </p>
-      <a href="/enroll" class="inline-block bg-white text-pink-600 px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
-        立即報名
+      <a href="/enroll" class="inline-block bg-white text-teal-600 px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
+        成為學伴
       </a>
     </div>
   </section>
