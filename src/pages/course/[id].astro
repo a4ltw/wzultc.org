@@ -1,0 +1,102 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  const courses = [
+    { id: '00', title: '第零課', titleVi: 'Bài học 0', pages: 10, audioStart: 3 },
+    { id: '01', title: '第一課', titleVi: 'Bài học 1', pages: 10, audioStart: 3 },
+    { id: '02', title: '第二課', titleVi: 'Bài học 2', pages: 10, audioStart: 3 },
+    { id: '03', title: '第三課', titleVi: 'Bài học 3', pages: 10, audioStart: 3 },
+    { id: '04', title: '第四課', titleVi: 'Bài học 4', pages: 10, audioStart: 3 },
+    { id: '05', title: '第五課', titleVi: 'Bài học 5', pages: 10, audioStart: 3 },
+    { id: '06', title: '第六課', titleVi: 'Bài học 6', pages: 10, audioStart: 3 },
+  ];
+
+  return courses.map(course => ({
+    params: { id: course.id },
+    props: { course }
+  }));
+}
+
+const { id } = Astro.params;
+const { course } = Astro.props;
+
+// 產生頁面陣列
+const pageNumbers = Array.from({ length: course.pages }, (_, i) => i + 1);
+const basePath = `/assets/course/${id}`;
+---
+
+<Layout title={`${course.title} - 台越照護華語 - WZULTC`}>
+  <!-- Course Header -->
+  <div class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 text-white py-8 text-center">
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">
+      {course.title} {course.titleVi}
+    </h1>
+    <p class="text-lg opacity-90">台越照護華語 - 入門級</p>
+  </div>
+
+  <!-- Navigation -->
+  <div class="bg-white shadow-sm border-b sticky top-14 z-40">
+    <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex flex-wrap gap-3">
+        <a href="/course" class="text-teal-600 hover:text-teal-700 font-medium">
+          ← 返回課程列表 Quay lại danh sách
+        </a>
+        <a href="/" class="text-gray-600 hover:text-gray-700">
+          首頁 Trang chủ
+        </a>
+      </div>
+      <a
+        href={`${basePath}/台越照護華語-入門級 ${parseInt(id)}.pdf`}
+        download
+        class="bg-teal-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-teal-700 transition-colors"
+      >
+        📥 下載 PDF Tải xuống
+      </a>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    {pageNumbers.map((pageNum) => {
+      const pageStr = pageNum.toString().padStart(2, '0');
+      const hasAudio = pageNum >= course.audioStart;
+
+      return (
+        <div class="mb-8">
+          <img
+            src={`${basePath}/page-${pageStr}.jpg`}
+            alt={`第 ${pageNum} 頁`}
+            class="w-full rounded-lg shadow-lg bg-white p-2"
+            loading="lazy"
+          />
+          <div class="mt-3 text-center">
+            <p class="text-gray-500 text-sm mb-2">第 {pageNum} 頁</p>
+            {hasAudio && (
+              <audio controls class="w-full max-w-md mx-auto" preload="metadata">
+                <source src={`${basePath}/${id}-${pageStr}.mp3`} type="audio/mpeg" />
+                您的瀏覽器不支援音訊播放。
+              </audio>
+            )}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div class="bg-gray-100 border-t">
+    <div class="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-3">
+      <a href="/course" class="text-teal-600 hover:text-teal-700 font-medium">
+        ← 返回課程列表 Quay lại danh sách
+      </a>
+      <a
+        href={`${basePath}/台越照護華語-入門級 ${parseInt(id)}.pdf`}
+        download
+        class="bg-teal-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-teal-700 transition-colors"
+      >
+        📥 下載 PDF Tải xuống
+      </a>
+    </div>
+  </div>
+</Layout>
