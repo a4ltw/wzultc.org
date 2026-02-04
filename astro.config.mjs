@@ -17,7 +17,8 @@ export default defineConfig({
     '/files/stcontract1': 'https://drive.google.com/file/d/1uHBdJpfQ6ZImUJwpQKSM-huZ0scEncKh/view?usp=sharing',
     '/files/stcontract2': 'https://drive.google.com/file/d/1YR21yuJKkhxEeV2I0X9f4x0xyj1lhF65/view?usp=sharing',
     '/files/mid-ai': 'https://drive.google.com/file/d/167WJAknP9BfwKPYyIXad-9nImCk2jcva/view?usp=drive_link',
-    '/files/mid-zh': 'https://drive.google.com/file/d/1EA6yqUaUg16OE1MJQCirnbNSZIOpLW1w/view?usp=drive_link',
+    '/files/mid-zh': 'https://drive.google.com/file/d/1MReE9EYd2ove05M6yGWvkCNAE4Pp_TRX/view?usp=drive_link',
+    '/files/mid-cs': 'https://drive.google.com/file/d/1EA6yqUaUg16OE1MJQCirnbNSZIOpLW1w/view?usp=drive_link',
     '/prototype/ai': 'https://davidkuodcam-crypto.github.io/VTuber/AITranslator_v1.html'
   },
 
