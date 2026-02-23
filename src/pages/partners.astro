@@ -32,6 +32,18 @@ const partners = [
       },
     ],
   },
+  {
+    name: '愛吠的狗 AI AMAZE',
+    image: '/assets/partners/ai-amaze-logo.png',
+    description: '愛吠的狗團隊專注於 AI 技術應用開發，為本計畫打造 AI AMAZE 專業醫療翻譯系統。系統採用 LLM + RAG 技術架構，能精準處理醫療術語翻譯，確保就醫溝通零誤差。透過即時翻譯與自助學習模式，大幅提升外籍人士就醫體驗與語言學習效率。',
+    website: 'https://www.barkingdog.ai/',
+  },
+  {
+    name: 'One-Forty',
+    image: '/assets/partners/one-forty-logo.png',
+    description: 'One-Forty 是一個致力於移工教育與培力的非營利組織，透過多元教育課程協助在台移工提升技能、融入社會。本計畫與 One-Forty 合作，結合其豐富的移工培力經驗，共同推動跨文化教育，協助越南移工在台灣安心工作、自信成長。',
+    website: 'https://one-forty.org/',
+  },
 ];
 ---
 
@@ -54,11 +66,11 @@ const partners = [
       </h2>
       <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
         <p>
-          本計畫與多個醫療機構、長照單位及教育單位合作，
+          本計畫與多個醫療機構、長照單位、教育單位及非營利組織合作，
           共同為越南移工提供華語學習與文化適應支援。
         </p>
         <p>
-          透過產學合作模式，我們將理論與實務結合，
+          透過產學醫三方合作模式，我們將理論與實務結合，
           為移工創造更友善的工作環境，同時提升照護服務品質。
         </p>
       </div>
@@ -83,17 +95,19 @@ const partners = [
               <p class="text-gray-700 leading-relaxed mb-4">
                 {partner.description}
               </p>
-              <a
-                href={partner.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors"
-              >
-                <span>前往官方網站</span>
-                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
+              {partner.website !== '#' && (
+                <a
+                  href={partner.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors"
+                >
+                  <span>前往官方網站</span>
+                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              )}
               {partner.faculty && (
                 <div class="mt-6 pt-4 border-t border-gray-200">
                   <p class="text-sm text-gray-500 mb-3">合作教師</p>
@@ -125,7 +139,7 @@ const partners = [
       <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">
         合作領域
       </h2>
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-4 gap-6">
         <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 text-center">
           <div class="w-20 h-20 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-md">
             <svg class="w-10 h-10 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,6 +168,16 @@ const partners = [
           </div>
           <h3 class="text-lg font-bold text-gray-800">教育單位</h3>
           <p class="text-gray-600 mt-2 text-sm">學術研究與教學合作</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-8 text-center">
+          <div class="w-20 h-20 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-md">
+            <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-800">科技夥伴</h3>
+          <p class="text-gray-600 mt-2 text-sm">AI 技術開發與應用</p>
         </div>
       </div>
     </section>
