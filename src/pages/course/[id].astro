@@ -3,13 +3,21 @@ import Layout from '../../layouts/Layout.astro';
 
 export function getStaticPaths() {
   const courses = [
-    { id: '00', title: '第零課', titleVi: 'Bài học 0', pages: 10, audioStart: 3 },
-    { id: '01', title: '第一課', titleVi: 'Bài học 1', pages: 10, audioStart: 3 },
-    { id: '02', title: '第二課', titleVi: 'Bài học 2', pages: 10, audioStart: 3 },
-    { id: '03', title: '第三課', titleVi: 'Bài học 3', pages: 10, audioStart: 3 },
-    { id: '04', title: '第四課', titleVi: 'Bài học 4', pages: 10, audioStart: 3 },
-    { id: '05', title: '第五課', titleVi: 'Bài học 5', pages: 10, audioStart: 3 },
-    { id: '06', title: '第六課', titleVi: 'Bài học 6', pages: 10, audioStart: 3 },
+    // 入門級
+    { id: '00', title: '第零課', titleVi: 'Bài học 0', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
+    { id: '01', title: '第一課', titleVi: 'Bài học 1', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
+    { id: '02', title: '第二課', titleVi: 'Bài học 2', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
+    { id: '03', title: '第三課', titleVi: 'Bài học 3', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
+    { id: '04', title: '第四課', titleVi: 'Bài học 4', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
+    { id: '05', title: '第五課', titleVi: 'Bài học 5', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
+    { id: '06', title: '第六課', titleVi: 'Bài học 6', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
+    // 基礎級
+    { id: '07', title: '第七課', titleVi: 'Bài học 7', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '08', title: '第八課', titleVi: 'Bài học 8', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '09', title: '第九課', titleVi: 'Bài học 9', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '10', title: '第十課', titleVi: 'Bài học 10', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '11', title: '第十一課', titleVi: 'Bài học 11', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '12', title: '第十二課', titleVi: 'Bài học 12', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
   ];
 
   return courses.map(course => ({
@@ -28,18 +36,18 @@ const basePath = `/assets/course/${id}`;
 
 <Layout title={`${course.title} - 台越照護華語 - WZULTC`}>
   <!-- Course Header -->
-  <div class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 text-white py-8 text-center">
+  <div class={`bg-gradient-to-r ${course.gradient} text-white py-8 text-center`}>
     <h1 class="text-3xl md:text-4xl font-bold mb-2">
       {course.title} {course.titleVi}
     </h1>
-    <p class="text-lg opacity-90">台越照護華語 - 入門級</p>
+    <p class="text-lg opacity-90">台越照護華語 - {course.level}</p>
   </div>
 
   <!-- Navigation (hide on scroll down, show on scroll up) -->
   <div id="course-nav" class="bg-white shadow-sm border-b sticky top-14 z-40 transition-transform duration-300">
     <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
       <div class="flex flex-wrap gap-3">
-        <a href="/course" class="text-teal-600 hover:text-teal-700 font-medium">
+        <a href="/course" class={`${course.linkColor} font-medium`}>
           ← 返回課程列表 Quay lại danh sách
         </a>
         <a href="/" class="text-gray-600 hover:text-gray-700">
@@ -47,9 +55,9 @@ const basePath = `/assets/course/${id}`;
         </a>
       </div>
       <a
-        href={`${basePath}/台越照護華語-入門級 ${parseInt(id)}.pdf`}
+        href={`${basePath}/台越照護華語-${course.level} ${parseInt(id)}.pdf`}
         download
-        class="bg-teal-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-teal-700 transition-colors"
+        class={`${course.btnColor} text-white px-4 py-2 rounded-lg font-medium transition-colors`}
       >
         📥 下載 PDF Tải xuống
       </a>
@@ -60,7 +68,7 @@ const basePath = `/assets/course/${id}`;
   <div class="container mx-auto px-4 py-8 max-w-4xl">
     {pageNumbers.map((pageNum) => {
       const pageStr = pageNum.toString().padStart(2, '0');
-      const hasAudio = pageNum >= course.audioStart;
+      const hasAudio = course.audioStart !== null && pageNum >= course.audioStart;
 
       return (
         <div class="mb-8">
