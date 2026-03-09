@@ -12,12 +12,12 @@ export function getStaticPaths() {
     { id: '05', title: '第五課', titleVi: 'Bài học 5', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
     { id: '06', title: '第六課', titleVi: 'Bài học 6', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
     // 基礎級
-    { id: '07', title: '第七課', titleVi: 'Bài học 7', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
-    { id: '08', title: '第八課', titleVi: 'Bài học 8', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
-    { id: '09', title: '第九課', titleVi: 'Bài học 9', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
-    { id: '10', title: '第十課', titleVi: 'Bài học 10', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
-    { id: '11', title: '第十一課', titleVi: 'Bài học 11', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
-    { id: '12', title: '第十二課', titleVi: 'Bài học 12', pages: 10, audioStart: null, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '07', title: '第七課', titleVi: 'Bài học 7', pages: 10, audioStart: 3, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '08', title: '第八課', titleVi: 'Bài học 8', pages: 10, audioStart: 3, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '09', title: '第九課', titleVi: 'Bài học 9', pages: 10, audioStart: 3, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '10', title: '第十課', titleVi: 'Bài học 10', pages: 10, audioStart: 3, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '11', title: '第十一課', titleVi: 'Bài học 11', pages: 10, audioStart: 3, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
+    { id: '12', title: '第十二課', titleVi: 'Bài học 12', pages: 10, audioStart: 3, audioEnd: 9, level: '基礎級', gradient: 'from-rose-400 to-red-600', linkColor: 'text-red-600 hover:text-red-700', btnColor: 'bg-red-600 hover:bg-red-700' },
   ];
 
   return courses.map(course => ({
@@ -68,7 +68,7 @@ const basePath = `/assets/course/${id}`;
   <div class="container mx-auto px-4 py-8 max-w-4xl">
     {pageNumbers.map((pageNum) => {
       const pageStr = pageNum.toString().padStart(2, '0');
-      const hasAudio = course.audioStart !== null && pageNum >= course.audioStart;
+      const hasAudio = course.audioStart !== null && pageNum >= course.audioStart && (course.audioEnd === undefined || pageNum <= course.audioEnd);
 
       return (
         <div class="mb-8">
