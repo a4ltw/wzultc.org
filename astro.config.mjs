@@ -22,7 +22,7 @@ export default defineConfig({
     '/files/mid-et': 'https://drive.google.com/file/d/1qpyLD0FwwhAuUdDAcMR5lZnRz15BSyc9/view?usp=drive_link',
     '/files/mid-rp-pdf': 'https://drive.google.com/file/d/1Wi6Mc7Jr5N-vzlSz54D1wwjCvdsZDfPS/view?usp=drive_link',
     '/files/mid-rp-ppt': 'https://docs.google.com/presentation/d/1zc0J280ww02SLnmQTu51D9WeE7TDg9bH/edit?usp=sharing&ouid=113390623339640898195&rtpof=true&sd=true',
-    '/prototype/ai': 'https://davidkuodcam-crypto.github.io/VTuber/AITranslator_v1.html'
+    '/prototype/ai': 'https://aitranslator-navy.vercel.app/'
   },
 
   build: {

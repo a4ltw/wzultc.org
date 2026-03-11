@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const images = [
+  { src: '/assets/events/20260226/03-group.jpg', alt: '團隊合照' },
+  { src: '/assets/events/20260226/07-group2.jpg', alt: '團隊合照' },
+  { src: '/assets/events/20260226/01-meeting.jpg', alt: '會議討論' },
+  { src: '/assets/events/20260226/02-demo.jpg', alt: '照護示範拍攝' },
+  { src: '/assets/events/20260226/05-teaching.jpg', alt: '照護指導' },
+  { src: '/assets/events/20260226/04-filming.jpg', alt: '拍攝現場' },
+  { src: '/assets/events/20260226/06-selfie.jpg', alt: '工作人員合影' },
+];
+---
+
+<Layout title="2026/02/26 多語照護教材拍攝 - WZULTC" description="國科會計畫多語照護新教材拍攝活動紀錄">
+  <section class="py-16 container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <p class="text-teal-600 font-medium mb-2">2026/02/26</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          多語照護新教材開拍
+        </h1>
+        <p class="text-xl text-gray-600">
+          Quay phim tài liệu chăm sóc đa ngữ
+        </p>
+      </div>
+
+      <!-- QR Code -->
+      <div class="flex flex-col items-center mb-10">
+        <div class="bg-white p-3 rounded-xl shadow-md">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://wzultc.org/r/20260226"
+            alt="QR Code"
+            width="120"
+            height="120"
+            class="block"
+          />
+        </div>
+        <p class="text-sm text-gray-400 mt-2">掃描分享本頁</p>
+      </div>
+
+      <!-- Content -->
+      <article class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-10">
+        <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+          <p>
+            文藻外語大學團隊與<strong>高雄榮民總醫院</strong>、<strong>高雄醫學大學</strong>及<strong>輔英科技大學</strong>攜手合作，打造給長照場域越南籍照服員專屬的專業技能示範影片！
+          </p>
+
+          <p>
+            活動由廖俊芳主持人帶領，說明拍攝目標與教材用途。高醫的陳建州老師蒞臨現場指導，提醒示範教材要兼顧正確性與細節呈現，才能讓影片成為照服員自學時的實用工具。
+          </p>
+
+          <p>
+            榮總的淑芬阿長與桂珍組長不僅全程參與，更親自上場協助拍攝，從專業角度提供許多寶貴建議，讓專業示範動作更貼近實際照護現場。趙立記者親自協助拍攝與指導取景，讓整個拍攝流程順利又充滿跨域交流學習的好氣氛。
+          </p>
+
+          <p>
+            輔英科技大學的越南籍實習生<strong>李珠芳儀</strong>、<strong>阮草原</strong>也加入演出及協助工作，透過親身參與，深入體會長照照護工作的要點與精神。
+          </p>
+
+          <p>
+            團隊將持續製作多語專業技能照護教材，期盼在培訓、增能外籍照服員時，提供實務、易於理解的自學素材，幫助他們更快融入適應台灣文化與長照職場環境。
+          </p>
+
+          <p class="text-center text-teal-600 font-semibold mt-6">
+            敬請期待成果影片上線！
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-gray-200">
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">國科會計畫</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">多語照護</span>
+          <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">越南籍照服員</span>
+          <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">跨校合作</span>
+        </div>
+      </article>
+
+      <!-- Photo Gallery -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          活動剪影
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {images.map((img) => (
+            <div class="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <img
+                src={img.src}
+                alt={img.alt}
+                class="w-full h-64 object-cover"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Partners -->
+      <div class="bg-gradient-to-br from-blue-50 to-teal-50 rounded-xl p-6 mb-10">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">合作單位</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">文藻外語大學</span>
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">高雄榮民總醫院</span>
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">高雄醫學大學</span>
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">輔英科技大學</span>
+        </div>
+      </div>
+
+      <!-- Back -->
+      <div class="text-center pt-6 border-t border-gray-200">
+        <a href="/" class="text-gray-500 hover:text-teal-500 transition-colors">
+          ← 返回首頁 | Quay lại trang chủ
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

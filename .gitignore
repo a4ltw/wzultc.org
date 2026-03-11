@@ -33,3 +33,11 @@ astro-temp/
 t_newmaterial/
 t_20251215slide/
 t_recording/
+t_newlogo/
+
+# AI assistant files
+CLAUDE.md
+.cursorrules
+.cursorignore
+.aider*
+copilot-instructions.md
