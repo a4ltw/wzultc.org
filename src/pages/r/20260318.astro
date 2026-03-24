@@ -1,0 +1,113 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const images = [
+  { src: '/assets/events/20260318/1.jpg', alt: '活動現場' },
+  { src: '/assets/events/20260318/2.jpg', alt: '活動現場' },
+  { src: '/assets/events/20260318/3.jpg', alt: '活動現場' },
+  { src: '/assets/events/20260318/4.jpg', alt: '活動現場' },
+  { src: '/assets/events/20260318/5.jpg', alt: '活動現場' },
+  { src: '/assets/events/20260318/6.jpg', alt: '活動現場' },
+  { src: '/assets/events/20260318/7.jpg', alt: '活動現場' },
+];
+---
+
+<Layout title="2026/03/18 華語學伴相見歡 - WZULTC" description="華語學伴相見歡活動紀錄">
+  <section class="py-16 container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <p class="text-teal-600 font-medium mb-2">2026/03/18</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          華語學伴相見歡
+        </h1>
+        <p class="text-xl text-gray-600">
+          陪伴的力量無所不在
+        </p>
+      </div>
+
+      <!-- QR Code -->
+      <div class="flex flex-col items-center mb-10">
+        <div class="bg-white p-3 rounded-xl shadow-md">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://wzultc.org/r/20260318"
+            alt="QR Code"
+            width="120"
+            height="120"
+            class="block"
+          />
+        </div>
+        <p class="text-sm text-gray-400 mt-2">掃描分享本頁</p>
+      </div>
+
+      <!-- Content -->
+      <article class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-10">
+        <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+          <p>
+            3 月 18 日，我們在文藻外語大學舉辦了一場充滿感動與溫度的學伴相見歡活動。這次不僅召集了正在線上進行陪伴教學的華語學伴，也邀請了許多對教學充滿熱忱的新同學，共同交流執行心得與未來展望。
+          </p>
+
+          <p>
+            活動由 Melody 老師熱力開場，引導大家完成期中問卷，並由華語中心<strong>林學芳主任</strong>親自分享計畫的初心動念、目前的執行進度，以及未來課程發展的藍圖。林主任強調，我們不僅是在教語言，更是在建立一種跨越文化的連結。
+          </p>
+
+          <h3 class="text-xl font-bold text-gray-800 mt-6 mb-3">小螺絲釘的大力量：學伴的真情分享</h3>
+
+          <p>
+            會中，學伴<strong>文海</strong>分享了他的心情故事。原本只是想磨練自己的華語教學能力，但在陪伴的過程中，他深刻感受到自己能像「小螺絲釘」一樣，支撐起異地同鄉姐姐們在台灣的生活，陪伴她們提早適應職場環境。
+          </p>
+
+          <p>
+            另一位學伴<strong>美幸</strong>也分享她未來的志向就是要成為華語老師，所以很高興不僅有這個機會能夠幫助自己家鄉的越南朋友，還能有機會「做中學」⋯⋯這份「原來我也可以付出力量」以及「相互扶持成長」的感動，正是本計畫最珍貴的收穫。
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-gray-200">
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">國科會計畫</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">華語教學</span>
+          <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">學伴計畫</span>
+          <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">文化交流</span>
+        </div>
+      </article>
+
+      <!-- Photo Gallery -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          活動剪影
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {images.map((img) => (
+            <div class="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <img
+                src={img.src}
+                alt={img.alt}
+                class="w-full h-64 object-cover"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Partners -->
+      <div class="bg-gradient-to-br from-blue-50 to-teal-50 rounded-xl p-6 mb-10">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">主辦單位</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">文藻外語大學</span>
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">華語中心</span>
+        </div>
+      </div>
+
+      <!-- Back -->
+      <div class="text-center pt-6 border-t border-gray-200">
+        <a href="/" class="text-gray-500 hover:text-teal-500 transition-colors">
+          ← 返回首頁 | Quay lại trang chủ
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

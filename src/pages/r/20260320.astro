@@ -1,0 +1,135 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const images = [
+  { src: '/assets/events/20260320/1.jpg', alt: '會議現場' },
+  { src: '/assets/events/20260320/2.jpg', alt: '會議現場' },
+  { src: '/assets/events/20260320/3.jpg', alt: '會議現場' },
+  { src: '/assets/events/20260320/4.jpg', alt: '會議現場' },
+  { src: '/assets/events/20260320/5.jpg', alt: '會議現場' },
+];
+---
+
+<Layout title="2026/03/20 AI 與長照產學合作會議 - WZULTC" description="AI 與長照產學合作會議紀錄">
+  <section class="py-16 container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <p class="text-teal-600 font-medium mb-2">2026/03/19-20</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          當 AI 遇見長照
+        </h1>
+        <p class="text-xl text-gray-600">
+          產學合作會議紀錄
+        </p>
+      </div>
+
+      <!-- QR Code -->
+      <div class="flex flex-col items-center mb-10">
+        <div class="bg-white p-3 rounded-xl shadow-md">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://wzultc.org/r/20260320"
+            alt="QR Code"
+            width="120"
+            height="120"
+            class="block"
+          />
+        </div>
+        <p class="text-sm text-gray-400 mt-2">掃描分享本頁</p>
+      </div>
+
+      <!-- Content -->
+      <article class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-10">
+        <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+          <p>
+            這週四、週五，我們和產業夥伴「<strong>愛吠的狗 AI AMAZE</strong>」連續兩天坐下來，好好聊了一場關於 AI 如何真正走進照護現場的討論。週五還邀請到跨校跨域夥伴<strong>龔旭陽主任</strong>（擔任顧問提供強大的 IT+AI 支援）與會，提供技術面的專業建議。
+          </p>
+
+          <p>
+            說真的，做研究計畫最怕的就是「做完就沒了」。所以這次會議的核心問題是：<strong>技術怎麼落地？計畫結束後怎麼延續？</strong>
+          </p>
+
+          <h3 class="text-xl font-bold text-gray-800 mt-6 mb-3">三天，一個平台就誕生了</h3>
+
+          <p>
+            會議中最讓大家驚豔的，是郭大維老師用 Dify 這套工具，三天內就建出了「<strong>CareConnect 雲端學園</strong>」。這個平台可以讓照護員用母語發問，AI 就會從長照知識庫裡找答案回覆，還能追蹤學習歷程。
+          </p>
+
+          <p>
+            除了學習平台，我們還有「<strong>友善醫療指引</strong>」和「<strong>雙向翻譯</strong>」兩個 AI 助理。想像一下：越南籍照護員帶阿公來看診，不知道掛哪一科、不知道怎麼描述症狀——現在有 AI 可以幫忙了！
+          </p>
+
+          <h3 class="text-xl font-bold text-gray-800 mt-6 mb-3">產學合作，各取所長</h3>
+
+          <p>
+            這次合作最棒的地方是：我們不是各做各的。
+          </p>
+
+          <p>
+            廠商有超強的技術底子（創辦人是台大電機背景，系統已經在好多醫院上線了），但他們缺的是「長照專業知識庫」——這正是文藻和高榮可以提供的！
+          </p>
+
+          <p>
+            文藻的語言專家可以校正翻譯品質，高榮的護理團隊可以把臨床經驗轉化成知識內容，廠商則負責把這些變成穩定好用的系統。
+          </p>
+
+          <p>
+            這樣的合作模式，讓計畫成果有機會真正延續下去，不會只是做完報告就結束。
+          </p>
+
+          <p class="text-center text-teal-600 font-semibold mt-6">
+            每一步都不容易，但看到技術真的能幫助到人，就覺得一切都值得了。<br/>
+            我們會繼續努力，讓 AI 成為照護現場最給力的幫手！
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-gray-200">
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">AI 長照</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">產學合作</span>
+          <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">CareConnect</span>
+          <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">移工照護</span>
+        </div>
+      </article>
+
+      <!-- Photo Gallery -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          活動剪影
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {images.map((img) => (
+            <div class="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <img
+                src={img.src}
+                alt={img.alt}
+                class="w-full h-64 object-cover"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Partners -->
+      <div class="bg-gradient-to-br from-blue-50 to-teal-50 rounded-xl p-6 mb-10">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">合作單位</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">文藻外語大學</span>
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">高雄榮民總醫院</span>
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">愛吠的狗 AI AMAZE</span>
+        </div>
+      </div>
+
+      <!-- Back -->
+      <div class="text-center pt-6 border-t border-gray-200">
+        <a href="/" class="text-gray-500 hover:text-teal-500 transition-colors">
+          ← 返回首頁 | Quay lại trang chủ
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
