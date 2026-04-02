@@ -24,9 +24,9 @@ export default defineConfig({
     '/files/mid-rp-ppt': 'https://docs.google.com/presentation/d/1zc0J280ww02SLnmQTu51D9WeE7TDg9bH/edit?usp=sharing&ouid=113390623339640898195&rtpof=true&sd=true',
     '/prototype/ai': 'https://aitranslator-navy.vercel.app/',
     '/visit/1142': 'https://docs.google.com/forms/d/e/1FAIpQLSfDQn0imBffaQ93Az9l7L_X4iHx3nXvOlSc5-Ykx2ziYhRGFQ/viewform?usp=header',
-    '/video/zh': 'https://youtu.be/43TIuD-CdCc',
-    '/video/id': 'https://youtu.be/ewp13sfnF48',
-    '/video/vi': 'https://youtu.be/gfExMdsj7ho'
+    '/video/pcp-zh': 'https://youtu.be/43TIuD-CdCc',
+    '/video/pcp-id': 'https://youtu.be/ewp13sfnF48',
+    '/video/pcp-vi': 'https://youtu.be/gfExMdsj7ho'
   },
 
   build: {
