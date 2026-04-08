@@ -1,0 +1,208 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="第6單元：健康與用藥 互動詞彙 - WZULTC" description="台越照護華語第6單元互動詞彙練習，包含核心詞彙、情境對話與自我測驗。">
+
+  <div class="bg-emerald-50 min-h-screen pb-20">
+
+    <!-- Header -->
+    <header class="bg-emerald-600 text-white p-6 shadow-lg">
+      <div class="max-w-md mx-auto">
+        <h1 class="text-xl font-bold text-center">台越照護華語 (Tai-Việt Caregiving)</h1>
+        <p class="text-center text-sm opacity-90">第6單元：健康與用藥 | Bài 6: Sức khỏe và dùng thuốc</p>
+        <div class="flex justify-center mt-3">
+          <a href="/course/06" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1 rounded-full transition-colors">
+            ← 回到課程教材
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-md mx-auto p-4 space-y-8">
+
+      <!-- Learning Goals -->
+      <section class="bg-white rounded-2xl p-5 shadow-sm border-l-4 border-emerald-500">
+        <h2 class="font-bold text-emerald-800 mb-2">教學目標 | Mục tiêu</h2>
+        <ul class="text-sm space-y-1 text-gray-600">
+          <li>• 表達身體不適 (Nói về tình trạng sức khỏe)</li>
+          <li>• 用藥指示 (Hướng dẫn dùng thuốc)</li>
+          <li>• 照護提醒 (Nhắc nhở chăm sóc)</li>
+        </ul>
+      </section>
+
+      <!-- Vocabulary Section -->
+      <section>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-bold text-gray-800">核心詞彙 | Từ vựng</h2>
+          <span class="text-xs text-gray-400">點擊文字聽發音 (Bấm để nghe)</span>
+        </div>
+        <div class="grid grid-cols-1 gap-3" id="vocab-container"></div>
+      </section>
+
+      <!-- Situational Dialogue -->
+      <section class="bg-emerald-50 rounded-2xl p-5 border border-emerald-100">
+        <h2 class="text-lg font-bold text-emerald-800 mb-4">情境對話 | Hội thoại</h2>
+        <div class="space-y-4" id="dialogue-container"></div>
+      </section>
+
+      <!-- Quiz Section -->
+      <section id="quiz-section" class="bg-white rounded-2xl p-6 shadow-md border border-orange-100">
+        <h2 class="text-lg font-bold text-orange-600 mb-4">自我測驗 | Trắc nghiệm</h2>
+        <div id="quiz-content">
+          <p id="quiz-question" class="font-medium text-gray-800 mb-4"></p>
+          <div id="quiz-options" class="space-y-2"></div>
+          <div id="quiz-feedback" class="mt-4 hidden p-3 rounded-lg text-center font-bold"></div>
+        </div>
+        <button id="next-quiz-btn" class="mt-4 w-full bg-orange-500 text-white py-2 rounded-xl hidden">
+          下一題 (Tiếp theo)
+        </button>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-full text-sm opacity-0 transition-opacity pointer-events-none z-50">
+    正在發音...
+  </div>
+
+  <style>
+    .card-hover:active { transform: scale(0.98); }
+    .vietnamese-text { color: #059669; font-style: italic; }
+    .btn-shadow { box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06); }
+  </style>
+
+  <script is:inline>
+    const vocabList = [
+      { zh: "不舒服", py: "bù shūfu",      vi: "khó chịu" },
+      { zh: "發燒",   py: "fā shāo",        vi: "sốt" },
+      { zh: "頭痛",   py: "tóu tòng",       vi: "đau đầu" },
+      { zh: "吃藥",   py: "chī yào",        vi: "uống thuốc" },
+      { zh: "打針",   py: "dǎ zhēn",        vi: "tiêm thuốc" },
+      { zh: "流鼻水", py: "liú bí shuǐ",    vi: "sổ mũi" },
+      { zh: "喉嚨痛", py: "hóulóng tòng",   vi: "đau họng" },
+      { zh: "拉肚子", py: "lā dùzi",        vi: "tiêu chảy" },
+      { zh: "飯後吃", py: "fàn hòu chī",    vi: "uống sau ăn" },
+      { zh: "休息",   py: "xiūxi",          vi: "nghỉ ngơi" },
+    ];
+
+    const dialogues = [
+      { role: "看護", zh: "你哪裡不舒服？",       vi: "Bạn thấy khó chịu ở đâu?",              side: "left" },
+      { role: "病人", zh: "我頭痛，有一點發燒。", vi: "Tôi đau đầu, hơi sốt.",                  side: "right" },
+      { role: "看護", zh: "先吃藥，要多喝水。",   vi: "Uống thuốc trước, nhớ uống nhiều nước.", side: "left" },
+    ];
+
+    const quizData = [
+      { q: "「Sổ mũi」的中文是什麼？",               options: ["發燒", "流鼻水", "頭痛"],                                correct: 1 },
+      { q: "「Uống thuốc sau khi ăn」怎麼說？",       options: ["飯前吃", "現在吃", "飯後吃"],                            correct: 2 },
+      { q: "病人說「Wǒ tóu yūn」，代表他覺得？",     options: ["頭暈 (Chóng mặt)", "肚子痛 (Đau bụng)", "很累 (Rất mệt)"], correct: 0 },
+    ];
+
+    let currentQuizIndex = 0;
+
+    function speak(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-TW';
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+      showToast('🔊 ' + text);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.style.opacity = '1';
+      setTimeout(() => (toast.style.opacity = '0'), 1500);
+    }
+
+    function renderVocab() {
+      const container = document.getElementById('vocab-container');
+      vocabList.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'bg-white p-4 rounded-xl shadow-sm flex items-center justify-between border border-gray-100 card-hover cursor-pointer btn-shadow';
+        div.onclick = () => speak(item.zh);
+        div.innerHTML =
+          '<div>' +
+            '<div class="text-xl font-bold text-gray-800">' + item.zh + '</div>' +
+            '<div class="text-xs text-gray-400 font-mono">' + item.py + '</div>' +
+          '</div>' +
+          '<div class="text-right">' +
+            '<div class="vietnamese-text font-medium">' + item.vi + '</div>' +
+            '<div class="text-[10px] text-emerald-400 mt-1">🔈 Click</div>' +
+          '</div>';
+        container.appendChild(div);
+      });
+    }
+
+    function renderDialogue() {
+      const container = document.getElementById('dialogue-container');
+      dialogues.forEach(d => {
+        const isLeft = d.side === 'left';
+        const div = document.createElement('div');
+        div.className = 'flex ' + (isLeft ? 'justify-start' : 'justify-end') + ' mb-2';
+        const bubbleClass = isLeft
+          ? 'bg-white rounded-r-2xl rounded-tl-2xl text-gray-800'
+          : 'bg-emerald-600 text-white rounded-l-2xl rounded-tr-2xl';
+        const viClass = isLeft ? 'text-emerald-600' : 'text-emerald-100';
+        div.innerHTML =
+          '<div class="max-w-[80%] ' + bubbleClass + ' p-3 shadow-sm border border-emerald-100 cursor-pointer" onclick="speak(\'' + d.zh.replace(/'/g, "\\'") + '\')">' +
+            '<p class="text-[10px] uppercase font-bold opacity-60 mb-1">' + d.role + '</p>' +
+            '<p class="font-medium">' + d.zh + '</p>' +
+            '<p class="text-xs mt-1 ' + viClass + ' italic">' + d.vi + '</p>' +
+          '</div>';
+        container.appendChild(div);
+      });
+    }
+
+    function loadQuiz() {
+      const feedback = document.getElementById('quiz-feedback');
+      const nextBtn = document.getElementById('next-quiz-btn');
+      const optionsContainer = document.getElementById('quiz-options');
+
+      feedback.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+      optionsContainer.innerHTML = '';
+
+      const data = quizData[currentQuizIndex];
+      document.getElementById('quiz-question').innerText = (currentQuizIndex + 1) + '. ' + data.q;
+
+      data.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'w-full text-left p-3 rounded-xl border-2 border-gray-100 hover:border-orange-200 transition-colors';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selectedIndex) {
+      const data = quizData[currentQuizIndex];
+      const feedback = document.getElementById('quiz-feedback');
+      const nextBtn = document.getElementById('next-quiz-btn');
+
+      feedback.classList.remove('hidden');
+      if (selectedIndex === data.correct) {
+        feedback.innerText = '正確！(Chính xác!) 🎉';
+        feedback.className = 'mt-4 p-3 rounded-lg text-center font-bold bg-green-100 text-green-700';
+        speak('正確');
+      } else {
+        feedback.innerText = '再試一次 (Thử lại nhé) 💡';
+        feedback.className = 'mt-4 p-3 rounded-lg text-center font-bold bg-red-100 text-red-700';
+      }
+      nextBtn.classList.remove('hidden');
+    }
+
+    document.getElementById('next-quiz-btn').onclick = () => {
+      currentQuizIndex = (currentQuizIndex + 1) % quizData.length;
+      loadQuiz();
+    };
+
+    renderVocab();
+    renderDialogue();
+    loadQuiz();
+  </script>
+
+</Layout>
