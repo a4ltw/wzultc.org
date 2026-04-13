@@ -24,6 +24,7 @@ export default defineConfig({
     '/files/mid-rp-ppt': 'https://docs.google.com/presentation/d/1zc0J280ww02SLnmQTu51D9WeE7TDg9bH/edit?usp=sharing&ouid=113390623339640898195&rtpof=true&sd=true',
     '/tool/translate': 'https://aitranslator-navy.vercel.app/',
     '/tool/careconnect': 'https://nstc-ai-campus.vercel.app/',
+    '/tool/VirtualPatient': 'https://vtuber01.vercel.app/VirtualPatient.html',
     '/visit/1142': 'https://docs.google.com/forms/d/e/1FAIpQLSfDQn0imBffaQ93Az9l7L_X4iHx3nXvOlSc5-Ykx2ziYhRGFQ/viewform?usp=header',
     '/video/pcp-zh': 'https://youtu.be/43TIuD-CdCc',
     '/video/pcp-id': 'https://youtu.be/ewp13sfnF48',

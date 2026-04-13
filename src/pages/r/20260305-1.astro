@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const images = [
+  { src: '/assets/events/20260305-1/00FCFCC9-6718-480A-9CC8-1D142432DDA7.jpg', alt: '工作會議現場' },
+  { src: '/assets/events/20260305-1/1ADFDB85-B4EC-4BB1-A105-CD42C4C5BD4F.jpg', alt: '工作會議現場' },
+  { src: '/assets/events/20260305-1/27508C9F-2B18-4851-ABAF-2F476DB86EFB.jpg', alt: '工作會議現場' },
+  { src: '/assets/events/20260305-1/453B57AC-68FE-4C91-98BA-A4815B57E1DF.jpg', alt: '工作會議現場' },
+  { src: '/assets/events/20260305-1/4C41C755-674D-490A-B0FD-44E76C0716B4.jpg', alt: '工作會議現場' },
+  { src: '/assets/events/20260305-1/7B901BAC-E55C-4E5F-A2D5-F21609CB2C45.jpg', alt: '工作會議現場' },
+  { src: '/assets/events/20260305-1/CC66642C-A159-438D-8AB4-C29FF05F29AC.jpg', alt: '工作會議現場' },
+  { src: '/assets/events/20260305-1/DAD168D4-BD2A-4872-A0E4-FCB8A347064D.jpg', alt: '工作會議現場' },
+  { src: '/assets/events/20260305-1/E3423C49-9459-4AE7-BC60-30BCE6879057.jpg', alt: '工作會議現場' },
+  { src: '/assets/events/20260305-1/E90554E4-6EF9-46C2-90D8-384481E64E70.jpg', alt: '工作會議現場' },
+];
+---
+
+<Layout title="2026/03/05 產學攜手教材升級工作會議 - WZULTC" description="專業技能升級教材工作會議紀錄">
+  <section class="py-16 container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <p class="text-teal-600 font-medium mb-2">2026/03/05</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          產學攜手教材升級工作會議
+        </h1>
+        <p class="text-xl text-gray-600">
+          專業技能升級，全面啟動
+        </p>
+      </div>
+
+      <!-- QR Code -->
+      <div class="flex flex-col items-center mb-10">
+        <div class="bg-white p-3 rounded-xl shadow-md">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://wzultc.org/r/20260305-1"
+            alt="QR Code"
+            width="120"
+            height="120"
+            class="block"
+          />
+        </div>
+        <p class="text-sm text-gray-400 mt-2">掃描分享本頁</p>
+      </div>
+
+      <!-- Content -->
+      <article class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-10">
+        <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+          <p>
+            3 月 5 日下午，我們在文藻外語大學進行了一場充滿能量與交流的工作會議。感謝 Melody 老師用心安排，邀請了場域夥伴——<strong>淑芬阿長、桂真組長、佩昀護理師與奕如心理師</strong>，以及高雄醫學大學的<strong>陳建州老師</strong>、文藻的<strong>林艾依老師</strong>齊聚一堂，共同為國科會計畫的「專業技能升級教材」找出最有力的前進方向。
+          </p>
+
+          <p>
+            討論中，大家從臨床實務、教育現場到教材媒體製作，都貢獻了滿滿的經驗與創意。會中也初步擬定了教材製作行動規劃，涵蓋以下面向：
+          </p>
+
+          <ul>
+            <li>教材盤整與現有資源梳理</li>
+            <li>新人訓練內容設計</li>
+            <li>長照與失智主題課程開發</li>
+            <li>影音拍攝與多語配音設計</li>
+          </ul>
+
+          <p>
+            整體架構逐漸成形，讓人對後續成果充滿期待。接下來團隊將持續協作，融合各方專業與教學現場需求，打造兼具深度與實用性的教材，為專業培育注入新動能！
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-gray-200">
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">國科會計畫</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">產學合作</span>
+          <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">教材創新</span>
+          <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">專業技能升級</span>
+        </div>
+      </article>
+
+      <!-- Photo Gallery -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          活動剪影
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {images.map((img) => (
+            <div class="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <img
+                src={img.src}
+                alt={img.alt}
+                class="w-full h-64 object-cover"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Partners -->
+      <div class="bg-gradient-to-br from-blue-50 to-teal-50 rounded-xl p-6 mb-10">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">合作單位</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">文藻外語大學</span>
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">高雄榮民總醫院</span>
+          <span class="px-4 py-2 bg-white rounded-lg shadow-sm text-gray-700">高雄醫學大學</span>
+        </div>
+      </div>
+
+      <!-- Back -->
+      <div class="text-center pt-6 border-t border-gray-200">
+        <a href="/" class="text-gray-500 hover:text-teal-500 transition-colors">
+          ← 返回首頁 | Quay lại trang chủ
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
