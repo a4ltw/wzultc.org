@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const FORM_URL = 'https://forms.gle/zQQV5boHHwgtXrPK8';
+---
+
+<Layout title="2026/04/22 跨文化講座問卷 - WZULTC" description="S4 跨文化講座活動問卷">
+  <section class="py-16 container mx-auto px-4">
+    <div class="max-w-lg mx-auto text-center">
+
+      <!-- Header -->
+      <p class="text-teal-600 font-medium mb-2">2026/04/22</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+        跨文化講座
+      </h1>
+      <p class="text-gray-500 mb-10">活動問卷</p>
+
+      <!-- 問卷 QR Code（大） -->
+      <div class="flex flex-col items-center mb-8">
+        <div class="bg-white p-5 rounded-2xl shadow-lg mb-4">
+          <img
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(FORM_URL)}&margin=10`}
+            alt="問卷 QR Code"
+            width="240"
+            height="240"
+            class="block"
+          />
+        </div>
+        <p class="text-xl font-semibold text-gray-700 mb-1">請掃描 QR Code 填答問卷</p>
+        <p class="text-gray-400 text-sm">Vui lòng quét mã QR để điền khảo sát</p>
+      </div>
+
+      <!-- 說明 -->
+      <div class="bg-amber-50 border border-amber-200 rounded-xl px-6 py-5 mb-8">
+        <p class="text-amber-800 font-semibold text-lg mb-1">🎁 填答完畢，請出示完成頁面領取小禮物</p>
+        <p class="text-amber-600 text-sm">Sau khi hoàn thành, vui lòng xuất trình màn hình hoàn thành để nhận quà</p>
+      </div>
+
+      <!-- 直接開啟按鈕 -->
+      <a
+        href={FORM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold px-8 py-4 rounded-xl hover:shadow-lg transition-all hover:-translate-y-0.5 mb-10"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+        開啟問卷
+      </a>
+
+      <!-- 返回首頁 -->
+      <div class="pt-6 border-t border-gray-200">
+        <a href="/" class="text-gray-400 hover:text-teal-500 transition-colors text-sm">
+          ← 返回首頁 | Quay lại trang chủ
+        </a>
+      </div>
+
+    </div>
+  </section>
+</Layout>
