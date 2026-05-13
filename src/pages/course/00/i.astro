@@ -8,7 +8,7 @@ const BASE = '/assets/course/l0';
 
   <!-- ═══ Sticky Header ═══════════════════════════════════════════ -->
   <div class="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
-    <div class="flex items-center gap-3 px-4 pt-3 pb-1">
+    <div class="max-w-md mx-auto flex items-center gap-3 px-4 pt-3 pb-1">
       <a href="/course/00" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
@@ -18,7 +18,7 @@ const BASE = '/assets/course/l0';
       </div>
     </div>
     <!-- Tab Bar -->
-    <div class="flex overflow-x-auto scrollbar-hide gap-1 px-3 pb-0 mt-1" id="tab-bar" style="scrollbar-width:none">
+    <div class="max-w-md mx-auto flex overflow-x-auto scrollbar-hide gap-1 px-3 pb-0 mt-1" id="tab-bar" style="scrollbar-width:none">
       {[
         { id:'tones',     zh:'聲調',  vn:'Thanh điệu' },
         { id:'initfinal', zh:'聲韻母', vn:'Phụ âm & vần' },
@@ -40,6 +40,7 @@ const BASE = '/assets/course/l0';
   </div>
 
   <!-- ═══ Tab Content ════════════════════════════════════════════ -->
+  <div class="max-w-md mx-auto">
 
   <!-- ── Tab 1: 聲調 ─────────────────────────────────────────── -->
   <section id="sec-tones" class="tab-section -mx-4">
@@ -174,6 +175,7 @@ const BASE = '/assets/course/l0';
       <button onclick="resetQuiz(2)" class="mt-4 px-6 py-2 bg-teal-500 text-white rounded-xl text-sm font-bold">Làm lại / 重新作答</button>
     </div>
   </section>
+  </div><!-- /max-w-md -->
 
 <style>
   :global(.flip-card) { perspective: 800px; }
