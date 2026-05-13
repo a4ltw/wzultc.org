@@ -2,106 +2,133 @@
 import Layout from '../layouts/Layout.astro';
 
 const beginnerCourses = [
-  { number: '零', vietnamese: 'Bài học 0', level: '入門級', gradient: 'from-sky-500 to-teal-500', href: '/course/00' },
-  { number: '一', vietnamese: 'Bài học 1', level: '入門級', gradient: 'from-sky-500 to-teal-500', href: '/course/01' },
-  { number: '二', vietnamese: 'Bài học 2', level: '入門級', gradient: 'from-sky-500 to-teal-500', href: '/course/02' },
-  { number: '三', vietnamese: 'Bài học 3', level: '入門級', gradient: 'from-sky-500 to-teal-500', href: '/course/03' },
-  { number: '四', vietnamese: 'Bài học 4', level: '入門級', gradient: 'from-sky-500 to-teal-500', href: '/course/04' },
-  { number: '五', vietnamese: 'Bài học 5', level: '入門級', gradient: 'from-sky-500 to-teal-500', href: '/course/05' },
-  { number: '六', vietnamese: 'Bài học 6', level: '入門級', gradient: 'from-sky-500 to-teal-500', href: '/course/06' },
+  { number: '零', vietnamese: 'Bài học 0', slidesHref: '/course/00', interactiveHref: null },
+  { number: '一', vietnamese: 'Bài học 1', slidesHref: '/course/01', interactiveHref: '/course/01/i' },
+  { number: '二', vietnamese: 'Bài học 2', slidesHref: '/course/02', interactiveHref: null },
+  { number: '三', vietnamese: 'Bài học 3', slidesHref: '/course/03', interactiveHref: null },
+  { number: '四', vietnamese: 'Bài học 4', slidesHref: '/course/04', interactiveHref: null },
+  { number: '五', vietnamese: 'Bài học 5', slidesHref: '/course/05', interactiveHref: null },
+  { number: '六', vietnamese: 'Bài học 6', slidesHref: '/course/06', interactiveHref: null },
 ];
 
 const basicCourses = [
-  { number: '七', vietnamese: 'Bài học 7', level: '基礎級', gradient: 'from-rose-400 to-red-600', href: '/course/07' },
-  { number: '八', vietnamese: 'Bài học 8', level: '基礎級', gradient: 'from-rose-400 to-red-600', href: '/course/08' },
-  { number: '九', vietnamese: 'Bài học 9', level: '基礎級', gradient: 'from-rose-400 to-red-600', href: '/course/09' },
-  { number: '十', vietnamese: 'Bài học 10', level: '基礎級', gradient: 'from-rose-400 to-red-600', href: '/course/10' },
-  { number: '十一', vietnamese: 'Bài học 11', level: '基礎級', gradient: 'from-rose-400 to-red-600', href: '/course/11' },
-  { number: '十二', vietnamese: 'Bài học 12', level: '基礎級', gradient: 'from-rose-400 to-red-600', href: '/course/12' },
+  { number: '七',  vietnamese: 'Bài học 7',  slidesHref: '/course/07', interactiveHref: null },
+  { number: '八',  vietnamese: 'Bài học 8',  slidesHref: '/course/08', interactiveHref: null },
+  { number: '九',  vietnamese: 'Bài học 9',  slidesHref: '/course/09', interactiveHref: null },
+  { number: '十',  vietnamese: 'Bài học 10', slidesHref: '/course/10', interactiveHref: null },
+  { number: '十一', vietnamese: 'Bài học 11', slidesHref: '/course/11', interactiveHref: null },
+  { number: '十二', vietnamese: 'Bài học 12', slidesHref: '/course/12', interactiveHref: null },
 ];
 ---
 
 <Layout title="華語教材 - WZULTC" description="文藻跨語照護華語課程，專為越南移工設計的照護華語教材">
-  <div class="container mx-auto px-4 py-12">
+  <div class="max-w-2xl mx-auto px-4 py-10">
+
     <!-- Page Header -->
-    <div class="text-center mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-        照護華語課程
-      </h1>
-      <p class="text-xl md:text-2xl text-gray-600">
-        Khóa học Hoa ngữ Chăm sóc
-      </p>
+    <div class="text-center mb-10">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">照護華語課程</h1>
+      <p class="text-gray-500">Khóa học Hoa ngữ Chăm sóc</p>
     </div>
 
-    <!-- 入門級 Course Grid -->
-    <div class="max-w-6xl mx-auto mb-12">
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-700 mb-6 border-l-4 border-cyan-500 pl-4">
-        入門級 <span class="text-lg font-normal text-gray-500">Sơ cấp</span>
+    <!-- 入門級 -->
+    <div class="mb-10">
+      <h2 class="text-lg font-bold text-gray-700 mb-4 border-l-4 border-cyan-500 pl-3">
+        入門級 <span class="font-normal text-sm text-gray-400">Sơ cấp</span>
       </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="space-y-3">
         {beginnerCourses.map((course) => (
-          <a
-            href={course.href}
-            class={`group bg-gradient-to-br ${course.gradient} rounded-xl p-8 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2`}
-          >
-            <h3 class="text-3xl font-bold mb-2">第{course.number}課</h3>
-            <p class="text-lg opacity-90 mb-2">{course.vietnamese}</p>
-            <p class="text-sm opacity-80">{course.level}</p>
-            <div class="mt-4 flex justify-end">
-              <svg
-                class="w-6 h-6 transform group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 px-5 py-4">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-7 h-7 bg-sky-500 text-white text-xs font-bold rounded-full flex items-center justify-center flex-shrink-0">
+                {course.number[0]}
+              </span>
+              <div>
+                <p class="font-bold text-gray-800 leading-tight">第{course.number}課</p>
+                <p class="text-xs text-gray-400">{course.vietnamese}</p>
+              </div>
             </div>
-          </a>
+            <div class="flex gap-2">
+              <a
+                href={course.slidesHref}
+                class="flex-1 flex items-center justify-center gap-1.5 bg-sky-50 hover:bg-sky-100 text-sky-700 text-sm font-medium py-2 rounded-xl transition-colors border border-sky-200"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                課程簡報
+              </a>
+              {course.interactiveHref ? (
+                <a
+                  href={course.interactiveHref}
+                  class="flex-1 flex items-center justify-center gap-1.5 bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium py-2 rounded-xl transition-colors shadow-sm"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  互動課程
+                </a>
+              ) : (
+                <span class="flex-1 flex items-center justify-center gap-1.5 bg-gray-50 text-gray-300 text-sm font-medium py-2 rounded-xl border border-gray-100 cursor-not-allowed">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  互動課程
+                </span>
+              )}
+            </div>
+          </div>
         ))}
       </div>
     </div>
 
-    <!-- 基礎級 Course Grid -->
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-700 mb-6 border-l-4 border-red-500 pl-4">
-        基礎級 <span class="text-lg font-normal text-gray-500">Cơ bản</span>
+    <!-- 基礎級 -->
+    <div class="mb-10">
+      <h2 class="text-lg font-bold text-gray-700 mb-4 border-l-4 border-rose-500 pl-3">
+        基礎級 <span class="font-normal text-sm text-gray-400">Cơ bản</span>
       </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="space-y-3">
         {basicCourses.map((course) => (
-          <a
-            href={course.href}
-            class={`group bg-gradient-to-br ${course.gradient} rounded-xl p-8 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2`}
-          >
-            <h3 class="text-3xl font-bold mb-2">第{course.number}課</h3>
-            <p class="text-lg opacity-90 mb-2">{course.vietnamese}</p>
-            <p class="text-sm opacity-80">{course.level}</p>
-            <div class="mt-4 flex justify-end">
-              <svg
-                class="w-6 h-6 transform group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 px-5 py-4">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-7 h-7 bg-rose-500 text-white text-xs font-bold rounded-full flex items-center justify-center flex-shrink-0">
+                {course.number[0]}
+              </span>
+              <div>
+                <p class="font-bold text-gray-800 leading-tight">第{course.number}課</p>
+                <p class="text-xs text-gray-400">{course.vietnamese}</p>
+              </div>
             </div>
-          </a>
+            <div class="flex gap-2">
+              <a
+                href={course.slidesHref}
+                class="flex-1 flex items-center justify-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 text-sm font-medium py-2 rounded-xl transition-colors border border-rose-200"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                課程簡報
+              </a>
+              {course.interactiveHref ? (
+                <a
+                  href={course.interactiveHref}
+                  class="flex-1 flex items-center justify-center gap-1.5 bg-rose-500 hover:bg-rose-600 text-white text-sm font-medium py-2 rounded-xl transition-colors shadow-sm"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  互動課程
+                </a>
+              ) : (
+                <span class="flex-1 flex items-center justify-center gap-1.5 bg-gray-50 text-gray-300 text-sm font-medium py-2 rounded-xl border border-gray-100 cursor-not-allowed">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  互動課程
+                </span>
+              )}
+            </div>
+          </div>
         ))}
       </div>
     </div>
 
     <!-- Back Link -->
-    <div class="text-center mt-12">
-      <a
-        href="/"
-        class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors"
-      >
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="text-center">
+      <a href="/" class="inline-flex items-center text-teal-600 hover:text-teal-700 text-sm font-medium transition-colors">
+        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
         返回網站首頁
       </a>
     </div>
+
   </div>
 </Layout>
