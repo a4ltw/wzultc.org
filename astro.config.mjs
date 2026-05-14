@@ -9,6 +9,8 @@ export default defineConfig({
   outDir: './docs',
 
   redirects: {
+    '/course/00/i': '/course/i/00',
+    '/course/01/i': '/course/i/01',
     '/fb': 'https://www.facebook.com/whc.usr',
     '/yt': 'https://www.youtube.com/@wzuusr',
     '/ig': 'https://www.instagram.com/whc_usr/',

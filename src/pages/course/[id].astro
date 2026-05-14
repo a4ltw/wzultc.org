@@ -4,9 +4,9 @@ import Layout from '../../layouts/Layout.astro';
 export function getStaticPaths() {
   const courses = [
     // 入門級
-    { id: '00', title: '第零課', titleVi: 'Bài học 0', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
-    { id: '01', title: '第一課', titleVi: 'Bài học 1', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
-    { id: '02', title: '第二課', titleVi: 'Bài học 2', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
+    { id: '00', title: '第零課', titleVi: 'Bài học 0', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700', interactiveHref: '/course/i/00' },
+    { id: '01', title: '第一課', titleVi: 'Bài học 1', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700', interactiveHref: '/course/i/01' },
+    { id: '02', title: '第二課', titleVi: 'Bài học 2', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700', interactiveHref: '/course/i/02' },
     { id: '03', title: '第三課', titleVi: 'Bài học 3', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
     { id: '04', title: '第四課', titleVi: 'Bài học 4', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
     { id: '05', title: '第五課', titleVi: 'Bài học 5', pages: 10, audioStart: 3, level: '入門級', gradient: 'from-sky-500 to-teal-500', linkColor: 'text-teal-600 hover:text-teal-700', btnColor: 'bg-teal-600 hover:bg-teal-700' },
@@ -54,13 +54,23 @@ const basePath = `/assets/course/${id}`;
           首頁 Trang chủ
         </a>
       </div>
-      <a
-        href={`${basePath}/台越照護華語-${course.level} ${parseInt(id)}.pdf`}
-        download
-        class={`${course.btnColor} text-white px-4 py-2 rounded-lg font-medium transition-colors`}
-      >
-        📥 下載 PDF Tải xuống
-      </a>
+      <div class="flex gap-2">
+        {course.interactiveHref && (
+          <a
+            href={course.interactiveHref}
+            class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+          >
+            ▶ 互動課程
+          </a>
+        )}
+        <a
+          href={`${basePath}/台越照護華語-${course.level} ${parseInt(id)}.pdf`}
+          download
+          class={`${course.btnColor} text-white px-4 py-2 rounded-lg font-medium transition-colors`}
+        >
+          📥 下載 PDF Tải xuống
+        </a>
+      </div>
     </div>
   </div>
 
