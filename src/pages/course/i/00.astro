@@ -7,45 +7,44 @@ const BASE = '/assets/course/l0';
   <audio id="global-audio"></audio>
 
   <!-- ═══ Sticky Header ═══════════════════════════════════════════ -->
-  <div class="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
-    <div class="max-w-md mx-auto flex items-center gap-3 px-4 pt-3 pb-1">
-      <a href="/course/00" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  <div class="sticky top-0 z-40 bg-teal-600 text-white shadow-lg">
+    <div class="max-w-3xl mx-auto flex items-center gap-3 px-4 py-3">
+      <a href="/course/00" class="p-1 hover:bg-white/20 rounded-lg transition-colors text-white flex-shrink-0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
       <div>
-        <p class="text-sm font-bold text-gray-800 leading-tight">第零課・互動課程</p>
-        <p class="text-xs text-gray-400">Bài học 0 · Tương tác</p>
+        <p class="text-sm font-bold leading-tight">第零課：聲調・拼音</p>
+        <p class="text-xs opacity-80">Bài 0: Thanh điệu · Phiên âm</p>
       </div>
     </div>
     <!-- Tab Bar -->
-    <div class="max-w-md mx-auto flex overflow-x-auto scrollbar-hide gap-1 px-3 pb-0 mt-1" id="tab-bar" style="scrollbar-width:none">
-      {[
-        { id:'tones',     zh:'聲調',  vn:'Thanh điệu' },
-        { id:'initfinal', zh:'聲韻母', vn:'Phụ âm & vần' },
-        { id:'quiz1',     zh:'練習①', vn:'Bài tập 1' },
-        { id:'practical', zh:'實用拼音練習', vn:'Luyện Pinyin thực tế' },
-        { id:'extended',  zh:'延伸',   vn:'Mở rộng' },
-        { id:'quiz2',     zh:'練習②', vn:'Bài tập 2' },
-      ].map((t, i) => (
-        <button
-          class={`tab-btn flex-shrink-0 flex flex-col items-center px-3 pb-2 pt-1 text-xs font-semibold border-b-2 transition-colors whitespace-nowrap ${i===0 ? 'border-teal-500 text-teal-600' : 'border-transparent text-gray-400'}`}
-          data-tab={t.id}
-          onclick={`switchTab('${t.id}')`}
-        >
-          <span class="text-sm font-bold">{t.zh}</span>
-          <span class="text-[10px] leading-none mt-0.5 opacity-70">{t.vn}</span>
-        </button>
-      ))}
+    <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
+      <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full" id="tab-bar">
+        {[
+          { id:'tones',     zh:'聲調' },
+          { id:'initfinal', zh:'聲韻母' },
+          { id:'quiz1',     zh:'練習①' },
+          { id:'practical', zh:'拼音練習' },
+          { id:'extended',  zh:'延伸' },
+          { id:'quiz2',     zh:'練習②' },
+        ].map((t, i) => (
+          <button
+            class={`tab-btn px-4 py-2 text-xs font-medium border-b-2 transition-all whitespace-nowrap flex-1 md:flex-none md:px-5 ${i===0 ? 'opacity-100 border-white' : 'opacity-60 border-transparent'}`}
+            data-tab={t.id}
+            onclick={`switchTab('${t.id}')`}
+          >{t.zh}</button>
+        ))}
+      </div>
     </div>
   </div>
 
   <!-- ═══ Tab Content ════════════════════════════════════════════ -->
-  <div class="max-w-md mx-auto">
+  <div class="max-w-3xl mx-auto">
 
   <!-- ── Tab 1: 聲調 ─────────────────────────────────────────── -->
-  <section id="sec-tones" class="tab-section -mx-4">
-    <div id="tone-list" class="overflow-y-auto px-4 pt-4 pb-3 space-y-3" style="max-height:52vh"></div>
-    <div class="sticky bottom-0 bg-white rounded-t-3xl shadow-[0_-4px_24px_rgba(0,0,0,0.10)] border-t border-gray-100 px-5 py-4 z-20">
+  <section id="sec-tones" class="tab-section -mx-4 md:mx-0 md:flex md:gap-6 md:items-start">
+    <div id="tone-list" class="overflow-y-auto px-4 pt-4 pb-3 space-y-3 max-h-[52vh] md:max-h-none md:flex-1"></div>
+    <div class="sticky bottom-0 md:bottom-auto md:top-24 bg-white rounded-t-3xl md:rounded-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.10)] md:shadow-sm border-t md:border border-gray-100 px-5 py-4 z-20 md:z-10 md:w-72 md:flex-shrink-0 md:mt-4">
       <div id="tone-empty" class="flex flex-col items-center gap-1.5 py-4 text-gray-400">
         <p class="text-3xl">☝️</p>
         <p class="text-sm font-medium text-gray-500">請點選上方聲調</p>
@@ -76,14 +75,17 @@ const BASE = '/assets/course/l0';
   </section>
 
   <!-- ── Tab 2: 聲韻母 ─────────────────────────────────────────── -->
-  <section id="sec-initfinal" class="tab-section hidden -mx-4">
+  <section id="sec-initfinal" class="tab-section hidden -mx-4 md:mx-0 md:flex md:gap-6 md:items-start">
+    <!-- Left: toggle + grid -->
+    <div class="md:flex-1 md:min-w-0">
     <!-- Toggle -->
-    <div class="flex gap-2 px-4 pt-4 pb-3 sticky top-[84px] z-10 bg-white border-b border-gray-100">
+    <div class="flex gap-2 px-4 pt-4 pb-3 sticky top-[104px] z-10 bg-white border-b border-gray-100 md:static md:border-none md:bg-transparent md:pt-4 md:pb-2">
       <button id="btn-initial" onclick="switchIF('initial')" class="flex-1 py-2 rounded-xl text-sm font-bold bg-sky-500 text-white transition-all">聲母 <span class="font-normal text-xs opacity-80">Phụ âm</span></button>
       <button id="btn-final"   onclick="switchIF('final')"   class="flex-1 py-2 rounded-xl text-sm font-bold bg-gray-100 text-gray-500 transition-all">韻母 <span class="font-normal text-xs opacity-80">Vần</span></button>
     </div>
-    <div id="if-grid" class="overflow-y-auto px-4 py-3" style="max-height:44vh"></div>
-    <div class="sticky bottom-0 bg-white rounded-t-3xl shadow-[0_-4px_24px_rgba(0,0,0,0.10)] border-t border-gray-100 px-5 py-4 z-20">
+    <div id="if-grid" class="overflow-y-auto px-4 py-3 max-h-[44vh] md:max-h-none"></div>
+    </div>
+    <div class="sticky bottom-0 md:bottom-auto md:top-24 bg-white rounded-t-3xl md:rounded-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.10)] md:shadow-sm border-t md:border border-gray-100 px-5 py-4 z-20 md:z-10 md:w-72 md:flex-shrink-0 md:mt-4">
       <div id="if-empty" class="flex flex-col items-center gap-1.5 py-3 text-gray-400">
         <p class="text-3xl">☝️</p>
         <p class="text-sm font-medium text-gray-500">請點選上方拼音字母</p>
@@ -110,7 +112,7 @@ const BASE = '/assets/course/l0';
 
   <!-- ── Tab 3: 練習① ─────────────────────────────────────────── -->
   <section id="sec-quiz1" class="tab-section hidden">
-    <div id="q1-score-bar" class="flex items-center gap-3 px-4 py-3 bg-white/90 backdrop-blur sticky top-[84px] z-10 border-b border-gray-100">
+    <div id="q1-score-bar" class="flex items-center gap-3 px-4 py-3 bg-white/90 backdrop-blur sticky top-[104px] z-10 border-b border-gray-100">
       <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
         <div id="q1-progress" class="h-2 bg-teal-500 rounded-full transition-all" style="width:0%"></div>
       </div>
@@ -152,16 +154,16 @@ const BASE = '/assets/course/l0';
   </section>
 
   <!-- ── Tab 5: 延伸學習 ───────────────────────────────────────── -->
-  <section id="sec-extended" class="tab-section hidden -mx-4">
-    <div class="px-4 py-3 border-b border-gray-100">
+  <section id="sec-extended" class="tab-section hidden">
+    <div class="py-3 border-b border-gray-100 mb-3">
       <p class="text-sm font-bold text-gray-700">日常回應語 <span class="font-normal text-xs text-gray-400">Câu trả lời thông thường</span></p>
     </div>
-    <div id="extended-list" class="px-4 py-4 space-y-4 pb-8"></div>
+    <div id="extended-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-8"></div>
   </section>
 
   <!-- ── Tab 6: 練習② ─────────────────────────────────────────── -->
   <section id="sec-quiz2" class="tab-section hidden">
-    <div id="q2-score-bar" class="flex items-center gap-3 px-4 py-3 bg-white/90 backdrop-blur sticky top-[84px] z-10 border-b border-gray-100">
+    <div id="q2-score-bar" class="flex items-center gap-3 px-4 py-3 bg-white/90 backdrop-blur sticky top-[104px] z-10 border-b border-gray-100">
       <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
         <div id="q2-progress" class="h-2 bg-teal-500 rounded-full transition-all" style="width:0%"></div>
       </div>
@@ -178,6 +180,9 @@ const BASE = '/assets/course/l0';
   </div><!-- /max-w-md -->
 
 <style>
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
   :global(.flip-card) { perspective: 800px; }
   :global(.flip-card-inner) {
     position: relative; width: 100%; height: 100%;
@@ -334,10 +339,10 @@ window.switchTab = function(id) {
   document.getElementById('sec-' + id).classList.remove('hidden');
   document.querySelectorAll('.tab-btn').forEach(b => {
     const active = b.dataset.tab === id;
-    b.classList.toggle('border-teal-500', active);
-    b.classList.toggle('text-teal-600', active);
+    b.classList.toggle('opacity-100', active);
+    b.classList.toggle('border-white', active);
+    b.classList.toggle('opacity-60', !active);
     b.classList.toggle('border-transparent', !active);
-    b.classList.toggle('text-gray-400', !active);
   });
 };
 
@@ -481,7 +486,7 @@ function renderQuiz(questions, num) {
           <p class="text-sm text-gray-700 font-medium mb-1">${q.q}</p>
           <p class="text-xs text-gray-400 mb-3">${q.qCh}</p>
           ${mediaHtml ? `<div class="mb-3">${mediaHtml}</div>` : ''}
-          <div class="space-y-2" id="q${num}-opts-${qi}">
+          <div class="flex flex-col gap-2 md:grid md:grid-cols-3" id="q${num}-opts-${qi}">
             ${q.opts.map((opt, oi) => `
               <button onclick="answerQ(${num},${qi},${oi})"
                 class="w-full text-left px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"

@@ -10,7 +10,7 @@ const BASE = '/assets/course/l1';
 
   <!-- Header -->
   <header class="bg-teal-600 text-white shadow-lg sticky top-0 z-30">
-    <div class="max-w-md mx-auto px-4 py-3 flex items-center gap-3">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
       <a href="/course/01" class="p-1 hover:bg-white/20 rounded-lg transition-colors text-white">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
       </a>
@@ -20,8 +20,8 @@ const BASE = '/assets/course/l1';
       </div>
     </div>
     <!-- Tab Bar -->
-    <div class="max-w-md mx-auto overflow-x-auto scrollbar-none">
-      <div class="flex border-t border-white/20 min-w-max">
+    <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
+      <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full">
         {[
           ['vocab',    '生詞',     '詞彙'],
           ['sentence', '句型',     '句型'],
@@ -40,12 +40,12 @@ const BASE = '/assets/course/l1';
     </div>
   </header>
 
-  <main class="max-w-md mx-auto px-4 pt-4 space-y-0">
+  <main class="max-w-3xl mx-auto px-4 pt-4 space-y-0">
 
     <!-- ===== SECTION 1: 生詞 ===== -->
-    <section id="sec-vocab" class="tab-section -mx-4">
-      <div id="vocab-buttons" class="overflow-y-auto px-4 pt-4 pb-3 space-y-2" style="max-height:54vh;"></div>
-      <div class="sticky bottom-0 bg-white rounded-t-3xl shadow-[0_-4px_20px_rgba(0,0,0,0.08)] border-t border-gray-100 px-5 py-5 z-20">
+    <section id="sec-vocab" class="tab-section -mx-4 md:mx-0 md:flex md:gap-6 md:items-start">
+      <div id="vocab-buttons" class="overflow-y-auto px-4 pt-4 pb-3 space-y-2 max-h-[54vh] md:max-h-none md:flex-1"></div>
+      <div class="sticky bottom-0 md:bottom-auto md:top-24 bg-white rounded-t-3xl md:rounded-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.08)] md:shadow-sm border-t md:border border-gray-100 px-5 py-5 z-20 md:z-10 md:w-72 md:flex-shrink-0 md:mt-4">
         <div id="vocab-detail-empty" class="flex flex-col items-center gap-2 py-3 text-gray-400">
           <p class="text-3xl">☝️</p>
           <p class="text-sm font-medium text-gray-500">請點擊上方生詞</p>
@@ -60,7 +60,7 @@ const BASE = '/assets/course/l1';
     </section>
 
     <!-- ===== SECTION 2: 句型練習 ===== -->
-    <section id="sec-sentence" class="tab-section hidden -mx-4">
+    <section id="sec-sentence" class="tab-section hidden -mx-4 md:mx-0 md:rounded-2xl md:overflow-hidden">
       <div class="flex flex-col" style="height:calc(100dvh - 8rem);">
         <div id="sentence-chat" class="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-[#e2e6f2]">
           <div class="flex justify-center">
@@ -103,8 +103,8 @@ const BASE = '/assets/course/l1';
     </section>
 
     <!-- ===== SECTION 4: 情境對話 ===== -->
-    <section id="sec-dialogue" class="tab-section hidden -mx-4">
-      <div class="w-full h-52 relative bg-gray-200 flex-shrink-0">
+    <section id="sec-dialogue" class="tab-section hidden -mx-4 md:mx-0">
+      <div class="w-full h-52 md:h-72 relative bg-gray-200 flex-shrink-0">
         <img src={`${BASE}/images/L1_dialogue.png`} alt="情境對話插圖" class="w-full h-full object-cover" loading="lazy" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex items-end p-4">
           <div class="text-white">
@@ -114,7 +114,7 @@ const BASE = '/assets/course/l1';
           </div>
         </div>
       </div>
-      <div id="dialogue-list" class="overflow-y-auto px-4 py-4 space-y-3" style="max-height:55vh;"></div>
+      <div id="dialogue-list" class="overflow-y-auto px-4 py-4 space-y-3 max-h-[55vh] md:max-h-none"></div>
     </section>
 
     <!-- ===== SECTION 5: 延伸學習1 ===== -->
@@ -126,7 +126,7 @@ const BASE = '/assets/course/l1';
       <div class="bg-white rounded-2xl p-4 shadow-sm">
         <img src={`${BASE}/images/L1_dialogue.png`} alt="延伸學習插圖" class="w-full rounded-xl mb-4 object-contain max-h-48" loading="lazy" />
       </div>
-      <div id="ext1-grid" class="grid grid-cols-2 gap-3"></div>
+      <div id="ext1-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
     </section>
 
     <!-- ===== SECTION 6: 延伸學習2 ===== -->
@@ -147,7 +147,7 @@ const BASE = '/assets/course/l1';
           <button class="cat-btn flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full border border-yellow-300 bg-white text-gray-600 transition-colors whitespace-nowrap" data-cat={i}>{zh} <span class="opacity-60">{vi}</span></button>
         ))}
       </div>
-      <div id="ext2-grid" class="grid grid-cols-2 gap-3"></div>
+      <div id="ext2-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
     </section>
 
     <!-- ===== SECTION 7: 練習題 ===== -->
@@ -184,7 +184,7 @@ const BASE = '/assets/course/l1';
           <img id="quiz-image" src="" alt="題目圖片" class="w-full rounded-xl object-contain max-h-48 border border-gray-100" />
         </div>
         <p id="quiz-question-text" class="font-medium text-gray-800 mb-4 leading-relaxed"></p>
-        <div id="quiz-options-list" class="space-y-2"></div>
+        <div id="quiz-options-list" class="flex flex-col gap-2 md:grid md:grid-cols-3"></div>
         <div id="quiz-feedback-box" class="hidden mt-4 p-3 rounded-xl text-sm leading-relaxed"></div>
         <button id="quiz-next-btn" class="hidden mt-4 w-full bg-rose-500 hover:bg-rose-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors">
           下一題 → Câu tiếp theo
