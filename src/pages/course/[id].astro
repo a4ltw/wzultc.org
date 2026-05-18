@@ -58,9 +58,10 @@ const basePath = `/assets/course/${id}`;
         {course.interactiveHref && (
           <a
             href={course.interactiveHref}
-            class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+            class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-medium transition-colors flex flex-col items-center gap-0.5"
           >
-            ▶ 互動課程
+            <span class="flex items-center gap-1.5">▶ <span>互動課程</span></span>
+            <span class="text-[10px] opacity-80">Học tương tác</span>
           </a>
         )}
         <a
