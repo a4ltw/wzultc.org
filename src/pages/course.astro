@@ -50,23 +50,32 @@ const basicCourses = [
             <div class="flex gap-2">
               <a
                 href={course.slidesHref}
-                class="flex-1 flex items-center justify-center gap-1.5 bg-sky-50 hover:bg-sky-100 text-sky-700 text-sm font-medium py-2 rounded-xl transition-colors border border-sky-200"
+                class="flex-1 flex flex-col items-center justify-center gap-0.5 bg-sky-50 hover:bg-sky-100 text-sky-700 py-2.5 rounded-xl transition-colors border border-sky-200"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-                課程簡報
+                <div class="flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                  <span class="text-sm font-medium">課程簡報</span>
+                </div>
+                <span class="text-[10px] opacity-60">Xem slide</span>
               </a>
               {course.interactiveHref ? (
                 <a
                   href={course.interactiveHref}
-                  class="flex-1 flex items-center justify-center gap-1.5 bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium py-2 rounded-xl transition-colors shadow-sm"
+                  class="flex-1 flex flex-col items-center justify-center gap-0.5 bg-sky-500 hover:bg-sky-600 text-white py-2.5 rounded-xl transition-colors shadow-sm"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  互動課程
+                  <div class="flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    <span class="text-sm font-medium">互動課程</span>
+                  </div>
+                  <span class="text-[10px] opacity-80">Học tương tác</span>
                 </a>
               ) : (
-                <span class="flex-1 flex items-center justify-center gap-1.5 bg-gray-50 text-gray-300 text-sm font-medium py-2 rounded-xl border border-gray-100 cursor-not-allowed">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                  互動課程
+                <span class="flex-1 flex flex-col items-center justify-center gap-0.5 bg-gray-50 text-gray-300 py-2.5 rounded-xl border border-gray-100 cursor-not-allowed">
+                  <div class="flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span class="text-sm font-medium">互動課程</span>
+                  </div>
+                  <span class="text-[10px]">Học tương tác</span>
                 </span>
               )}
             </div>
@@ -95,23 +104,32 @@ const basicCourses = [
             <div class="flex gap-2">
               <a
                 href={course.slidesHref}
-                class="flex-1 flex items-center justify-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 text-sm font-medium py-2 rounded-xl transition-colors border border-rose-200"
+                class="flex-1 flex flex-col items-center justify-center gap-0.5 bg-rose-50 hover:bg-rose-100 text-rose-700 py-2.5 rounded-xl transition-colors border border-rose-200"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-                課程簡報
+                <div class="flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                  <span class="text-sm font-medium">課程簡報</span>
+                </div>
+                <span class="text-[10px] opacity-60">Xem slide</span>
               </a>
               {course.interactiveHref ? (
                 <a
                   href={course.interactiveHref}
-                  class="flex-1 flex items-center justify-center gap-1.5 bg-rose-500 hover:bg-rose-600 text-white text-sm font-medium py-2 rounded-xl transition-colors shadow-sm"
+                  class="flex-1 flex flex-col items-center justify-center gap-0.5 bg-rose-500 hover:bg-rose-600 text-white py-2.5 rounded-xl transition-colors shadow-sm"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  互動課程
+                  <div class="flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    <span class="text-sm font-medium">互動課程</span>
+                  </div>
+                  <span class="text-[10px] opacity-80">Học tương tác</span>
                 </a>
               ) : (
-                <span class="flex-1 flex items-center justify-center gap-1.5 bg-gray-50 text-gray-300 text-sm font-medium py-2 rounded-xl border border-gray-100 cursor-not-allowed">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                  互動課程
+                <span class="flex-1 flex flex-col items-center justify-center gap-0.5 bg-gray-50 text-gray-300 py-2.5 rounded-xl border border-gray-100 cursor-not-allowed">
+                  <div class="flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span class="text-sm font-medium">互動課程</span>
+                  </div>
+                  <span class="text-[10px]">Học tương tác</span>
                 </span>
               )}
             </div>
