@@ -29,7 +29,6 @@ const BASE = '/assets/course/l2';
           ['dialogue', '情境對話', '對話'],
           ['ext1',     '延伸1',    '延伸1'],
           ['ext2',     '延伸2',    '延伸2'],
-          ['quiz',     '練習題',   '練習'],
         ].map(([id, label]) => (
           <button
             class="tab-btn px-4 py-2 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all whitespace-nowrap"
@@ -150,53 +149,6 @@ const BASE = '/assets/course/l2';
       <div id="ext2-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
     </section>
 
-    <!-- ===== SECTION 7: 練習題 ===== -->
-    <section id="sec-quiz" class="tab-section hidden space-y-3">
-      <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-rose-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <h2 class="font-bold text-rose-800 mb-1">練習題 <span class="font-normal text-sm text-gray-400">Luyện tập</span></h2>
-            <p class="text-xs text-gray-400">聽音檔或看圖，選出正確答案</p>
-          </div>
-          <div class="text-right text-xs text-gray-400">
-            <span id="quiz-score">0</span> / <span id="quiz-total">10</span> 題正確
-          </div>
-        </div>
-        <div class="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-          <div id="quiz-progress-bar" class="h-full bg-rose-400 rounded-full transition-all duration-300" style="width:0%"></div>
-        </div>
-      </div>
-      <!-- Quiz Card -->
-      <div id="quiz-card" class="bg-white rounded-2xl p-5 shadow-md">
-        <p class="text-xs text-gray-400 mb-2" id="quiz-num">第 1 / 10 題</p>
-        <div id="quiz-audio-prompt" class="hidden mb-4">
-          <button id="quiz-play-btn" class="flex items-center gap-3 w-full bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-xl p-3 transition-colors">
-            <div class="bg-rose-500 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </div>
-            <div class="text-left">
-              <p class="text-sm font-medium text-rose-700">點擊播放音檔</p>
-              <p class="text-xs text-rose-400">Bấm để nghe câu hỏi</p>
-            </div>
-          </button>
-        </div>
-        <div id="quiz-image-prompt" class="hidden mb-4">
-          <img id="quiz-image" src="" alt="題目圖片" class="w-full rounded-xl object-contain max-h-48 border border-gray-100" />
-        </div>
-        <p id="quiz-question-text" class="font-medium text-gray-800 mb-4 leading-relaxed"></p>
-        <div id="quiz-options-list" class="flex flex-col gap-2 md:grid md:grid-cols-3"></div>
-        <div id="quiz-feedback-box" class="hidden mt-4 p-3 rounded-xl text-sm leading-relaxed"></div>
-        <button id="quiz-next-btn" class="hidden mt-4 w-full bg-rose-500 hover:bg-rose-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors">
-          下一題 → Câu tiếp theo
-        </button>
-        <div id="quiz-done" class="hidden text-center py-4">
-          <p class="text-2xl mb-2">🎉</p>
-          <p class="font-bold text-gray-800 mb-1">完成！Hoàn thành!</p>
-          <p class="text-sm text-gray-500 mb-4">答對 <span id="quiz-final-score"></span> / 10 題</p>
-          <button id="quiz-restart" class="bg-rose-500 text-white px-6 py-2 rounded-xl text-sm font-medium">重新練習</button>
-        </div>
-      </div>
-    </section>
 
   </main>
 </div>
@@ -329,18 +281,6 @@ const videoQuizzes = [
   },
 ];
 
-const quizData = [
-  { type:'audio', wav:'L2_exercise_01.wav', q:'Từ này có nghĩa là gì?', opts:['tháng một','Một tiếng','Thứ hai'], ans:2, exp:'(A) "一月 (yī yuè)" là tháng một. (B) "一個鐘頭 (yí ge zhōngtóu)" là Một tiếng. (C) "禮拜一 (lǐbài yī)" là Thứ hai.' },
-  { type:'audio', wav:'L2_exercise_02.wav', q:'Từ này có nghĩa là gì?', opts:['hôm nay','hôm qua','ngày mai'], ans:0, exp:'(A) "今天 (jīntiān)" là hôm nay. (B) "昨天 (zuótiān)" là hôm qua. (C) "明天 (míngtiān)" là ngày mai.' },
-  { type:'audio', wav:'L2_exercise_03.wav', q:'Từ này có nghĩa là gì?', opts:['tháng một','tháng sáu','tháng mười một'], ans:0, exp:'(A) "一月 (yī yuè)" là tháng một. (B) "六月 (liù yuè)" là tháng sáu. (C) "十一月 (shí yī yuè)" là tháng mười một.' },
-  { type:'audio', wav:'L2_exercise_04.wav', q:'Câu này có nghĩa là gì?', opts:['Bây giờ là bảy giờ.','Tôi thức dậy lúc bảy giờ.','Tôi đi ngủ lúc mười giờ.'], ans:0, exp:'(A) "現在七點。(Xiànzài qī diǎn.)" là Bây giờ là bảy giờ. (B) "我七點起床。" là Tôi thức dậy lúc bảy giờ. (C) "我十點睡覺。" là Tôi đi ngủ lúc mười giờ.' },
-  { type:'image', img:'L2_exercise_05.png', q:'Ông đang làm gì thế?', opts:['洗澡 (xǐ zǎo)','吃飯 (chī fàn)','睡覺 (shuì jiào)'], ans:2, exp:'(A) "洗澡 (xǐ zǎo)" là tắm. (B) "吃飯 (chī fàn)" là ăn cơm. (C) "睡覺 (shuì jiào)" là ngủ.' },
-  { type:'image', img:'L2_exercise_06.png', q:'Bà đang làm gì thế?', opts:['洗澡 (xǐ zǎo)','吃飯 (chī fàn)','睡覺 (shuì jiào)'], ans:0, exp:'(A) "洗澡 (xǐ zǎo)" là tắm. (B) "吃飯 (chī fàn)" là ăn cơm. (C) "睡覺 (shuì jiào)" là ngủ.' },
-  { type:'text',  q:'Khi người lớn nói với bạn "時間很晚 (Shíjiān hěn wǎn)", điều đó có nghĩa là gì?', opts:['Vẫn còn sớm, chưa muốn đi ngủ.','Đã muộn rồi, muốn đi ngủ rồi.','Sắp muộn giờ rồi, muốn nhanh hơn một chút.'], ans:1, exp:'"時間很晚 (Shíjiān hěn wǎn)" có nghĩa là Thời gian đã muộn rồi. Khi người lớn nói câu này, rất có thể là họ đã mệt và muốn đi ngủ rồi.' },
-  { type:'text',  q:'Khi người lớn hỏi bạn: "Hôm nay là thứ mấy?". Hôm nay là thứ sáu, bạn nên trả lời như thế nào?', opts:['禮拜五 (lǐbài wǔ)','禮拜二 (lǐbài èr)','禮拜四 (lǐbài sì)'], ans:0, exp:'(A) "禮拜五 (lǐbài wǔ)" là Thứ sáu. (B) "禮拜二 (lǐbài èr)" là Thứ ba. (C) "禮拜四 (lǐbài sì)" là Thứ năm.' },
-  { type:'text',  q:'Bạn đưa người lớn đi khám bệnh, bác sĩ yêu cầu bạn đưa họ đi lấy máu trước và quay lại sau "20 phút". Cho hỏi, "20 phút" trong tiếng Trung nói như thế nào?', opts:['兩點 (liǎng diǎn)','半個小時 (bàn ge xiǎoshí)','二十分鐘 (èr shí fēnzhōng)'], ans:2, exp:'(A) "兩點 (liǎng diǎn)" là 2 giờ. (B) "半個小時 (bàn ge xiǎoshí)" là Nửa tiếng. (C) "二十分鐘 (èr shí fēnzhōng)" là 20 phút.' },
-  { type:'text',  q:'Bà hỏi bạn: "Bây giờ là mấy giờ?", bạn có thể trả lời như thế nào?', opts:['吃飯時間到了。(Chī fàn shíjiān dào le.)','現在十點。(Xiànzài shí diǎn.)','好，我要吃飯。(Hǎo, wǒ yào chī fàn.)'], ans:1, exp:'(A) "吃飯時間到了。" là Đến giờ ăn rồi. (B) "現在十點。(Xiànzài shí diǎn.)" là Bây giờ là mười giờ. (C) "好，我要吃飯。" là Vâng, tôi muốn ăn cơm.' },
-];
 
 /* ── AUDIO ─────────────────────────────────────────────────── */
 const globalAudio = document.getElementById('global-audio');
@@ -592,94 +532,6 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
 });
 document.querySelectorAll('.cat-btn')[0].click();
 
-/* ── SECTION 7: 練習題 ───────────────────────────────────── */
-let qIndex = 0;
-let qScore = 0;
-let qAnswered = false;
-const qAudio = new Audio();
-
-function updateScoreBar() {
-  document.getElementById('quiz-score').textContent = qScore;
-  document.getElementById('quiz-total').textContent = quizData.length;
-  document.getElementById('quiz-progress-bar').style.width = (qIndex / quizData.length * 100) + '%';
-}
-
-function loadQuestion(i) {
-  qAnswered = false;
-  const q = quizData[i];
-  document.getElementById('quiz-num').textContent = `第 ${i+1} / ${quizData.length} 題`;
-  document.getElementById('quiz-question-text').textContent = q.q;
-  document.getElementById('quiz-feedback-box').classList.add('hidden');
-  document.getElementById('quiz-next-btn').classList.add('hidden');
-  document.getElementById('quiz-done').classList.add('hidden');
-
-  const audioPrompt = document.getElementById('quiz-audio-prompt');
-  const imagePrompt = document.getElementById('quiz-image-prompt');
-  const playBtn2 = document.getElementById('quiz-play-btn');
-  audioPrompt.classList.add('hidden');
-  imagePrompt.classList.add('hidden');
-  if (q.type === 'audio') {
-    audioPrompt.classList.remove('hidden');
-    qAudio.src = BASE + '/audio/' + q.wav;
-    playBtn2.onclick = () => { qAudio.currentTime = 0; qAudio.play(); };
-  } else if (q.type === 'image') {
-    imagePrompt.classList.remove('hidden');
-    document.getElementById('quiz-image').src = BASE + '/images/' + q.img;
-  }
-
-  const optList = document.getElementById('quiz-options-list');
-  optList.innerHTML = '';
-  q.opts.forEach((opt, j) => {
-    const btn = document.createElement('button');
-    btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-gray-100 hover:border-rose-300 text-sm transition-colors bg-white';
-    btn.textContent = String.fromCharCode(65+j) + '. ' + opt;
-    btn.addEventListener('click', () => {
-      if (qAnswered) return;
-      qAnswered = true;
-      optList.querySelectorAll('button').forEach(b => b.disabled = true);
-      const correct = j === q.ans;
-      if (correct) {
-        btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-green-400 bg-green-50 text-sm text-green-800';
-        qScore++;
-      } else {
-        btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-red-400 bg-red-50 text-sm text-red-800';
-        optList.querySelectorAll('button')[q.ans].className =
-          'w-full text-left px-4 py-2.5 rounded-xl border-2 border-green-400 bg-green-50 text-sm text-green-800';
-      }
-      const fb = document.getElementById('quiz-feedback-box');
-      fb.classList.remove('hidden');
-      fb.className = 'mt-4 p-3 rounded-xl text-sm leading-relaxed ' +
-        (correct ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200');
-      fb.innerHTML = (correct ? '<strong>✓ 正確！Chính xác!</strong><br>' : '<strong>✗ 再試一次。</strong><br>') + q.exp;
-      document.getElementById('quiz-next-btn').classList.remove('hidden');
-      updateScoreBar();
-    });
-    optList.appendChild(btn);
-  });
-  updateScoreBar();
-}
-
-document.getElementById('quiz-next-btn').addEventListener('click', () => {
-  qIndex++;
-  if (qIndex >= quizData.length) {
-    document.getElementById('quiz-options-list').innerHTML = '';
-    document.getElementById('quiz-num').textContent = '';
-    document.getElementById('quiz-question-text').textContent = '';
-    document.getElementById('quiz-audio-prompt').classList.add('hidden');
-    document.getElementById('quiz-image-prompt').classList.add('hidden');
-    document.getElementById('quiz-feedback-box').classList.add('hidden');
-    document.getElementById('quiz-next-btn').classList.add('hidden');
-    document.getElementById('quiz-progress-bar').style.width = '100%';
-    document.getElementById('quiz-final-score').textContent = qScore;
-    document.getElementById('quiz-done').classList.remove('hidden');
-  } else {
-    loadQuestion(qIndex);
-  }
-});
-
-document.getElementById('quiz-restart').addEventListener('click', () => {
-  qIndex = 0; qScore = 0;
-  loadQuestion(0);
 });
 
 loadQuestion(0);
