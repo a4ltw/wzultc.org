@@ -24,6 +24,7 @@ export default defineConfig({
     '/files/mid-et': 'https://drive.google.com/file/d/1qpyLD0FwwhAuUdDAcMR5lZnRz15BSyc9/view?usp=drive_link',
     '/files/mid-rp-pdf': 'https://drive.google.com/file/d/1Wi6Mc7Jr5N-vzlSz54D1wwjCvdsZDfPS/view?usp=drive_link',
     '/files/mid-rp-ppt': 'https://docs.google.com/presentation/d/1zc0J280ww02SLnmQTu51D9WeE7TDg9bH/edit?usp=sharing&ouid=113390623339640898195&rtpof=true&sd=true',
+    '/files/vis-st': 'https://docs.google.com/presentation/d/1G3gW7m3XeMIoaUdOARKWX4R-XjYOSvyl/edit?usp=sharing&ouid=113390623339640898195&rtpof=true&sd=true',
     '/tool/translate': 'https://aitranslator-navy.vercel.app/',
     '/tool/careconnect': 'https://nstc-ai-campus.vercel.app/',
     '/tool/VirtualPatient': 'https://vtuber01.vercel.app/VirtualPatient.html',
