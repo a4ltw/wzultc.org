@@ -9,12 +9,13 @@ const BASE = '/assets/course/l0';
   <!-- ═══ Sticky Header ═══════════════════════════════════════════ -->
   <div class="sticky top-0 z-40 bg-teal-600 text-white shadow-lg">
     <div class="max-w-3xl mx-auto flex items-center gap-3 px-4 py-3">
-      <a href="/course/00" class="p-1 hover:bg-white/20 rounded-lg transition-colors text-white flex-shrink-0">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
       <div>
-        <p class="text-sm font-bold leading-tight">第零課：聲調・拼音</p>
-        <p class="text-xs opacity-80">Bài 0: Thanh điệu · Phiên âm</p>
+        <div class="flex items-center gap-1.5 text-sm font-bold leading-tight">
+          <a href="/course" class="opacity-75 hover:opacity-100 transition-opacity">課程</a>
+          <span class="opacity-50">/</span>
+          <a href="/course/00" class="hover:opacity-80 transition-opacity">第零課：聲調・拼音</a>
+        </div>
+        <p class="text-xs opacity-60 mt-0.5">Bài 0: Thanh điệu · Phiên âm</p>
       </div>
     </div>
     <!-- Tab Bar -->
@@ -112,7 +113,7 @@ const BASE = '/assets/course/l0';
 
   <!-- ── Tab 3: 拼音練習 ───────────────────────────────────────── -->
   <section id="sec-practical" class="tab-section hidden">
-    <div class="relative w-full bg-gray-200 overflow-hidden" style="height:55vw; max-height:46vh">
+    <div class="relative w-full bg-gray-200 overflow-hidden" style="height:65vw; max-height:56vh">
       <img src={`${BASE}/images/L0_scene.png`} alt="拼音練習場景" class="w-full h-full object-cover" />
       <div id="hotspot-container"></div>
     </div>
@@ -122,12 +123,12 @@ const BASE = '/assets/course/l0';
         <p class="text-sm font-medium text-gray-500">點擊圖片上的按鈕</p>
         <p class="text-xs">Nhấn vào các nút trên hình ảnh</p>
       </div>
-      <div id="prac-word" style="display:none" class="flex items-center gap-4 bg-teal-50 rounded-2xl px-5 py-4">
-        <img id="prac-img" src="" alt="" class="w-20 h-20 object-contain rounded-2xl bg-white border border-teal-100 flex-shrink-0" />
+      <div id="prac-word" style="display:none" class="flex items-center gap-5 bg-teal-50 rounded-2xl px-5 py-5">
+        <img id="prac-img" src="" alt="" class="w-28 h-28 object-contain rounded-2xl bg-white border border-teal-100 flex-shrink-0" />
         <div class="flex-1 min-w-0">
-          <p id="prac-zh"     class="text-2xl font-bold text-gray-800 leading-tight"></p>
-          <p id="prac-pinyin" class="text-base font-medium text-teal-600"></p>
-          <p id="prac-vn"     class="text-sm text-gray-500"></p>
+          <p id="prac-zh"     class="text-3xl font-bold text-gray-800 leading-tight"></p>
+          <p id="prac-pinyin" class="text-xl font-medium text-teal-600 mt-1"></p>
+          <p id="prac-vn"     class="text-base text-gray-500 mt-0.5"></p>
         </div>
         <button onclick="window.playCurrentPrac()" class="w-12 h-12 bg-teal-500 hover:bg-teal-600 rounded-full flex items-center justify-center flex-shrink-0 transition-colors shadow-md">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -168,22 +169,29 @@ const BASE = '/assets/course/l0';
     transform: translate(-50%, -50%);
     width: 24px; height: 24px;
     border-radius: 50%;
-    background: rgba(13,148,136,0.9);
+    background: rgba(239,68,68,0.92);
     color: white;
     font-size: 10px; font-weight: bold;
     border: 2px solid white;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer;
     animation: pulse-dot 2s infinite;
-    box-shadow: 0 0 0 0 rgba(13,148,136,0.5);
+    box-shadow: 0 0 0 0 rgba(239,68,68,0.5);
     line-height: 1.1; text-align: center;
     white-space: nowrap;
   }
-  :global(.hotspot-btn.active) { background: rgba(5,95,85,0.95); box-shadow: 0 0 0 4px rgba(13,148,136,0.3); }
+  :global(.hotspot-btn.active) { background: rgba(185,28,28,0.95); box-shadow: 0 0 0 4px rgba(239,68,68,0.3); }
   @keyframes pulse-dot {
-    0%   { box-shadow: 0 0 0 0 rgba(13,148,136,0.5); }
-    70%  { box-shadow: 0 0 0 10px rgba(13,148,136,0); }
-    100% { box-shadow: 0 0 0 0 rgba(13,148,136,0); }
+    0%   { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+    70%  { box-shadow: 0 0 0 10px rgba(239,68,68,0); }
+    100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+  }
+  :global(#if-grid button) {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    padding: 0.75rem 1.25rem !important;
+    min-width: 3.5rem;
+    text-align: center;
   }
 </style>
 
@@ -243,7 +251,7 @@ const FINALS = [
   { pinyin:'wu',  group:'i / u / ü',          vn:'u (đứng đầu)',      word:'無力', wp:'wú lì',     trans:'Không có sức / Yếu',   img:'L0_27-8.png', audio:'L0_27-2.wav' },
   { pinyin:'ü',   group:'i / u / ü',          vn:'uy',                word:'女兒', wp:'nǚ ér',     trans:'Con gái',              img:'L0_28-1.png', audio:'L0_28-1.wav' },
   { pinyin:'yu',  group:'i / u / ü',          vn:'uy (đứng đầu)',     word:'浴室', wp:'yù shì',    trans:'Phòng tắm',            img:'L0_28-2.png', audio:'L0_28-2.wav' },
-  { pinyin:'ü*',  group:'i / u / ü',          vn:'uy (sau j/q/x)',    word:'舉手', wp:'jǔ shǒu',   trans:'Giơ tay / Nhấc tay',   img:'L0_28-3.png', audio:'L0_28-3.wav' },
+  { pinyin:'u',   group:'i / u / ü',          vn:'uy (sau j/q/x)',    word:'舉手', wp:'jǔ shǒu',   trans:'Giơ tay / Nhấc tay',   img:'L0_28-3.png', audio:'L0_28-3.wav' },
   { pinyin:'ai',  group:'ai / ei / ao / ou',  vn:'ai',                word:'慢慢來',wp:'màn màn lái',trans:'Cứ từ từ / Chậm thôi',img:'L0_29.png',  audio:'L0_29.wav'   },
   { pinyin:'ei',  group:'ai / ei / ao / ou',  vn:'ây',                word:'棉被', wp:'mián bèi',  trans:'Chăn bông / Mền',      img:'L0_30.png',   audio:'L0_30.wav'   },
   { pinyin:'ao',  group:'ai / ei / ao / ou',  vn:'ao',                word:'尿布', wp:'niào bù',   trans:'Tã / Bỉm',             img:'L0_31.png',   audio:'L0_31.wav'   },
@@ -255,12 +263,12 @@ const FINALS = [
 ];
 
 const PRACTICAL = [
-  { zh:'護士', pinyin:'hù shì',    vn:'y tá',        audio:'L0_45.wav', img:'L0_45.png', x:12, y:47 },
-  { zh:'飯',   pinyin:'fàn',       vn:'cơm',         audio:'L0_42.wav', img:'L0_42.png', x:23, y:64 },
-  { zh:'起床', pinyin:'qǐ chuáng', vn:'thức dậy',    audio:'L0_46.wav', img:'L0_46.png', x:30, y:53 },
-  { zh:'醫生', pinyin:'yī shēng',  vn:'bác sĩ',      audio:'L0_44.wav', img:'L0_44.png', x:53, y:42 },
-  { zh:'吃藥', pinyin:'chī yào',   vn:'uống thuốc',  audio:'L0_47.wav', img:'L0_47.png', x:78, y:53 },
-  { zh:'水',   pinyin:'shuǐ',      vn:'nước',        audio:'L0_43.wav', img:'L0_43.png', x:95, y:68 },
+  { zh:'護士', pinyin:'hù shì',    vn:'y tá',        audio:'L0_45.wav', img:'L0_45.png', x:10, y:47 },
+  { zh:'飯',   pinyin:'fàn',       vn:'cơm',         audio:'L0_42.wav', img:'L0_42.png', x:21, y:65 },
+  { zh:'起床', pinyin:'qǐ chuáng', vn:'thức dậy',    audio:'L0_46.wav', img:'L0_46.png', x:31, y:54 },
+  { zh:'醫生', pinyin:'yī shēng',  vn:'bác sĩ',      audio:'L0_44.wav', img:'L0_44.png', x:56, y:42 },
+  { zh:'吃藥', pinyin:'chī yào',   vn:'uống thuốc',  audio:'L0_47.wav', img:'L0_47.png', x:80, y:53 },
+  { zh:'水',   pinyin:'shuǐ',      vn:'nước',        audio:'L0_43.wav', img:'L0_43.png', x:98, y:68 },
 ];
 
 const EXTENDED = [
@@ -357,8 +365,8 @@ window.switchIF = function(mode) {
 };
 
 const IF_BTN_CLS = {
-  sky:    'px-4 py-2 rounded-xl font-bold text-sky-700 bg-sky-50 border border-sky-200 hover:bg-sky-100 transition-colors text-sm',
-  indigo: 'px-4 py-2 rounded-xl font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition-colors text-sm',
+  sky:    'px-5 py-3 rounded-xl font-bold text-sky-700 bg-sky-50 border border-sky-200 hover:bg-sky-100 transition-colors text-xl min-w-[3rem] text-center',
+  indigo: 'px-5 py-3 rounded-xl font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition-colors text-xl min-w-[3rem] text-center',
 };
 
 function renderIFGrid(items, color) {
@@ -473,5 +481,27 @@ renderTones();
 switchIF('initial');
 renderPractical();
 renderExtended();
+
+// ── 校正模式：網址加 ?calibrate=1 啟動 ──────────────────────
+if (new URLSearchParams(location.search).has('calibrate')) {
+  const imgWrap = document.querySelector('#sec-practical .relative');
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;top:56px;left:0;right:0;background:#f59e0b;color:#000;text-align:center;padding:8px 16px;font-weight:bold;z-index:9999;font-size:13px;letter-spacing:.02em;';
+  banner.textContent = '🎯 校正模式｜點圖片任意位置 → 下方顯示座標，告訴 Claude 各詞彙對應數字';
+  document.body.appendChild(banner);
+  const display = document.createElement('div');
+  display.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:14px 28px;border-radius:16px;font-size:20px;font-family:monospace;z-index:9999;display:none;text-align:center;min-width:160px;';
+  document.body.appendChild(display);
+  imgWrap.style.cursor = 'crosshair';
+  imgWrap.addEventListener('click', e => {
+    const r = imgWrap.getBoundingClientRect();
+    const x = Math.round((e.clientX - r.left) / r.width * 100);
+    const y = Math.round((e.clientY - r.top) / r.height * 100);
+    display.style.display = 'block';
+    display.innerHTML = `x: <b>${x}</b>，y: <b>${y}</b>`;
+    display.style.background = '#059669';
+    setTimeout(() => { display.style.background = '#1e293b'; }, 700);
+  });
+}
 </script>
 </Layout>

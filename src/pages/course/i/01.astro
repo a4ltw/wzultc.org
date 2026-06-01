@@ -11,12 +11,13 @@ const BASE = '/assets/course/l1';
   <!-- Header -->
   <header class="bg-teal-600 text-white shadow-lg sticky top-0 z-30">
     <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-      <a href="/course/01" class="p-1 hover:bg-white/20 rounded-lg transition-colors text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-      </a>
       <div>
-        <h1 class="text-base font-bold leading-tight">第一課：自我介紹</h1>
-        <p class="text-xs opacity-80">Bài 1: Tự giới thiệu</p>
+        <div class="flex items-center gap-1.5 text-sm font-bold leading-tight">
+          <a href="/course" class="opacity-75 hover:opacity-100 transition-opacity">課程</a>
+          <span class="opacity-50">/</span>
+          <a href="/course/01" class="hover:opacity-80 transition-opacity">第一課：自我介紹</a>
+        </div>
+        <p class="text-xs opacity-60 mt-0.5">Bài 1: Tự giới thiệu</p>
       </div>
     </div>
     <!-- Tab Bar -->
@@ -135,17 +136,18 @@ const BASE = '/assets/course/l1';
         <h2 class="font-bold text-yellow-800 mb-1">延伸學習 2 <span class="font-normal text-sm text-gray-400">Học thêm 2</span></h2>
         <p class="text-xs text-gray-400">選擇類別，點卡片翻面，點 🔊 聽發音</p>
       </div>
-      <!-- Category Tabs -->
-      <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
-        {[
-          ['問候語','Chào hỏi'],
-          ['禮貌語','Lịch sự'],
-          ['稱呼語','Xưng hô'],
-          ['職場用語','Làm việc'],
-          ['日常回應','Trả lời'],
-        ].map(([zh, vi], i) => (
-          <button class="cat-btn flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full border border-yellow-300 bg-white text-gray-600 transition-colors whitespace-nowrap" data-cat={i}>{zh} <span class="opacity-60">{vi}</span></button>
-        ))}
+      <!-- Category Dropdown -->
+      <div class="relative">
+        <select id="cat-select" class="w-full px-4 py-3 rounded-xl border-2 border-yellow-300 bg-white text-gray-700 font-medium text-sm appearance-none cursor-pointer focus:outline-none focus:border-yellow-400 pr-10">
+          <option value="0">問候語 · Chào hỏi</option>
+          <option value="1">禮貌語 · Lịch sự</option>
+          <option value="2">稱呼語 · Xưng hô</option>
+          <option value="3">職場用語 · Làm việc</option>
+          <option value="4">日常回應 · Trả lời</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
       </div>
       <div id="ext2-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
     </section>
@@ -498,20 +500,12 @@ function renderExt2(cat) {
   ext2.filter(v => v.cat === cat).forEach(v => ext2Grid.appendChild(makeFlipCard(v.zh, v.py, v.vi, v.wav, 'yellow')));
 }
 
-document.querySelectorAll('.cat-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    activeCat = parseInt(btn.dataset.cat);
-    document.querySelectorAll('.cat-btn').forEach(b => {
-      b.classList.toggle('bg-yellow-400', b === btn);
-      b.classList.toggle('text-white', b === btn);
-      b.classList.toggle('border-yellow-400', b === btn);
-      b.classList.toggle('bg-white', b !== btn);
-      b.classList.toggle('text-gray-600', b !== btn);
-    });
-    renderExt2(activeCat);
-  });
+const catSelect = document.getElementById('cat-select');
+catSelect.addEventListener('change', () => {
+  activeCat = parseInt(catSelect.value);
+  renderExt2(activeCat);
 });
-document.querySelectorAll('.cat-btn')[0].click();
+renderExt2(0);
 
 </script>
 

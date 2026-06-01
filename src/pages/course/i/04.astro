@@ -11,12 +11,13 @@ const BASE = '/assets/course/l4';
   <!-- Header -->
   <header class="bg-teal-600 text-white shadow-lg sticky top-0 z-30">
     <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-      <a href="/course/04" class="p-1 hover:bg-white/20 rounded-lg transition-colors text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-      </a>
       <div>
-        <h1 class="text-base font-bold leading-tight">第四課：個人清潔</h1>
-        <p class="text-xs opacity-80">Bài 4: Vệ sinh cá nhân</p>
+        <div class="flex items-center gap-1.5 text-sm font-bold leading-tight">
+          <a href="/course" class="opacity-75 hover:opacity-100 transition-opacity">課程</a>
+          <span class="opacity-50">/</span>
+          <a href="/course/04" class="hover:opacity-80 transition-opacity">第四課：個人清潔</a>
+        </div>
+        <p class="text-xs opacity-60 mt-0.5">Bài 4: Vệ sinh cá nhân</p>
       </div>
     </div>
     <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
@@ -114,10 +115,12 @@ const BASE = '/assets/course/l4';
     <section id="sec-ext1" class="tab-section hidden space-y-3">
       <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-orange-500">
         <h2 class="font-bold text-orange-800 mb-1">延伸學習 1 <span class="font-normal text-sm text-gray-400">Học thêm 1</span></h2>
-        <p class="text-xs text-gray-400">身體部位・點卡片翻面看越南文，點 🔊 聽發音</p>
+        <p class="text-xs text-gray-400">點圖上紅點跳字卡・翻卡看越南文・點 🔊 聽發音</p>
       </div>
       <div class="bg-white rounded-2xl p-4 shadow-sm">
-        <img src={`${BASE}/images/L4_ext1.png`} alt="延伸學習插圖" class="w-full rounded-xl mb-4 object-contain max-h-48" loading="lazy" />
+        <div id="ext1-map" class="relative rounded-xl overflow-hidden mb-4">
+          <img src={`${BASE}/images/L4_ext1.png`} alt="延伸學習插圖" class="w-full h-auto block" loading="lazy" />
+        </div>
       </div>
       <div id="ext1-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
     </section>
@@ -128,16 +131,17 @@ const BASE = '/assets/course/l4';
         <h2 class="font-bold text-yellow-800 mb-1">延伸學習 2 <span class="font-normal text-sm text-gray-400">Học thêm 2</span></h2>
         <p class="text-xs text-gray-400">選擇類別，點卡片翻面，點 🔊 聽發音</p>
       </div>
-      <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
-        {[
-          ['清潔動作','Hoạt động vệ sinh'],
-          ['清潔用品','Đồ dùng vệ sinh'],
-          ['狀態形容詞','Tính từ mô tả trạng thái'],
-          ['照護常用說法','Câu nói thường dùng'],
-        ].map(([zh, vi], i) => (
-          <button class="cat-btn flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full border border-yellow-300 bg-white text-gray-600 transition-colors whitespace-nowrap" data-cat={i}>{zh} <span class="opacity-60">{vi}</span></button>
-        ))}
-      </div>
+      <div class="relative">
+          <select id="cat-select" class="w-full px-4 py-3 rounded-xl border-2 border-yellow-300 bg-white text-gray-700 font-medium text-sm appearance-none cursor-pointer focus:outline-none focus:border-yellow-400 pr-10">
+          <option value="0">清潔動作 · Hoạt động vệ sinh</option>
+          <option value="1">清潔用品 · Đồ dùng vệ sinh</option>
+          <option value="2">狀態形容詞 · Tính từ mô tả trạng thái</option>
+          <option value="3">照護常用說法 · Câu nói thường dùng</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
       <div id="ext2-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
     </section>
 
@@ -149,6 +153,9 @@ const BASE = '/assets/course/l4';
 <style>
   .scrollbar-none::-webkit-scrollbar { display: none; }
   .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+  :global(.ext1-hotspot) { position:absolute; width:2.25rem; height:2.25rem; border-radius:9999px; transform:translate(-50%,-50%); cursor:pointer; border:none; background:transparent; transition:all 0.2s; }
+  :global(.ext1-hotspot:hover) { background:rgba(255,255,255,0.25); box-shadow:0 0 0 3px rgba(255,255,255,0.7); }
+  :global(.ext1-highlight) { outline:3px solid #f87171 !important; outline-offset:3px; }
   :global(.flip-card) { perspective: 800px; }
   :global(.flip-card-inner) { position: relative; width: 100%; height: 100%; transition: transform 0.45s ease; transform-style: preserve-3d; }
   :global(.flip-card.flipped .flip-card-inner) { transform: rotateY(180deg); }
@@ -458,6 +465,40 @@ dialogueLines.forEach(d => {
 /* ── SECTION 5: 延伸學習1 ── */
 const ext1Grid = document.getElementById('ext1-grid');
 ext1.forEach(v => ext1Grid.appendChild(makeFlipCard(v.zh, v.py, v.vi, v.wav, 'orange')));
+if (!document.getElementById('ext1-pulse-style')) {
+  const ps = document.createElement('style');
+  ps.id = 'ext1-pulse-style';
+  ps.textContent = '@keyframes ext1-pulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.5)}70%{box-shadow:0 0 0 8px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}';
+  document.head.appendChild(ps);
+}
+const ext1Map = document.getElementById('ext1-map');
+[
+  {idx:0,x:34,y:7},
+  {idx:1,x:12,y:21},
+  {idx:2,x:6, y:53},
+  {idx:3,x:95,y:79},
+  {idx:4,x:51,y:38},
+  {idx:5,x:89,y:23},
+  {idx:6,x:41,y:23},
+  {idx:7,x:64,y:12},
+  {idx:8,x:46,y:58},
+  {idx:9,x:58,y:76},
+].forEach(({ idx, x, y }) => {
+  const h = document.createElement('button');
+  h.title = ext1[idx]?.zh || '';
+  h.style.cssText = `position:absolute;left:${x}%;top:${y}%;width:24px;height:24px;border-radius:50%;background:rgba(239,68,68,0.92);border:2px solid white;transform:translate(-50%,-50%);cursor:pointer;animation:ext1-pulse 2s infinite;box-shadow:0 0 0 0 rgba(239,68,68,0.5);`;
+  h.addEventListener('click', () => {
+    const card = ext1Grid.children[idx];
+    if (!card) return;
+    card.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    card.classList.toggle('flipped');
+    if (card.classList.contains('flipped')) window.playAudio(ext1[idx].wav);
+    card.style.outline = '3px solid #0d9488';
+    card.style.outlineOffset = '3px';
+    setTimeout(() => { card.style.outline=''; card.style.outlineOffset=''; }, 1500);
+  });
+  ext1Map.appendChild(h);
+});
 
 /* ── SECTION 6: 延伸學習2 ── */
 let activeCat = 0;
@@ -466,20 +507,34 @@ function renderExt2(cat) {
   ext2Grid.innerHTML = '';
   ext2.filter(v => v.cat === cat).forEach(v => ext2Grid.appendChild(makeFlipCard(v.zh, v.py, v.vi, v.wav, 'yellow')));
 }
-document.querySelectorAll('.cat-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    activeCat = parseInt(btn.dataset.cat);
-    document.querySelectorAll('.cat-btn').forEach(b => {
-      b.classList.toggle('bg-yellow-400', b === btn);
-      b.classList.toggle('text-white', b === btn);
-      b.classList.toggle('border-yellow-400', b === btn);
-      b.classList.toggle('bg-white', b !== btn);
-      b.classList.toggle('text-gray-600', b !== btn);
-    });
-    renderExt2(activeCat);
-  });
+const catSelect = document.getElementById('cat-select');
+catSelect.addEventListener('change', () => {
+  activeCat = parseInt(catSelect.value);
+  renderExt2(activeCat);
 });
-document.querySelectorAll('.cat-btn')[0].click();
+renderExt2(0);
+
+// ── 校正模式：網址加 ?calibrate=1 啟動 ──────────────────────
+if (new URLSearchParams(location.search).has('calibrate')) {
+  const imgWrap = document.getElementById('ext1-map');
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;top:56px;left:0;right:0;background:#f59e0b;color:#000;text-align:center;padding:8px 16px;font-weight:bold;z-index:9999;font-size:13px;letter-spacing:.02em;';
+  banner.textContent = '🎯 校正模式｜切到「延伸一」tab，點圖片位置 → 下方顯示座標';
+  document.body.appendChild(banner);
+  const display = document.createElement('div');
+  display.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:14px 28px;border-radius:16px;font-size:20px;font-family:monospace;z-index:9999;display:none;text-align:center;min-width:160px;';
+  document.body.appendChild(display);
+  imgWrap.style.cursor = 'crosshair';
+  imgWrap.addEventListener('click', e => {
+    const r = imgWrap.getBoundingClientRect();
+    const x = Math.round((e.clientX - r.left) / r.width * 100);
+    const y = Math.round((e.clientY - r.top) / r.height * 100);
+    display.style.display = 'block';
+    display.innerHTML = 'x: <b>' + x + '</b>，y: <b>' + y + '</b>';
+    display.style.background = '#059669';
+    setTimeout(() => { display.style.background = '#1e293b'; }, 700);
+  });
+}
 
 </script>
 
