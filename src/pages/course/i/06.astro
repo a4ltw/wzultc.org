@@ -10,27 +10,43 @@ const BASE = '/assets/course/l6';
 
   <!-- Header -->
   <header class="bg-teal-600 text-white shadow-lg sticky top-0 z-30">
-    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-      <div>
-        <div class="flex items-center gap-1.5 text-sm font-bold leading-tight">
-          <a href="/course" class="opacity-75 hover:opacity-100 transition-opacity">課程</a>
-          <span class="opacity-50">/</span>
-          <a href="/course/06" class="hover:opacity-80 transition-opacity">第六課：健康與用藥</a>
-        </div>
+    <div class="max-w-3xl mx-auto flex items-center justify-between gap-2 px-3 py-2.5">
+      <a href="/course" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
+        <span class="flex items-center gap-1">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          課程列表
+        </span>
+        <span class="text-[10px] opacity-70 font-normal">Danh sách</span>
+      </a>
+      <div class="text-center min-w-0">
+        <p class="text-sm font-bold leading-tight">第六課：健康與用藥</p>
         <p class="text-xs opacity-60 mt-0.5">Bài 6: Sức khỏe và dùng thuốc</p>
       </div>
+      <a href="/course/06" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
+        <span class="flex items-center gap-1">
+          課程簡報
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+        <span class="text-[10px] opacity-70 font-normal">Bài giảng</span>
+      </a>
     </div>
     <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
       <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full">
         {[
-          ['vocab',    '生詞'],
-          ['sentence', '句型'],
-          ['video',    '對話影片'],
-          ['dialogue', '情境對話'],
-          ['ext1',     '延伸1'],
-          ['ext2',     '延伸2'],
-        ].map(([id, label]) => (
-          <button class="tab-btn px-4 py-2 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all whitespace-nowrap" data-tab={id}>{label}</button>
+          ['vocab',    '生詞',    'Từ vựng'],
+          ['sentence', '句型',    'Câu mẫu'],
+          ['video',    '對話影片','Video'],
+          ['dialogue', '情境對話','Hội thoại'],
+          ['ext1',     '延伸1',   'Mở rộng 1'],
+          ['ext2',     '延伸2',   'Mở rộng 2'],
+        ].map(([id, zh, vi]) => (
+          <button
+            class="tab-btn px-4 py-1.5 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all text-center"
+            data-tab={id}
+          >
+            <div class="whitespace-nowrap">{zh}</div>
+            <div class="text-[10px] font-normal opacity-70 whitespace-nowrap">{vi}</div>
+          </button>
         ))}
       </div>
     </div>
@@ -183,7 +199,7 @@ const vocab = [
 const sentences = [
   { zh:'你哪裡不舒服？',     py:'Nǐ nǎlǐ bù shūfú?',          vi:'Bạn thấy khó chịu ở đâu?',              wav:'L6_12.wav' },
   { zh:'我頭痛。',           py:'Wǒ tóu tòng.',                 vi:'Tôi đau đầu.',                          wav:'L6_13.wav' },
-  { zh:'吃藥了。',           py:'Chī yào le.',                   vi:'Đến lúc uống thuốc rồi.',               wav:'L6_14.wav' },
+  { zh:'吃藥了。',           py:'Chī yào le.',                   vi:'Uống thuốc thôi / Đến lúc uống thuốc rồi.', wav:'L6_14.wav' },
   { zh:'喝一點溫水。',       py:'Hē yìdiǎn wēn shuǐ.',          vi:'Uống một ít nước ấm.',                  wav:'L6_15.wav' },
   { zh:'不要動，我要打針。', py:'Bú yào dòng, wǒ yào dǎ zhēn.',vi:'Đừng cử động, tôi sẽ tiêm.',           wav:'L6_16.wav' },
 ];
@@ -191,9 +207,9 @@ const sentences = [
 const dialogueLines = [
   { role:'醫生', side:'left',  zh:'你哪裡不舒服？',                     py:'Nǐ nǎlǐ bù shūfú?',                                      vi:'Bạn thấy khó chịu ở đâu?',                            wav:'L6_17.wav' },
   { role:'阿嬤', side:'right', zh:'我頭痛，有一點發燒。',                py:'Wǒ tóu tòng, yǒu yìdiǎn fā shāo.',                       vi:'Tôi đau đầu, hơi sốt.',                               wav:'L6_18.wav' },
-  { role:'醫生', side:'left',  zh:'先吃藥，要多喝水，吃清淡一點。',      py:'Xiān chī yào, yào duō hē shuǐ, chī qīngdàn yìdiǎn.',    vi:'Uống thuốc trước, nhớ uống nhiều nước và ăn thanh đạm.',wav:'L6_19.wav' },
+  { role:'醫生', side:'left',  zh:'先吃藥，要多喝水，吃清淡一點。',      py:'Xiān chī yào, yào duō hē shuǐ, chī qīngdàn yìdiǎn.',    vi:'Uống thuốc trước, nhớ uống nhiều nước và ăn thanh đạm một chút.',wav:'L6_19.wav' },
   { role:'阿嬤', side:'right', zh:'醫生，我的胃也不舒服，吃不下。',      py:'Yīshēng, wǒ de wèi yě bù shūfú, chī bú xià.',           vi:'Bác sĩ, dạ dày tôi cũng khó chịu, ăn không nổi.',     wav:'L6_20.wav' },
-  { role:'醫生', side:'left',  zh:'好，我會加上胃藥，每餐飯前吃。',      py:'Hǎo, wǒ huì jiā shàng wèi yào, měi cān fàn qián chī.',  vi:'Được, tôi sẽ thêm thuốc dạ dày, uống trước mỗi bữa.', wav:'L6_21.wav' },
+  { role:'醫生', side:'left',  zh:'好，我會加上胃藥，每餐飯前吃。',      py:'Hǎo, wǒ huì jiā shàng wèi yào, měi cān fàn qián chī.',  vi:'Được, tôi sẽ thêm thuốc dạ dày, uống trước mỗi bữa ăn.', wav:'L6_21.wav' },
 ];
 
 const ext1 = [

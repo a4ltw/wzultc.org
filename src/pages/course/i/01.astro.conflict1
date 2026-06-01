@@ -10,44 +10,31 @@ const BASE = '/assets/course/l1';
 
   <!-- Header -->
   <header class="bg-teal-600 text-white shadow-lg sticky top-0 z-30">
-    <div class="max-w-3xl mx-auto flex items-center justify-between gap-2 px-3 py-2.5">
-      <a href="/course" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
-        <span class="flex items-center gap-1">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          課程列表
-        </span>
-        <span class="text-[10px] opacity-70 font-normal">Danh sách</span>
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+      <a href="/course/01" class="p-1 hover:bg-white/20 rounded-lg transition-colors text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
       </a>
-      <div class="text-center min-w-0">
-        <p class="text-sm font-bold leading-tight">第一課：自我介紹</p>
-        <p class="text-xs opacity-60 mt-0.5">Bài 1: Tự giới thiệu</p>
+      <div>
+        <h1 class="text-base font-bold leading-tight">第一課：自我介紹</h1>
+        <p class="text-xs opacity-80">Bài 1: Tự giới thiệu</p>
       </div>
-      <a href="/course/01" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
-        <span class="flex items-center gap-1">
-          課程簡報
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </span>
-        <span class="text-[10px] opacity-70 font-normal">Bài giảng</span>
-      </a>
     </div>
     <!-- Tab Bar -->
     <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
       <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full">
         {[
-          ['vocab',    '生詞',    'Từ vựng'],
-          ['sentence', '句型',    'Câu mẫu'],
-          ['video',    '對話影片','Video'],
-          ['dialogue', '情境對話','Hội thoại'],
-          ['ext1',     '延伸1',   'Mở rộng 1'],
-          ['ext2',     '延伸2',   'Mở rộng 2'],
-        ].map(([id, zh, vi]) => (
+          ['vocab',    '生詞',     '詞彙'],
+          ['sentence', '句型',     '句型'],
+          ['video',    '對話影片', '影片'],
+          ['dialogue', '情境對話', '對話'],
+          ['ext1',     '延伸1',    '延伸1'],
+          ['ext2',     '延伸2',    '延伸2'],
+          ['quiz',     '練習題',   '練習'],
+        ].map(([id, label]) => (
           <button
-            class="tab-btn px-4 py-1.5 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all text-center"
+            class="tab-btn px-4 py-2 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all whitespace-nowrap"
             data-tab={id}
-          >
-            <div class="whitespace-nowrap">{zh}</div>
-            <div class="text-[10px] font-normal opacity-70 whitespace-nowrap">{vi}</div>
-          </button>
+          >{label}</button>
         ))}
       </div>
     </div>
@@ -56,20 +43,19 @@ const BASE = '/assets/course/l1';
   <main class="max-w-3xl mx-auto px-4 pt-4 space-y-0">
 
     <!-- ===== SECTION 1: 生詞 ===== -->
-    <section id="sec-vocab" class="tab-section -mx-4 md:mx-0">
-      <div class="md:flex md:gap-6 md:items-start">
+    <section id="sec-vocab" class="tab-section -mx-4 md:mx-0 md:flex md:gap-6 md:items-start">
       <div id="vocab-buttons" class="overflow-y-auto px-4 pt-4 pb-3 space-y-2 max-h-[54vh] md:max-h-none md:flex-1"></div>
       <div class="sticky bottom-0 md:bottom-auto md:top-24 bg-white rounded-t-3xl md:rounded-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.08)] md:shadow-sm border-t md:border border-gray-100 px-5 py-5 z-20 md:z-10 md:w-72 md:flex-shrink-0 md:mt-4">
         <div id="vocab-detail-empty" class="flex flex-col items-center gap-2 py-3 text-gray-400">
-          <p class="text-sm font-medium text-gray-500">請點選生詞</p>
-          <p class="text-xs">Nhấn vào từ vựng</p>
+          <p class="text-3xl">☝️</p>
+          <p class="text-sm font-medium text-gray-500">請點擊上方生詞</p>
+          <p class="text-xs">Vui lòng nhấp vào từ vựng phía trên</p>
         </div>
         <div id="vocab-detail-content" style="display:none;" class="flex flex-col items-center gap-3">
           <span class="text-xs font-semibold text-teal-600 bg-teal-50 px-3 py-1 rounded-full">Tiếng Việt (越南文)</span>
           <p id="vocab-detail-vi" class="text-2xl font-bold text-teal-800 text-center leading-tight"></p>
           <img id="vocab-detail-img" src="" alt="" class="w-36 h-36 object-contain rounded-2xl bg-gray-50 border border-gray-100" />
         </div>
-      </div>
       </div>
     </section>
 
@@ -149,22 +135,68 @@ const BASE = '/assets/course/l1';
         <h2 class="font-bold text-yellow-800 mb-1">延伸學習 2 <span class="font-normal text-sm text-gray-400">Học thêm 2</span></h2>
         <p class="text-xs text-gray-400">選擇類別，點卡片翻面，點 🔊 聽發音</p>
       </div>
-      <!-- Category Dropdown -->
-      <div class="relative">
-        <select id="cat-select" class="w-full px-4 py-3 rounded-xl border-2 border-yellow-300 bg-white text-gray-700 font-medium text-sm appearance-none cursor-pointer focus:outline-none focus:border-yellow-400 pr-10">
-          <option value="0">問候語 · Chào hỏi</option>
-          <option value="1">禮貌語 · Lịch sự</option>
-          <option value="2">稱呼語 · Xưng hô</option>
-          <option value="3">職場用語 · Làm việc</option>
-          <option value="4">日常回應 · Trả lời</option>
-        </select>
-        <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
+      <!-- Category Tabs -->
+      <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+        {[
+          ['問候語','Chào hỏi'],
+          ['禮貌語','Lịch sự'],
+          ['稱呼語','Xưng hô'],
+          ['職場用語','Làm việc'],
+          ['日常回應','Trả lời'],
+        ].map(([zh, vi], i) => (
+          <button class="cat-btn flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full border border-yellow-300 bg-white text-gray-600 transition-colors whitespace-nowrap" data-cat={i}>{zh} <span class="opacity-60">{vi}</span></button>
+        ))}
       </div>
       <div id="ext2-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
     </section>
 
+    <!-- ===== SECTION 7: 練習題 ===== -->
+    <section id="sec-quiz" class="tab-section hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-rose-500">
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 class="font-bold text-rose-800 mb-1">練習題 <span class="font-normal text-sm text-gray-400">Luyện tập</span></h2>
+            <p class="text-xs text-gray-400">聽音檔或看圖，選出正確答案</p>
+          </div>
+          <div class="text-right text-xs text-gray-400">
+            <span id="quiz-score">0</span> / <span id="quiz-total">10</span> 題正確
+          </div>
+        </div>
+        <div class="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div id="quiz-progress-bar" class="h-full bg-rose-400 rounded-full transition-all duration-300" style="width:0%"></div>
+        </div>
+      </div>
+      <!-- Quiz Card -->
+      <div id="quiz-card" class="bg-white rounded-2xl p-5 shadow-md">
+        <p class="text-xs text-gray-400 mb-2" id="quiz-num">第 1 / 10 題</p>
+        <div id="quiz-audio-prompt" class="hidden mb-4">
+          <button id="quiz-play-btn" class="flex items-center gap-3 w-full bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-xl p-3 transition-colors">
+            <div class="bg-rose-500 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="text-left">
+              <p class="text-sm font-medium text-rose-700">點擊播放音檔</p>
+              <p class="text-xs text-rose-400">Bấm để nghe câu hỏi</p>
+            </div>
+          </button>
+        </div>
+        <div id="quiz-image-prompt" class="hidden mb-4">
+          <img id="quiz-image" src="" alt="題目圖片" class="w-full rounded-xl object-contain max-h-48 border border-gray-100" />
+        </div>
+        <p id="quiz-question-text" class="font-medium text-gray-800 mb-4 leading-relaxed"></p>
+        <div id="quiz-options-list" class="flex flex-col gap-2 md:grid md:grid-cols-3"></div>
+        <div id="quiz-feedback-box" class="hidden mt-4 p-3 rounded-xl text-sm leading-relaxed"></div>
+        <button id="quiz-next-btn" class="hidden mt-4 w-full bg-rose-500 hover:bg-rose-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors">
+          下一題 → Câu tiếp theo
+        </button>
+        <div id="quiz-done" class="hidden text-center py-4">
+          <p class="text-2xl mb-2">🎉</p>
+          <p class="font-bold text-gray-800 mb-1">完成！Hoàn thành!</p>
+          <p class="text-sm text-gray-500 mb-4">答對 <span id="quiz-final-score"></span> / 10 題</p>
+          <button id="quiz-restart" class="bg-rose-500 text-white px-6 py-2 rounded-xl text-sm font-medium">重新練習</button>
+        </div>
+      </div>
+    </section>
 
   </main>
 </div>
@@ -276,6 +308,18 @@ const videoQuizzes = [
   },
 ];
 
+const quizData = [
+  { type:'audio', wav:'L1_exercise_01.wav', q:'Câu này có nghĩa là gì?', opts:['Chào buổi sáng','Chào buổi trưa','Chúc ngủ ngon'], ans:0, exp:'(B) "午安 (wǔ ān)" là Chào buổi trưa. (C) "晚安 (wǎn ān)" là Chúc ngủ ngon.' },
+  { type:'audio', wav:'L1_exercise_02.wav', q:'Câu này có nghĩa là gì?', opts:['Rất vui được gặp bạn!','Tôi là nhân viên chăm sóc.','Tôi là người Việt Nam.'], ans:2, exp:'(A) "很高興認識你！" là Rất vui được gặp bạn! (B) "我是照護員。" là Tôi là nhân viên chăm sóc.' },
+  { type:'audio', wav:'L1_exercise_03.wav', q:'Khi nghe câu này, bạn nên trả lời như thế nào?', opts:['沒關係 (méi guānxi)','不客氣 (bú kèqi)','好的 (hǎo de)'], ans:1, exp:'Khi nghe "謝謝 (xièxie) / Cảm ơn", cách trả lời lịch sự là "不客氣 (bú kèqi) / Không có gì".' },
+  { type:'audio', wav:'L1_exercise_04.wav', q:'Câu này đang hỏi gì?', opts:['Hỏi tên','Hỏi quốc gia','Hỏi nghề nghiệp'], ans:0, exp:'Câu này có nghĩa là "Xin chào! Xin hỏi, bạn tên là gì?", dùng để hỏi tên.' },
+  { type:'image', img:'L1_exercise_05.png', q:'Đây là quốc gia nào?', opts:['越南 (Yuènán)','台灣 (Táiwān)','日本 (Rìběn)'], ans:1, exp:'(A) "越南 (Yuènán)" là Việt Nam. (B) "台灣 (Táiwān)" là Đài Loan. (C) "日本 (Rìběn)" là Nhật Bản.' },
+  { type:'image', img:'L1_exercise_06.png', q:'Nghề nghiệp của cô ấy là gì?', opts:['醫生 (yī shēng)','護士 (hù shì)','照護員 (zhàohùyuán)'], ans:2, exp:'(A) "醫生" là Bác sĩ. (B) "護士" là Y tá. (C) "照護員" là nhân viên chăm sóc.' },
+  { type:'text',  q:'Khi tan làm, đồng nghiệp nói với bạn「明天見 (míngtiān jiàn)」, câu này có nghĩa là gì?', opts:['Cố lên!','Chúc ngủ ngon','Hẹn gặp lại ngày mai'], ans:2, exp:'(A) "加油 (jiā yóu)" là Cố lên! (B) "晚安 (wǎn ān)" là Chúc ngủ ngon.' },
+  { type:'text',  q:'Bạn vô tình làm ướt quần áo của ông, lúc này bạn nên nói gì?', opts:['對不起 (duìbuqǐ)','沒關係 (méi guānxi)','沒問題 (méi wèntí)'], ans:0, exp:'"對不起 (duìbuqǐ)" là Xin lỗi. "沒關係" là Không sao đâu. "沒問題" là Không vấn đề gì.' },
+  { type:'text',  q:'Buổi trưa gặp trưởng điều dưỡng trong phòng bệnh, chào hỏi như thế nào là phù hợp nhất?', opts:['早安 (zǎo ān)','午安 (wǔ ān)','晚安 (wǎn ān)'], ans:1, exp:'"早安" là Chào buổi sáng. "午安" là Chào buổi trưa. "晚安" là Chúc ngủ ngon.' },
+  { type:'text',  q:'Người nhà hỏi bạn có thể giúp lấy đồ không, bạn muốn nói "Có thể / được", tiếng Trung nói như thế nào?', opts:['可以 (kě yǐ)','好的 (hǎo de)','Cả A và B đều đúng'], ans:2, exp:'"可以 (kě yǐ)" là Có thể / được. "好的 (hǎo de)" là vâng / được ạ. Cả hai đều có thể dùng.' },
+];
 
 /* ── AUDIO ─────────────────────────────────────────────────── */
 const globalAudio = document.getElementById('global-audio');
@@ -286,7 +330,7 @@ window.playAudio = function(wav) {
 };
 
 /* ── TABS ─────────────────────────────────────────────────── */
-const tabs = ['vocab','sentence','video','dialogue','ext1','ext2'];
+const tabs = ['vocab','sentence','video','dialogue','ext1','ext2','quiz'];
 let activeTab = 'vocab';
 
 function switchTab(id) {
@@ -513,12 +557,112 @@ function renderExt2(cat) {
   ext2.filter(v => v.cat === cat).forEach(v => ext2Grid.appendChild(makeFlipCard(v.zh, v.py, v.vi, v.wav, 'yellow')));
 }
 
-const catSelect = document.getElementById('cat-select');
-catSelect.addEventListener('change', () => {
-  activeCat = parseInt(catSelect.value);
-  renderExt2(activeCat);
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeCat = parseInt(btn.dataset.cat);
+    document.querySelectorAll('.cat-btn').forEach(b => {
+      b.classList.toggle('bg-yellow-400', b === btn);
+      b.classList.toggle('text-white', b === btn);
+      b.classList.toggle('border-yellow-400', b === btn);
+      b.classList.toggle('bg-white', b !== btn);
+      b.classList.toggle('text-gray-600', b !== btn);
+    });
+    renderExt2(activeCat);
+  });
 });
-renderExt2(0);
+document.querySelectorAll('.cat-btn')[0].click();
+
+/* ── SECTION 7: 練習題 ───────────────────────────────────── */
+let qIndex = 0;
+let qScore = 0;
+let qAnswered = false;
+const qAudio = new Audio();
+
+function updateScoreBar() {
+  document.getElementById('quiz-score').textContent = qScore;
+  document.getElementById('quiz-total').textContent = quizData.length;
+  document.getElementById('quiz-progress-bar').style.width = (qIndex / quizData.length * 100) + '%';
+}
+
+function loadQuestion(i) {
+  qAnswered = false;
+  const q = quizData[i];
+  document.getElementById('quiz-num').textContent = `第 ${i+1} / ${quizData.length} 題`;
+  document.getElementById('quiz-question-text').textContent = q.q;
+  document.getElementById('quiz-feedback-box').classList.add('hidden');
+  document.getElementById('quiz-next-btn').classList.add('hidden');
+  document.getElementById('quiz-done').classList.add('hidden');
+
+  const audioPrompt = document.getElementById('quiz-audio-prompt');
+  const imagePrompt = document.getElementById('quiz-image-prompt');
+  const playBtn2 = document.getElementById('quiz-play-btn');
+  audioPrompt.classList.add('hidden');
+  imagePrompt.classList.add('hidden');
+  if (q.type === 'audio') {
+    audioPrompt.classList.remove('hidden');
+    qAudio.src = BASE + '/audio/' + q.wav;
+    playBtn2.onclick = () => { qAudio.currentTime = 0; qAudio.play(); };
+  } else if (q.type === 'image') {
+    imagePrompt.classList.remove('hidden');
+    document.getElementById('quiz-image').src = BASE + '/images/' + q.img;
+  }
+
+  const optList = document.getElementById('quiz-options-list');
+  optList.innerHTML = '';
+  q.opts.forEach((opt, j) => {
+    const btn = document.createElement('button');
+    btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-gray-100 hover:border-rose-300 text-sm transition-colors bg-white';
+    btn.textContent = String.fromCharCode(65+j) + '. ' + opt;
+    btn.addEventListener('click', () => {
+      if (qAnswered) return;
+      qAnswered = true;
+      optList.querySelectorAll('button').forEach(b => b.disabled = true);
+      const correct = j === q.ans;
+      if (correct) {
+        btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-green-400 bg-green-50 text-sm text-green-800';
+        qScore++;
+      } else {
+        btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-red-400 bg-red-50 text-sm text-red-800';
+        optList.querySelectorAll('button')[q.ans].className =
+          'w-full text-left px-4 py-2.5 rounded-xl border-2 border-green-400 bg-green-50 text-sm text-green-800';
+      }
+      const fb = document.getElementById('quiz-feedback-box');
+      fb.classList.remove('hidden');
+      fb.className = 'mt-4 p-3 rounded-xl text-sm leading-relaxed ' +
+        (correct ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200');
+      fb.innerHTML = (correct ? '<strong>✓ 正確！Chính xác!</strong><br>' : '<strong>✗ 再試一次。</strong><br>') + q.exp;
+      document.getElementById('quiz-next-btn').classList.remove('hidden');
+      updateScoreBar();
+    });
+    optList.appendChild(btn);
+  });
+  updateScoreBar();
+}
+
+document.getElementById('quiz-next-btn').addEventListener('click', () => {
+  qIndex++;
+  if (qIndex >= quizData.length) {
+    document.getElementById('quiz-options-list').innerHTML = '';
+    document.getElementById('quiz-num').textContent = '';
+    document.getElementById('quiz-question-text').textContent = '';
+    document.getElementById('quiz-audio-prompt').classList.add('hidden');
+    document.getElementById('quiz-image-prompt').classList.add('hidden');
+    document.getElementById('quiz-feedback-box').classList.add('hidden');
+    document.getElementById('quiz-next-btn').classList.add('hidden');
+    document.getElementById('quiz-progress-bar').style.width = '100%';
+    document.getElementById('quiz-final-score').textContent = qScore;
+    document.getElementById('quiz-done').classList.remove('hidden');
+  } else {
+    loadQuestion(qIndex);
+  }
+});
+
+document.getElementById('quiz-restart').addEventListener('click', () => {
+  qIndex = 0; qScore = 0;
+  loadQuestion(0);
+});
+
+loadQuestion(0);
 
 </script>
 

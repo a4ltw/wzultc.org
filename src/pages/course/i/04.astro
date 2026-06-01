@@ -10,27 +10,43 @@ const BASE = '/assets/course/l4';
 
   <!-- Header -->
   <header class="bg-teal-600 text-white shadow-lg sticky top-0 z-30">
-    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-      <div>
-        <div class="flex items-center gap-1.5 text-sm font-bold leading-tight">
-          <a href="/course" class="opacity-75 hover:opacity-100 transition-opacity">課程</a>
-          <span class="opacity-50">/</span>
-          <a href="/course/04" class="hover:opacity-80 transition-opacity">第四課：個人清潔</a>
-        </div>
+    <div class="max-w-3xl mx-auto flex items-center justify-between gap-2 px-3 py-2.5">
+      <a href="/course" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
+        <span class="flex items-center gap-1">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          課程列表
+        </span>
+        <span class="text-[10px] opacity-70 font-normal">Danh sách</span>
+      </a>
+      <div class="text-center min-w-0">
+        <p class="text-sm font-bold leading-tight">第四課：個人清潔</p>
         <p class="text-xs opacity-60 mt-0.5">Bài 4: Vệ sinh cá nhân</p>
       </div>
+      <a href="/course/04" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
+        <span class="flex items-center gap-1">
+          課程簡報
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+        <span class="text-[10px] opacity-70 font-normal">Bài giảng</span>
+      </a>
     </div>
     <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
       <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full">
         {[
-          ['vocab',    '生詞'],
-          ['sentence', '句型'],
-          ['video',    '對話影片'],
-          ['dialogue', '情境對話'],
-          ['ext1',     '延伸1'],
-          ['ext2',     '延伸2'],
-        ].map(([id, label]) => (
-          <button class="tab-btn px-4 py-2 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all whitespace-nowrap" data-tab={id}>{label}</button>
+          ['vocab',    '生詞',    'Từ vựng'],
+          ['sentence', '句型',    'Câu mẫu'],
+          ['video',    '對話影片','Video'],
+          ['dialogue', '情境對話','Hội thoại'],
+          ['ext1',     '延伸1',   'Mở rộng 1'],
+          ['ext2',     '延伸2',   'Mở rộng 2'],
+        ].map(([id, zh, vi]) => (
+          <button
+            class="tab-btn px-4 py-1.5 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all text-center"
+            data-tab={id}
+          >
+            <div class="whitespace-nowrap">{zh}</div>
+            <div class="text-[10px] font-normal opacity-70 whitespace-nowrap">{vi}</div>
+          </button>
         ))}
       </div>
     </div>
@@ -235,7 +251,7 @@ const ext2 = [
   { cat:2, zh:'熱',     py:'rè',          vi:'nóng',              wav:'L4_55.wav' },
   { cat:2, zh:'冷',     py:'lěng',        vi:'lạnh',              wav:'L4_56.wav' },
   { cat:2, zh:'舒服',   py:'shūfú',       vi:'dễ chịu',           wav:'L4_57.wav' },
-  { cat:2, zh:'不舒服', py:'bù shūfú',    vi:'khó chịu',          wav:'L4_58.wav' },
+  { cat:2, zh:'不舒服', py:'bù shūfú',    vi:'khó chịu, không thoải mái', wav:'L4_58.wav' },
   { cat:2, zh:'小心',   py:'xiǎoxīn',     vi:'cẩn thận',          wav:'L4_59.wav' },
   { cat:2, zh:'慢慢來', py:'mànmàn lái',  vi:'từ từ thôi',        wav:'L4_60.wav' },
   { cat:3, zh:'我幫你',   py:'wǒ bāng nǐ',     vi:'tôi giúp bạn',     wav:'L4_61.wav' },

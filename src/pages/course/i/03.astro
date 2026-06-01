@@ -10,30 +10,43 @@ const BASE = '/assets/course/l3';
 
   <!-- Header -->
   <header class="bg-teal-600 text-white shadow-lg sticky top-0 z-30">
-    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-      <div>
-        <div class="flex items-center gap-1.5 text-sm font-bold leading-tight">
-          <a href="/course" class="opacity-75 hover:opacity-100 transition-opacity">課程</a>
-          <span class="opacity-50">/</span>
-          <a href="/course/03" class="hover:opacity-80 transition-opacity">第三課：飲食照護</a>
-        </div>
+    <div class="max-w-3xl mx-auto flex items-center justify-between gap-2 px-3 py-2.5">
+      <a href="/course" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
+        <span class="flex items-center gap-1">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          課程列表
+        </span>
+        <span class="text-[10px] opacity-70 font-normal">Danh sách</span>
+      </a>
+      <div class="text-center min-w-0">
+        <p class="text-sm font-bold leading-tight">第三課：飲食照護</p>
         <p class="text-xs opacity-60 mt-0.5">Bài 3: Chăm sóc bữa ăn</p>
       </div>
+      <a href="/course/03" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
+        <span class="flex items-center gap-1">
+          課程簡報
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+        <span class="text-[10px] opacity-70 font-normal">Bài giảng</span>
+      </a>
     </div>
     <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
       <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full">
         {[
-          ['vocab',    '生詞'],
-          ['sentence', '句型'],
-          ['video',    '對話影片'],
-          ['dialogue', '情境對話'],
-          ['ext1',     '延伸1'],
-          ['ext2',     '延伸2'],
-        ].map(([id, label]) => (
+          ['vocab',    '生詞',    'Từ vựng'],
+          ['sentence', '句型',    'Câu mẫu'],
+          ['video',    '對話影片','Video'],
+          ['dialogue', '情境對話','Hội thoại'],
+          ['ext1',     '延伸1',   'Mở rộng 1'],
+          ['ext2',     '延伸2',   'Mở rộng 2'],
+        ].map(([id, zh, vi]) => (
           <button
-            class="tab-btn px-4 py-2 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all whitespace-nowrap"
+            class="tab-btn px-4 py-1.5 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all text-center"
             data-tab={id}
-          >{label}</button>
+          >
+            <div class="whitespace-nowrap">{zh}</div>
+            <div class="text-[10px] font-normal opacity-70 whitespace-nowrap">{vi}</div>
+          </button>
         ))}
       </div>
     </div>
@@ -215,7 +228,7 @@ const ext2 = [
   { cat:0, zh:'魚',   py:'yú',           vi:'cá',                     wav:'L3_32.wav' },
   { cat:0, zh:'青菜', py:'qīngcài',      vi:'rau',                    wav:'L3_33.wav' },
   { cat:0, zh:'水果', py:'shuǐguǒ',      vi:'trái cây',               wav:'L3_34.wav' },
-  { cat:0, zh:'點心', py:'diǎnxīn',      vi:'đồ ăn nhẹ',              wav:'L3_35.wav' },
+  { cat:0, zh:'點心', py:'diǎnxīn',      vi:'Đồ ăn nhẹ',              wav:'L3_35.wav' },
   { cat:0, zh:'麵包', py:'miànbāo',      vi:'bánh mì',                wav:'L3_36.wav' },
   { cat:0, zh:'包子', py:'bāozi',        vi:'bánh bao',               wav:'L3_37.wav' },
   { cat:1, zh:'好吃', py:'hǎochī',       vi:'ngon',                   wav:'L3_38.wav' },
@@ -235,11 +248,11 @@ const ext2 = [
   { cat:2, zh:'再來一點',py:'zài lái yì diǎn',vi:'Thêm một chút',    wav:'L3_52.wav' },
   { cat:3, zh:'吃藥',   py:'chī yào',      vi:'uống thuốc',            wav:'L3_53.wav' },
   { cat:3, zh:'喝水',   py:'hē shuǐ',      vi:'uống nước',             wav:'L3_54.wav' },
-  { cat:3, zh:'鼻胃管', py:'bí wèi guǎn',  vi:'ống thông mũi–dạ dày', wav:'L3_55.wav' },
+  { cat:3, zh:'鼻胃管', py:'bí wèi guǎn',  vi:'ống thông mũi – dạ dày', wav:'L3_55.wav' },
   { cat:3, zh:'灌食',   py:'guàn shí',     vi:'cho ăn qua ống',        wav:'L3_56.wav' },
   { cat:3, zh:'營養品', py:'yíng yǎng pǐn',vi:'thực phẩm dinh dưỡng', wav:'L3_57.wav' },
   { cat:3, zh:'西藥',   py:'xī yào',       vi:'thuốc tây',             wav:'L3_58.wav' },
-  { cat:3, zh:'中藥',   py:'zhōng yào',    vi:'thuốc bắc / đông y',    wav:'L3_59.wav' },
+  { cat:3, zh:'中藥',   py:'zhōng yào',    vi:'thuốc bắc / thuốc đông y', wav:'L3_59.wav' },
   { cat:3, zh:'打針',   py:'dǎ zhēn',      vi:'tiêm thuốc',            wav:'L3_60.wav' },
   { cat:3, zh:'打點滴', py:'dǎ diǎndī',    vi:'truyền dịch',           wav:'L3_61.wav' },
 ];
