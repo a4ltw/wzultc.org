@@ -31,25 +31,33 @@ const BASE = '/assets/course/l1';
       </a>
     </div>
     <!-- Tab Bar -->
-    <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
-      <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full">
-        {[
-          ['vocab',    '生詞',    'Từ vựng'],
-          ['sentence', '句型',    'Câu mẫu'],
-          ['video',    '對話影片','Video'],
-          ['dialogue', '情境對話','Hội thoại'],
-          ['ext1',     '延伸1',   'Mở rộng 1'],
-          ['ext2',     '延伸2',   'Mở rộng 2'],
-        ].map(([id, zh, vi]) => (
-          <button
-            class="tab-btn px-4 py-1.5 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all text-center"
-            data-tab={id}
-          >
-            <div class="whitespace-nowrap">{zh}</div>
-            <div class="text-[10px] font-normal opacity-70 whitespace-nowrap">{vi}</div>
-          </button>
-        ))}
+    <div class="max-w-3xl mx-auto relative flex items-stretch">
+      <button id="tab-prev" class="hidden flex-shrink-0 px-2 border-t border-white/20 text-white/70 hover:text-white hover:bg-white/10 transition-colors" aria-label="向左捲動">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <div id="tab-scroll" class="overflow-x-auto scrollbar-none flex-1 relative">
+        <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full">
+          {[
+            ['vocab',    '生詞',    'Từ vựng'],
+            ['sentence', '句型',    'Câu mẫu'],
+            ['video',    '對話影片','Video'],
+            ['dialogue', '情境對話','Hội thoại'],
+            ['ext1',     '延伸1',   'Mở rộng 1'],
+            ['ext2',     '延伸2',   'Mở rộng 2'],
+          ].map(([id, zh, vi]) => (
+            <button
+              class="tab-btn px-4 py-1.5 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all text-center"
+              data-tab={id}
+            >
+              <div class="whitespace-nowrap">{zh}</div>
+              <div class="text-[10px] font-normal opacity-70 whitespace-nowrap">{vi}</div>
+            </button>
+          ))}
+        </div>
       </div>
+      <button id="tab-next" class="flex-shrink-0 px-2 border-t border-white/20 text-white/70 hover:text-white hover:bg-white/10 transition-colors" aria-label="向右捲動">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
     </div>
   </header>
 
@@ -135,10 +143,12 @@ const BASE = '/assets/course/l1';
     <section id="sec-ext1" class="tab-section hidden space-y-3">
       <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-orange-500">
         <h2 class="font-bold text-orange-800 mb-1">延伸學習 1 <span class="font-normal text-sm text-gray-400">Học thêm 1</span></h2>
-        <p class="text-xs text-gray-400">點卡片翻面看越南文，點 🔊 聽發音</p>
+        <p class="text-xs text-gray-400">點圖上紅點跳字卡・翻卡看越南文・點 🔊 聽發音</p>
       </div>
       <div class="bg-white rounded-2xl p-4 shadow-sm">
-        <img src={`${BASE}/images/L1_dialogue.png`} alt="延伸學習插圖" class="w-full rounded-xl mb-4 object-contain max-h-48" loading="lazy" />
+        <div id="ext1-map" class="relative rounded-xl overflow-hidden mb-4">
+          <img src={`${BASE}/images/L1_extended_learning1.png`} alt="延伸學習插圖" class="w-full h-auto block" loading="lazy" />
+        </div>
       </div>
       <div id="ext1-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
     </section>
@@ -263,13 +273,13 @@ const videoQuizzes = [
     ans: 0,
   },
   {
-    time: 9,
+    time: 10,
     q: 'Công việc của Mỹ Linh là gì?',
     opts: ['Bác sĩ', 'Y tá', 'Nhân viên chăm sóc'],
     ans: 2,
   },
   {
-    time: 11,
+    time: 12,
     q: 'Lan cuối cùng đã nói "很高興認識你！(Hěn gāoxìng rènshì nǐ!)", câu này thường được sử dụng khi nào?',
     opts: ['Khi lần đầu tiên gặp mặt và làm quen', 'Khi làm sai và muốn xin lỗi', 'Khi đi ngủ'],
     ans: 0,
@@ -284,6 +294,23 @@ window.playAudio = function(wav) {
   globalAudio.currentTime = 0;
   globalAudio.play().catch(() => {});
 };
+
+/* ── TAB SCROLL BUTTONS ────────────────────────────────────── */
+const tabScroll = document.getElementById('tab-scroll');
+const tabPrev   = document.getElementById('tab-prev');
+const tabNext   = document.getElementById('tab-next');
+const TAB_STEP  = 120;
+
+function updateTabNav() {
+  const atStart = tabScroll.scrollLeft <= 4;
+  const atEnd   = tabScroll.scrollLeft + tabScroll.clientWidth >= tabScroll.scrollWidth - 4;
+  tabPrev.classList.toggle('hidden', atStart);
+  tabNext.classList.toggle('hidden', atEnd);
+}
+tabPrev.addEventListener('click', () => { tabScroll.scrollBy({ left: -TAB_STEP, behavior: 'smooth' }); });
+tabNext.addEventListener('click', () => { tabScroll.scrollBy({ left:  TAB_STEP, behavior: 'smooth' }); });
+tabScroll.addEventListener('scroll', updateTabNav, { passive: true });
+updateTabNav();
 
 /* ── TABS ─────────────────────────────────────────────────── */
 const tabs = ['vocab','sentence','video','dialogue','ext1','ext2'];
@@ -319,16 +346,21 @@ function makeFlipCard(zh, py, vi, wav, color='teal') {
   div.className = 'flip-card h-28 cursor-pointer';
   div.innerHTML = `
     <div class="flip-card-inner">
-      <div class="flip-card-front ${bg} text-white p-3 flex flex-col justify-between rounded-2xl shadow-sm">
-        <div class="text-lg font-bold leading-tight">${zh}</div>
-        <div class="text-xs opacity-80 font-mono">${py}</div>
-      </div>
-      <div class="flip-card-back ${bgD} text-white p-3 flex flex-col justify-between rounded-2xl shadow-sm">
-        <div class="${viC} text-sm font-medium leading-snug">${vi}</div>
-        <button class="self-end bg-white/20 hover:bg-white/30 rounded-full w-8 h-8 flex items-center justify-center transition-colors"
-          data-wav="${wav}" onclick="event.stopPropagation(); playAudio('${wav}')">
-          🔊
+      <div class="flip-card-front ${bg} text-white px-4 py-3 flex items-center justify-between rounded-2xl shadow-sm">
+        <div class="flex-1 min-w-0">
+          <div class="text-xl font-bold leading-tight">${zh}</div>
+          <div class="text-xs opacity-80 font-mono mt-0.5">${py}</div>
+        </div>
+        <button class="ml-3 bg-white/20 hover:bg-white/30 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 transition-colors"
+          onclick="event.stopPropagation(); window.playAudio('${wav}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </button>
+      </div>
+      <div class="flip-card-back ${bgD} text-white px-4 py-3 flex items-center rounded-2xl shadow-sm">
+        <div class="flex-1 min-w-0">
+          <div class="${viC} text-xs font-medium mb-1">Tiếng Việt</div>
+          <div class="text-base font-bold leading-snug">${vi}</div>
+        </div>
       </div>
     </div>`;
   div.addEventListener('click', () => div.classList.toggle('flipped'));
@@ -438,6 +470,13 @@ video.addEventListener('timeupdate', () => {
   }
 });
 
+video.addEventListener('ended', () => {
+  const lastVQ = videoQuizzes[videoQuizzes.length - 1];
+  if (!vqAnswered.has(lastVQ.time)) {
+    showVideoQuiz(lastVQ);
+  }
+});
+
 function showVideoQuiz(vq) {
   currentVQ = vq;
   quizOverlay.classList.remove('hidden');
@@ -503,6 +542,62 @@ dialogueLines.forEach(d => {
 /* ── SECTION 5: 延伸學習1 ─────────────────────────────────── */
 const ext1Grid = document.getElementById('ext1-grid');
 ext1.forEach(v => ext1Grid.appendChild(makeFlipCard(v.zh, v.py, v.vi, v.wav, 'orange')));
+
+if (!document.getElementById('ext1-pulse-style')) {
+  const ps = document.createElement('style');
+  ps.id = 'ext1-pulse-style';
+  ps.textContent = '@keyframes ext1-pulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.5)}70%{box-shadow:0 0 0 8px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}';
+  document.head.appendChild(ps);
+}
+const ext1Map = document.getElementById('ext1-map');
+[
+  { idx:0, x:23, y:63 },
+  { idx:1, x:42, y:58 },
+  { idx:2, x:75, y:48 },
+  { idx:3, x:16, y:14 },
+  { idx:4, x:42, y:20 },
+  { idx:5, x:58, y:11 },
+  { idx:6, x:90, y:10 },
+].forEach(({ idx, x, y }) => {
+  const h = document.createElement('button');
+  h.title = ext1[idx]?.zh || '';
+  h.style.cssText = `position:absolute;left:${x}%;top:${y}%;width:24px;height:24px;border-radius:50%;background:rgba(239,68,68,0.92);border:2px solid white;transform:translate(-50%,-50%);cursor:pointer;animation:ext1-pulse 2s infinite;box-shadow:0 0 0 0 rgba(239,68,68,0.5);`;
+  h.addEventListener('click', () => {
+    const card = ext1Grid.children[idx];
+    if (!card) return;
+    card.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    card.classList.toggle('flipped');
+    if (card.classList.contains('flipped')) window.playAudio(ext1[idx].wav);
+    card.style.outline = '3px solid #f97316';
+    card.style.outlineOffset = '3px';
+    setTimeout(() => { card.style.outline=''; card.style.outlineOffset=''; }, 1500);
+  });
+  ext1Map.appendChild(h);
+});
+
+/* ── 校正模式 (URL: ?calibrate=1) ──────────────────────── */
+if (new URLSearchParams(location.search).has('calibrate')) {
+  const wrap = document.getElementById('ext1-map');
+  if (wrap) {
+    const banner = document.createElement('div');
+    banner.style.cssText = 'position:absolute;top:0;left:0;right:0;background:rgba(234,179,8,0.9);color:#000;font-size:12px;font-weight:bold;padding:4px 8px;z-index:100;';
+    banner.textContent = '📍 校正模式：點擊圖片取得座標';
+    wrap.appendChild(banner);
+    const display = document.createElement('div');
+    display.style.cssText = 'position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,0.75);color:#4ade80;font-size:13px;font-family:monospace;padding:4px 8px;border-radius:6px;z-index:100;';
+    display.textContent = 'x: -, y: -';
+    wrap.appendChild(display);
+    wrap.style.cursor = 'crosshair';
+    wrap.addEventListener('click', e => {
+      const r = wrap.getBoundingClientRect();
+      const x = Math.round((e.clientX - r.left) / r.width * 100);
+      const y = Math.round((e.clientY - r.top)  / r.height * 100);
+      display.textContent = `x: ${x}, y: ${y}`;
+      display.style.background = 'rgba(0,100,0,0.85)';
+      setTimeout(() => { display.style.background = 'rgba(0,0,0,0.75)'; }, 800);
+    });
+  }
+}
 
 /* ── SECTION 6: 延伸學習2 ─────────────────────────────────── */
 let activeCat = 0;
