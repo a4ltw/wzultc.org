@@ -127,8 +127,8 @@ const BASE = '/assets/course/l0';
 
   <!-- ── Tab 3: 拼音練習 ───────────────────────────────────────── -->
   <section id="sec-practical" class="tab-section hidden">
-    <div class="relative w-full bg-gray-200 overflow-hidden" style="height:65vw; max-height:56vh">
-      <img src={`${BASE}/images/L0_scene.png`} alt="拼音練習場景" class="w-full h-full object-cover" />
+    <div class="relative w-full bg-gray-200 overflow-hidden" style="aspect-ratio:600/448">
+      <img src={`${BASE}/images/L0_scene.png`} alt="拼音練習場景" class="w-full h-full object-contain" />
       <div id="hotspot-container"></div>
     </div>
     <div id="practical-detail" class="px-4 py-4">
@@ -276,12 +276,12 @@ const FINALS = [
 ];
 
 const PRACTICAL = [
-  { zh:'護士', pinyin:'hù shì',    vn:'y tá',        audio:'L0_45.wav', img:'L0_45.png', x:12, y:44 },
-  { zh:'飯',   pinyin:'fàn',       vn:'cơm',         audio:'L0_42.wav', img:'L0_42.png', x:23, y:79 },
-  { zh:'起床', pinyin:'qǐ chuáng', vn:'thức dậy',    audio:'L0_46.wav', img:'L0_46.png', x:32, y:57 },
-  { zh:'醫生', pinyin:'yī shēng',  vn:'bác sĩ',      audio:'L0_44.wav', img:'L0_44.png', x:56, y:35 },
-  { zh:'吃藥', pinyin:'chī yào',   vn:'uống thuốc',  audio:'L0_47.wav', img:'L0_47.png', x:79, y:57 },
-  { zh:'水',   pinyin:'shuǐ',      vn:'nước',        audio:'L0_43.wav', img:'L0_43.png', x:95, y:85 },
+  { zh:'護士', pinyin:'hù shì',    vn:'y tá',        audio:'L0_45.wav', img:'L0_45.png', x:12, y:47 },
+  { zh:'飯',   pinyin:'fàn',       vn:'cơm',         audio:'L0_42.wav', img:'L0_42.png', x:23, y:65 },
+  { zh:'起床', pinyin:'qǐ chuáng', vn:'thức dậy',    audio:'L0_46.wav', img:'L0_46.png', x:32, y:54 },
+  { zh:'醫生', pinyin:'yī shēng',  vn:'bác sĩ',      audio:'L0_44.wav', img:'L0_44.png', x:56, y:42 },
+  { zh:'吃藥', pinyin:'chī yào',   vn:'uống thuốc',  audio:'L0_47.wav', img:'L0_47.png', x:79, y:54 },
+  { zh:'水',   pinyin:'shuǐ',      vn:'nước',        audio:'L0_43.wav', img:'L0_43.png', x:95, y:68 },
 ];
 
 const EXTENDED = [
