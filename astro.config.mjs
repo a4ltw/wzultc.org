@@ -36,7 +36,22 @@ export default defineConfig({
     '/visit/1142': 'https://docs.google.com/forms/d/e/1FAIpQLSfDQn0imBffaQ93Az9l7L_X4iHx3nXvOlSc5-Ykx2ziYhRGFQ/viewform?usp=header',
     '/video/pcp-zh': 'https://youtu.be/43TIuD-CdCc',
     '/video/pcp-id': 'https://youtu.be/ewp13sfnF48',
-    '/video/pcp-vi': 'https://youtu.be/gfExMdsj7ho'
+    '/video/pcp-vi': 'https://youtu.be/gfExMdsj7ho',
+    '/video/ccl-id': 'https://youtu.be/vqMtYoL-cMM',
+    '/video/ccl-th': 'https://youtu.be/hjQe_-D5GqA',
+    '/video/ccl-vi': 'https://youtu.be/n4gryq5iYnc',
+    '/video/ccl-ph': 'https://youtu.be/aW5auRpYFLc',
+    '/video/oral-zh': 'https://youtu.be/_K2JZYlVzns',
+    '/video/oral-vi': 'https://youtu.be/oT_qFTb1HIU',
+    '/video/cath-zh': 'https://youtu.be/23_UlcGaDfI',
+    '/video/cath-vi': 'https://youtu.be/-yZwJCEzW9k',
+    '/video/ngt-zh':  'https://youtu.be/XFuY9lVEhuk',
+    '/video/ngt-vi':  'https://youtu.be/tBpFEgdqq_M',
+    '/video/A01': 'https://youtu.be/soXI4plE9Z8',
+    '/video/A02': 'https://youtu.be/db0HuzSJwRQ',
+    '/video/B01': 'https://youtu.be/ADtgtbw0BvE',
+    '/video/C01': 'https://youtu.be/uHLYbFA9k7M',
+    '/video/C02': 'https://youtu.be/Lwx7nRca0U0'
   },
 
   build: {
