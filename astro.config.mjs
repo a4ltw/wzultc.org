@@ -34,6 +34,7 @@ export default defineConfig({
     '/tool/careconnect': 'https://nstc-ai-campus.vercel.app/',
     '/tool/VirtualPatient': 'https://vtuber01.vercel.app/VirtualPatient.html',
     '/visit/1142': 'https://docs.google.com/forms/d/e/1FAIpQLSfDQn0imBffaQ93Az9l7L_X4iHx3nXvOlSc5-Ykx2ziYhRGFQ/viewform?usp=header',
+    '/form/connect': 'https://docs.google.com/forms/d/e/1FAIpQLScafcpKN-6G71vMB0Fnsh8B_AN1q4d69OLcYTUD3WWWI5LocA/viewform',
     '/video/pcp-zh': 'https://youtu.be/43TIuD-CdCc',
     '/video/pcp-id': 'https://youtu.be/ewp13sfnF48',
     '/video/pcp-vi': 'https://youtu.be/gfExMdsj7ho',
