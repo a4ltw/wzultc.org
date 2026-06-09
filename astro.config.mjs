@@ -39,6 +39,7 @@ export default defineConfig({
     '/video/pcp-id': 'https://youtu.be/ewp13sfnF48',
     '/video/pcp-vi': 'https://youtu.be/gfExMdsj7ho',
     '/file/20260603': 'https://drive.google.com/drive/folders/1yjnkI2UbWA4K-xguMNAp17lHNTajSY14?usp=drive_link',
+    '/file/20260609': 'https://drive.google.com/drive/folders/1N3M_6iCv80TXhmjhbwd5GrTQoZDzZAV6?usp=drive_link',
     '/video/ccl-id': 'https://youtu.be/vqMtYoL-cMM',
     '/video/ccl-th': 'https://youtu.be/hjQe_-D5GqA',
     '/video/ccl-vi': 'https://youtu.be/n4gryq5iYnc',
