@@ -40,7 +40,6 @@ const BASE = '/assets/course/l9';
             ['dialogue', '情境對話','Hội thoại'],
             ['ext1',     '延伸1',   'Mở rộng 1'],
             ['ext2',     '延伸2',   'Mở rộng 2'],
-            ['quiz',     '練習題',  'Bài tập'],
           ].map(([id, zh, vi]) => (
             <button
               class="tab-btn px-4 py-1.5 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all text-center"
@@ -166,20 +165,6 @@ const BASE = '/assets/course/l9';
       <div id="ext2-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
     </section>
 
-    <!-- ===== SECTION 7: 練習題 ===== -->
-    <section id="sec-quiz" class="tab-section hidden space-y-3">
-      <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-indigo-500">
-        <h2 class="font-bold text-indigo-800 mb-1">練習題 <span class="font-normal text-sm text-gray-400">Bài tập</span></h2>
-        <p class="text-xs text-gray-400">共 10 題，聽音或看圖，選出正確答案</p>
-      </div>
-      <div id="quiz-card" class="bg-white rounded-2xl p-5 shadow-sm space-y-4"></div>
-      <div id="quiz-result" class="hidden bg-white rounded-2xl p-6 shadow-sm text-center space-y-3">
-        <p class="text-4xl font-bold text-indigo-600" id="quiz-score"></p>
-        <p class="text-gray-500 text-sm">Hoàn thành! / 完成！</p>
-        <button id="quiz-restart" class="mt-2 px-6 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 transition-colors">重新作答 / Làm lại</button>
-      </div>
-    </section>
-
   </main>
 </div>
 
@@ -296,19 +281,6 @@ const videoQuizzes = [
   { time: 3,  q: 'Công việc của Lan là gì?',            opts: ['Y tá','Nhân viên chăm sóc','Bác sĩ'],           ans: 1 },
   { time: 10, q: 'Tình trạng của bà hiện tại thế nào?', opts: ['ổn định','hơi mệt','không sốt'],                 ans: 0 },
   { time: 15, q: 'Bây giờ bà có đang ngủ không?',       opts: ['Đúng','Không đúng','Không biết'],                ans: 1 },
-];
-
-const quizzes = [
-  { q:'Từ này có nghĩa là gì?',  audio:'L9_exercise_01.wav', img:null, opts:['người nhà','bố','mẹ'],                                    ans:0, exp:'"người nhà" là 家屬 (jiāshǔ).' },
-  { q:'Từ này có nghĩa là gì?',  audio:'L9_exercise_02.wav', img:null, opts:['bà','bố','mẹ'],                                            ans:2, exp:'"mẹ" là 媽媽 (māma).' },
-  { q:'Từ này có nghĩa là gì?',  audio:'L9_exercise_03.wav', img:null, opts:['ổn định','tình trạng','nghỉ ngơi'],                        ans:1, exp:'"tình trạng" là 情況 (qíngkuàng).' },
-  { q:'Câu này có nghĩa là gì?', audio:'L9_exercise_04.wav', img:null, opts:['xin đợi chút','nói từ từ','xin nói lại một lần nữa'],     ans:2, exp:'"xin nói lại một lần nữa" là 請再說一遍 (qǐng zài shuō yí biàn).' },
-  { q:'Ông đang làm gì thế?',    audio:null, img:'L9_exercise_05.png', opts:['病人 (bìngrén)','哥哥 (gēge)','姐姐 (jiějie)'],            ans:0, exp:'"病人 (bìngrén)" là bệnh nhân.' },
-  { q:'Bà đang làm gì thế?',     audio:null, img:'L9_exercise_06.png', opts:['阿公 (āgōng)','媽媽 (māma)','爸爸 (bàba)'],               ans:2, exp:'"爸爸 (bàba)" là bố.' },
-  { q:'Người nhà rất lo lắng, bạn muốn nói "Xin hãy yên tâm, tôi sẽ chăm sóc." thì nên nói câu nào?', audio:null, img:null, opts:['對不起，請等一下。','不好意思，慢慢說。','請放心，我會照顧。'], ans:2, exp:'"請放心，我會照顧。(Qǐng fàngxīn, wǒ huì zhàogù.)" là Xin yên tâm, tôi sẽ chăm sóc.' },
-  { q:'Người nhà hỏi "Ông đã tỉnh chưa?", thực ra ông đã tỉnh rồi, bạn nên trả lời thế nào?', audio:null, img:null, opts:['已經醒了 (yǐjīng xǐng le)','在觀察 (zài guānchá)','吃得下 (chī de xià)'], ans:0, exp:'"已經醒了 (yǐjīng xǐng le)" là đã tỉnh rồi.' },
-  { q:'Người nhà hỏi "Có cần nhập viện không?", câu này tiếng Trung nói như thế nào?', audio:null, img:null, opts:['什麼時候可以看？','需要住院嗎？(Xūyào zhùyuàn ma?)','怎麼做？'], ans:1, exp:'"需要住院嗎？(Xūyào zhùyuàn ma?)" là có cần nhập viện không.' },
-  { q:'Muốn thể hiện "làm phiền bạn" một cách lịch sự, bạn có thể nói gì?', audio:null, img:null, opts:['對不起 (duìbuqǐ)','不客氣 (bú kèqì)','麻煩你 (máfán nǐ)'], ans:2, exp:'"麻煩你 (máfán nǐ)" là làm phiền bạn.' },
 ];
 
 /* ── AUDIO ── */
@@ -572,84 +544,6 @@ function renderExt2(cat) {
 }
 document.getElementById('cat-select').addEventListener('change', function() { renderExt2(parseInt(this.value)); });
 renderExt2(0);
-
-/* ── SECTION 7: 練習題 ── */
-let quizIdx = 0;
-let quizScore = 0;
-let quizAnswered = false;
-const quizCard = document.getElementById('quiz-card');
-const quizResult = document.getElementById('quiz-result');
-
-function renderQuiz() {
-  if (quizIdx >= quizzes.length) {
-    quizCard.classList.add('hidden');
-    quizResult.classList.remove('hidden');
-    document.getElementById('quiz-score').textContent = quizScore + ' / ' + quizzes.length;
-    return;
-  }
-  quizAnswered = false;
-  const q = quizzes[quizIdx];
-  let stimulusHtml = '';
-  if (q.audio) {
-    stimulusHtml = `<div class="flex justify-center mb-2">
-      <button onclick="window.playAudio('${q.audio}')" class="flex items-center gap-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium px-5 py-3 rounded-xl transition-colors text-sm">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        播放題目
-      </button>
-    </div>`;
-  } else if (q.img) {
-    stimulusHtml = `<img src="${BASE}/images/${q.img}" alt="題目圖片" class="w-full rounded-xl object-contain bg-gray-50 border border-gray-100 mb-2" style="max-height:180px;" />`;
-  }
-  const progress = `<div class="flex items-center justify-between mb-3">
-    <span class="text-xs font-bold text-indigo-600">第 ${quizIdx+1} / ${quizzes.length} 題</span>
-    <div class="flex gap-1">${quizzes.map((_,i) => `<div class="w-2 h-2 rounded-full ${i < quizIdx ? 'bg-indigo-500' : i === quizIdx ? 'bg-indigo-300' : 'bg-gray-200'}"></div>`).join('')}</div>
-  </div>`;
-  const optsHtml = q.opts.map((opt, i) => `
-    <button data-qi="${i}" class="quiz-opt w-full text-left px-4 py-2.5 rounded-xl border-2 border-gray-100 hover:border-indigo-300 text-sm transition-colors bg-white">
-      ${String.fromCharCode(65+i)}. ${opt}
-    </button>`).join('');
-  quizCard.innerHTML = `
-    ${progress}
-    ${stimulusHtml}
-    <p class="text-sm font-medium text-gray-800 leading-relaxed mb-3">${q.q}</p>
-    <div class="space-y-2" id="quiz-opts">${optsHtml}</div>
-    <div id="quiz-fb" class="hidden mt-3 p-3 rounded-xl text-sm font-medium"></div>
-    <button id="quiz-next" class="hidden mt-3 w-full bg-indigo-600 text-white py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 transition-colors">
-      ${quizIdx < quizzes.length - 1 ? '下一題 ▶' : '查看成績'}
-    </button>`;
-
-  document.querySelectorAll('.quiz-opt').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (quizAnswered) return;
-      quizAnswered = true;
-      const i = parseInt(btn.dataset.qi);
-      document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
-      const fb = document.getElementById('quiz-fb');
-      if (i === q.ans) {
-        quizScore++;
-        btn.className = btn.className.replace('border-gray-100 bg-white','border-green-400 bg-green-50 text-green-800');
-        fb.textContent = '✓ 正確！ — ' + q.exp;
-        fb.className = 'mt-3 p-3 rounded-xl text-sm font-medium bg-green-50 text-green-700';
-      } else {
-        btn.className = btn.className.replace('border-gray-100 bg-white','border-red-400 bg-red-50 text-red-700');
-        document.querySelectorAll('.quiz-opt')[q.ans].className = document.querySelectorAll('.quiz-opt')[q.ans].className.replace('border-gray-100 bg-white','border-green-400 bg-green-50 text-green-800');
-        fb.textContent = '✗ 答案是 ' + String.fromCharCode(65+q.ans) + '. — ' + q.exp;
-        fb.className = 'mt-3 p-3 rounded-xl text-sm font-medium bg-red-50 text-red-700';
-      }
-      fb.classList.remove('hidden');
-      document.getElementById('quiz-next').classList.remove('hidden');
-    });
-  });
-  document.getElementById('quiz-next').addEventListener('click', () => { quizIdx++; renderQuiz(); });
-}
-
-document.getElementById('quiz-restart').addEventListener('click', () => {
-  quizIdx = 0; quizScore = 0;
-  quizCard.classList.remove('hidden');
-  quizResult.classList.add('hidden');
-  renderQuiz();
-});
-renderQuiz();
 
 /* ── 校正模式 ── */
 if (new URLSearchParams(location.search).has('calibrate')) {
