@@ -11,6 +11,9 @@ export default defineConfig({
   redirects: {
     '/course/00/i': '/course/i/00',
     '/course/01/i': '/course/i/01',
+    '/course/07/i': '/course/i/07',
+    '/course/08/i': '/course/i/08',
+    '/course/09/i': '/course/i/09',
     '/fb': 'https://www.facebook.com/whc.usr',
     '/yt': 'https://www.youtube.com/@wzuusr',
     '/ig': 'https://www.instagram.com/whc_usr/',
