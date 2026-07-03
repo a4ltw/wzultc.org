@@ -145,11 +145,17 @@ const sentences = [
   { zh:'已經記錄了。',         py:'Yǐjīng jìlù le.',               vi:'Đã ghi chép rồi.',                wav:'L12_15.wav' },
 ];
 
+const defaultHotspots = [
+  { idx:0, x:20, y:17 },{ idx:1, x:62, y:38 },{ idx:2, x:83, y:16 },
+  { idx:3, x:24, y:59 },{ idx:4, x:52, y:60 },{ idx:5, x:87, y:60 },
+];
+
 const tasks = [
   {
     id: 1,
     titleZh: '日常照護＋安撫',
     titleVi: 'Chăm sóc hằng ngày & trấn an',
+    hotspots: defaultHotspots,
     lines: [
       { role:'蘭',   zh:'哪裡不舒服？',     py:'Nǎlǐ bù shūfu?',                   vi:'Bạn khó chịu ở đâu?',             wav:'L12_16.wav' },
       { role:'阿嬤', zh:'有一點頭痛。',     py:'Yǒu yìdiǎn tóu tòng.',             vi:'Tôi hơi đau đầu.',                wav:'L12_17.wav' },
@@ -163,6 +169,10 @@ const tasks = [
     id: 2,
     titleZh: '醫療處置＋說明',
     titleVi: 'Xử lý y tế & giải thích',
+    hotspots: [
+      { idx:0, x:15, y:17 },{ idx:1, x:61, y:17 },{ idx:2, x:85, y:16 },
+      { idx:3, x:21, y:62 },{ idx:4, x:50, y:61 },{ idx:5, x:72, y:61 },
+    ],
     lines: [
       { role:'護士', zh:'每天起床後喝一點溫水。',   py:'Měitiān qǐchuáng hòu hē yìdiǎn wēn shuǐ.', vi:'Mỗi ngày sau khi thức dậy uống một ít nước ấm.', wav:'L12_22.wav' },
       { role:'護士', zh:'下午不要睡太久。',         py:'Xiàwǔ bú yào shuì tài jiǔ.',               vi:'Buổi chiều đừng ngủ quá lâu.',                   wav:'L12_23.wav' },
@@ -176,6 +186,10 @@ const tasks = [
     id: 3,
     titleZh: '緊急狀況',
     titleVi: 'Tình huống khẩn cấp',
+    hotspots: [
+      { idx:0, x:15, y:18 },{ idx:1, x:43, y:19 },{ idx:2, x:76, y:19 },
+      { idx:3, x:21, y:60 },{ idx:4, x:55, y:60 },{ idx:5, x:71.5, y:61 },
+    ],
     lines: [
       { role:'蘭→阿公', zh:'不要動！',       py:'Bú yào dòng!',           vi:'Đừng cử động!',       wav:'L12_28.wav' },
       { role:'蘭→美玲', zh:'他跌倒了。',     py:'Tā diédǎo le.',          vi:'Ông ấy bị té rồi.',   wav:'L12_29.wav' },
@@ -189,6 +203,10 @@ const tasks = [
     id: 4,
     titleZh: '家屬溝通',
     titleVi: 'Giao tiếp với gia đình',
+    hotspots: [
+      { idx:0, x: 6.5, y:18.5 },{ idx:1, x:67, y:15 },{ idx:2, x:89, y:16 },
+      { idx:3, x:35, y:80 },{ idx:4, x:47.5, y:61.5 },{ idx:5, x:94, y:61 },
+    ],
     lines: [
       { role:'蘭→爸爸', zh:'您好，我是照護員。', py:'Nín hǎo, wǒ shì zhàohùyuán.',   vi:'Chào anh/chị, tôi là nhân viên chăm sóc.', wav:'L12_34.wav' },
       { role:'爸爸→蘭', zh:'他現在怎麼樣？',     py:'Tā xiànzài zěnme yàng?',         vi:'Bây giờ ông ấy thế nào?',                  wav:'L12_35.wav' },
@@ -202,6 +220,10 @@ const tasks = [
     id: 5,
     titleZh: '記錄與回報',
     titleVi: 'Ghi chép & báo cáo',
+    hotspots: [
+      { idx:0, x: 4, y:17.2 },{ idx:1, x:35, y:22 },{ idx:2, x:78, y:26 },
+      { idx:3, x:13, y:61 },{ idx:4, x:51, y:61 },{ idx:5, x:89, y:58 },
+    ],
     lines: [
       { role:'蘭→媽媽', zh:'中午十二點半吃飯。', py:"Zhōngwǔ shí'èr diǎn bàn chī fàn.", vi:'Mười hai giờ rưỡi trưa ăn cơm.', wav:'L12_40.wav' },
       { role:'蘭→媽媽', zh:'然後吃藥。',         py:'Ránhòu chī yào.',                  vi:'Sau đó uống thuốc.',              wav:'L12_41.wav' },
@@ -324,15 +346,6 @@ if (!document.getElementById('task-pulse-style')) {
   document.head.appendChild(ps);
 }
 
-const taskHotspots = [
-  { idx:0, x: 5, y: 9 },
-  { idx:1, x:36, y: 9 },
-  { idx:2, x:73, y: 9 },
-  { idx:3, x:26, y:59 },
-  { idx:4, x:61, y:59 },
-  { idx:5, x:93, y:59 },
-];
-
 tasks.forEach(task => {
   const titleEl = document.getElementById(`task${task.id}-title`);
   if (titleEl) titleEl.innerHTML = `情境任務 ${task.id}：${task.titleZh} <span class="font-normal text-sm text-gray-400">${task.titleVi}</span>`;
@@ -363,7 +376,7 @@ tasks.forEach(task => {
     grid.appendChild(card);
   });
 
-  taskHotspots.forEach(({ idx, x, y }) => {
+  task.hotspots.forEach(({ idx, x, y }) => {
     if (idx >= task.lines.length) return;
     const h = document.createElement('button');
     h.title = `${idx+1}. ${task.lines[idx].zh}`;
@@ -382,8 +395,9 @@ tasks.forEach(task => {
 });
 
 /* ── 校正模式 ── */
-if (new URLSearchParams(location.search).has('calibrate')) {
-  const taskN = parseInt(new URLSearchParams(location.search).get('task') || '1');
+const _cal = new URLSearchParams(location.search).get('calibrate');
+if (_cal !== null) {
+  const taskN = parseInt(_cal) || 1;
   switchTab('task' + taskN);
   const imgWrap = document.getElementById(`task${taskN}-map`);
   const banner = document.createElement('div');
