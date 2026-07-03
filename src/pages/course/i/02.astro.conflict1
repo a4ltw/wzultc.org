@@ -1,0 +1,689 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const BASE = '/assets/course/l2';
+---
+
+<Layout title="第二課：作息時間 - WZULTC 台越照護華語" description="台越照護華語第二課互動練習，包含生詞、句型、情境對話影片、延伸學習與自我測驗。">
+
+<div class="bg-teal-50 min-h-screen pb-24">
+
+  <!-- Header -->
+  <header class="bg-teal-600 text-white shadow-lg sticky top-0 z-30">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+      <a href="/course/02" class="p-1 hover:bg-white/20 rounded-lg transition-colors text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <div>
+        <h1 class="text-base font-bold leading-tight">第二課：作息時間</h1>
+        <p class="text-xs opacity-80">Bài 2: Thời gian sinh hoạt</p>
+      </div>
+    </div>
+    <!-- Tab Bar -->
+    <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
+      <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full">
+        {[
+          ['vocab',    '生詞',     '詞彙'],
+          ['sentence', '句型',     '句型'],
+          ['video',    '對話影片', '影片'],
+          ['dialogue', '情境對話', '對話'],
+          ['ext1',     '延伸1',    '延伸1'],
+          ['ext2',     '延伸2',    '延伸2'],
+          ['quiz',     '練習題',   '練習'],
+        ].map(([id, label]) => (
+          <button
+            class="tab-btn px-4 py-2 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all whitespace-nowrap"
+            data-tab={id}
+          >{label}</button>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 pt-4 space-y-0">
+
+    <!-- ===== SECTION 1: 生詞 ===== -->
+    <section id="sec-vocab" class="tab-section -mx-4 md:mx-0 md:flex md:gap-6 md:items-start">
+      <div id="vocab-buttons" class="overflow-y-auto px-4 pt-4 pb-3 space-y-2 max-h-[54vh] md:max-h-none md:flex-1"></div>
+      <div class="sticky bottom-0 md:bottom-auto md:top-24 bg-white rounded-t-3xl md:rounded-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.08)] md:shadow-sm border-t md:border border-gray-100 px-5 py-5 z-20 md:z-10 md:w-72 md:flex-shrink-0 md:mt-4">
+        <div id="vocab-detail-empty" class="flex flex-col items-center gap-2 py-3 text-gray-400">
+          <p class="text-3xl">☝️</p>
+          <p class="text-sm font-medium text-gray-500">請點擊上方生詞</p>
+          <p class="text-xs">Vui lòng nhấp vào từ vựng phía trên</p>
+        </div>
+        <div id="vocab-detail-content" style="display:none;" class="flex flex-col items-center gap-3">
+          <span class="text-xs font-semibold text-teal-600 bg-teal-50 px-3 py-1 rounded-full">Tiếng Việt (越南文)</span>
+          <p id="vocab-detail-vi" class="text-2xl font-bold text-teal-800 text-center leading-tight"></p>
+          <img id="vocab-detail-img" src="" alt="" class="w-36 h-36 object-contain rounded-2xl bg-gray-50 border border-gray-100" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 2: 句型練習 ===== -->
+    <section id="sec-sentence" class="tab-section hidden -mx-4 md:mx-0 md:rounded-2xl md:overflow-hidden">
+      <div class="flex flex-col" style="height:calc(100dvh - 8rem);">
+        <div id="sentence-chat" class="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-[#e2e6f2]">
+          <div class="flex justify-center">
+            <span class="bg-black/20 text-white text-xs px-3 py-1 rounded-full">點擊下方拼音，開始練習 / Nhấn pinyin để bắt đầu</span>
+          </div>
+        </div>
+        <div class="bg-white border-t border-gray-200 px-4 pt-3 pb-4 shadow-[0_-3px_10px_rgba(0,0,0,0.05)] flex-shrink-0">
+          <p class="text-xs text-gray-400 mb-2">👇 請點擊拼音來發送句子：</p>
+          <div id="sentence-btns" class="space-y-2 overflow-y-auto" style="max-height:32vh;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 3: 情境對話影片 ===== -->
+    <section id="sec-video" class="tab-section hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-purple-500">
+        <h2 class="font-bold text-purple-800 mb-1">情境對話影片 <span class="font-normal text-sm text-gray-400">Video hội thoại</span></h2>
+        <p class="text-xs text-gray-400">影片播放中會自動暫停，請回答問題後繼續</p>
+      </div>
+      <div class="relative bg-black rounded-2xl overflow-hidden shadow-lg">
+        <video id="dialogue-video" class="w-full" preload="metadata" playsinline>
+          <source src={`${BASE}/video/L2_dialogue.mp4`} type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 flex items-center justify-center bg-black/30" id="video-play-overlay">
+          <button id="video-play-btn" class="bg-white/90 rounded-full w-16 h-16 flex items-center justify-center shadow-xl hover:bg-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#0d9488"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- Quiz Overlay -->
+      <div id="video-quiz-overlay" class="hidden bg-white rounded-2xl p-5 shadow-md border border-purple-100">
+        <p class="text-xs font-bold text-purple-500 mb-2">⏸ 影片暫停 — 請回答問題</p>
+        <p id="vq-question" class="font-medium text-gray-800 mb-4 text-sm leading-relaxed"></p>
+        <div id="vq-options" class="space-y-2"></div>
+        <div id="vq-feedback" class="hidden mt-3 p-3 rounded-xl text-center text-sm font-bold"></div>
+        <button id="vq-continue" class="hidden mt-3 w-full bg-purple-500 text-white py-2.5 rounded-xl text-sm font-medium">
+          ▶ 繼續播放
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 4: 情境對話 ===== -->
+    <section id="sec-dialogue" class="tab-section hidden -mx-4 md:mx-0">
+      <div class="w-full h-52 md:h-72 relative bg-gray-200 flex-shrink-0">
+        <img src={`${BASE}/images/L2_dialogue.png`} alt="情境對話插圖" class="w-full h-full object-cover" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex items-end p-4">
+          <div class="text-white">
+            <span class="bg-emerald-600 text-xs font-bold px-2 py-1 rounded mb-2 inline-block">情境一</span>
+            <h2 class="text-lg font-bold">作息時間</h2>
+            <p class="text-xs text-gray-200">Thời gian sinh hoạt hàng ngày</p>
+          </div>
+        </div>
+      </div>
+      <div id="dialogue-list" class="overflow-y-auto px-4 py-4 space-y-3 max-h-[55vh] md:max-h-none"></div>
+    </section>
+
+    <!-- ===== SECTION 5: 延伸學習1 ===== -->
+    <section id="sec-ext1" class="tab-section hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-orange-500">
+        <h2 class="font-bold text-orange-800 mb-1">延伸學習 1 <span class="font-normal text-sm text-gray-400">Học thêm 1</span></h2>
+        <p class="text-xs text-gray-400">時段詞彙・點卡片翻面看越南文，點 🔊 聽發音</p>
+      </div>
+      <div class="bg-white rounded-2xl p-4 shadow-sm">
+        <img src={`${BASE}/images/L2_ext1.png`} alt="延伸學習插圖" class="w-full rounded-xl mb-4 object-contain max-h-48" loading="lazy" />
+      </div>
+      <div id="ext1-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+    </section>
+
+    <!-- ===== SECTION 6: 延伸學習2 ===== -->
+    <section id="sec-ext2" class="tab-section hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-yellow-500">
+        <h2 class="font-bold text-yellow-800 mb-1">延伸學習 2 <span class="font-normal text-sm text-gray-400">Học thêm 2</span></h2>
+        <p class="text-xs text-gray-400">選擇類別，點卡片翻面，點 🔊 聽發音</p>
+      </div>
+      <!-- Category Tabs -->
+      <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+        {[
+          ['時間詞彙','Từ vựng thời gian'],
+          ['速度表達','Tốc độ'],
+          ['月份','Tháng'],
+          ['星期','Ngày trong tuần'],
+          ['具體時間','Giờ cụ thể'],
+        ].map(([zh, vi], i) => (
+          <button class="cat-btn flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-full border border-yellow-300 bg-white text-gray-600 transition-colors whitespace-nowrap" data-cat={i}>{zh} <span class="opacity-60">{vi}</span></button>
+        ))}
+      </div>
+      <div id="ext2-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+    </section>
+
+    <!-- ===== SECTION 7: 練習題 ===== -->
+    <section id="sec-quiz" class="tab-section hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-rose-500">
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 class="font-bold text-rose-800 mb-1">練習題 <span class="font-normal text-sm text-gray-400">Luyện tập</span></h2>
+            <p class="text-xs text-gray-400">聽音檔或看圖，選出正確答案</p>
+          </div>
+          <div class="text-right text-xs text-gray-400">
+            <span id="quiz-score">0</span> / <span id="quiz-total">10</span> 題正確
+          </div>
+        </div>
+        <div class="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div id="quiz-progress-bar" class="h-full bg-rose-400 rounded-full transition-all duration-300" style="width:0%"></div>
+        </div>
+      </div>
+      <!-- Quiz Card -->
+      <div id="quiz-card" class="bg-white rounded-2xl p-5 shadow-md">
+        <p class="text-xs text-gray-400 mb-2" id="quiz-num">第 1 / 10 題</p>
+        <div id="quiz-audio-prompt" class="hidden mb-4">
+          <button id="quiz-play-btn" class="flex items-center gap-3 w-full bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-xl p-3 transition-colors">
+            <div class="bg-rose-500 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="text-left">
+              <p class="text-sm font-medium text-rose-700">點擊播放音檔</p>
+              <p class="text-xs text-rose-400">Bấm để nghe câu hỏi</p>
+            </div>
+          </button>
+        </div>
+        <div id="quiz-image-prompt" class="hidden mb-4">
+          <img id="quiz-image" src="" alt="題目圖片" class="w-full rounded-xl object-contain max-h-48 border border-gray-100" />
+        </div>
+        <p id="quiz-question-text" class="font-medium text-gray-800 mb-4 leading-relaxed"></p>
+        <div id="quiz-options-list" class="flex flex-col gap-2 md:grid md:grid-cols-3"></div>
+        <div id="quiz-feedback-box" class="hidden mt-4 p-3 rounded-xl text-sm leading-relaxed"></div>
+        <button id="quiz-next-btn" class="hidden mt-4 w-full bg-rose-500 hover:bg-rose-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors">
+          下一題 → Câu tiếp theo
+        </button>
+        <div id="quiz-done" class="hidden text-center py-4">
+          <p class="text-2xl mb-2">🎉</p>
+          <p class="font-bold text-gray-800 mb-1">完成！Hoàn thành!</p>
+          <p class="text-sm text-gray-500 mb-4">答對 <span id="quiz-final-score"></span> / 10 題</p>
+          <button id="quiz-restart" class="bg-rose-500 text-white px-6 py-2 rounded-xl text-sm font-medium">重新練習</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Audio element (reused) -->
+<audio id="global-audio"></audio>
+
+<style>
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+  :global(.flip-card) { perspective: 800px; }
+  :global(.flip-card-inner) {
+    position: relative; width: 100%; height: 100%;
+    transition: transform 0.45s ease;
+    transform-style: preserve-3d;
+  }
+  :global(.flip-card.flipped .flip-card-inner) { transform: rotateY(180deg); }
+  :global(.flip-card-front), :global(.flip-card-back) {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  :global(.flip-card-back) { transform: rotateY(180deg); }
+</style>
+
+<script is:inline define:vars={{ BASE }}>
+
+/* ── DATA ─────────────────────────────────────────────────── */
+const vocab = [
+  { zh:'起床',   py:'qǐ chuáng',  vi:'thức dậy',             img:'L2_01.png', wav:'L2_01.wav' },
+  { zh:'吃飯',   py:'chī fàn',    vi:'ăn cơm',               img:'L2_02.png', wav:'L2_02.wav' },
+  { zh:'洗澡',   py:'xǐ zǎo',     vi:'tắm',                  img:'L2_03.png', wav:'L2_03.wav' },
+  { zh:'睡覺',   py:'shuì jiào',  vi:'ngủ',                  img:'L2_04.png', wav:'L2_04.wav' },
+  { zh:'現在',   py:'xiànzài',    vi:'bây giờ',              img:'L2_05.png', wav:'L2_05.wav' },
+  { zh:'點',     py:'diǎn',       vi:'giờ',                  img:'L2_06.png', wav:'L2_06.wav' },
+  { zh:'分',     py:'fēn',        vi:'phút',                 img:'L2_07.png', wav:'L2_07.wav' },
+  { zh:'工作',   py:'gōngzuò',    vi:'làm việc',             img:'L2_08.png', wav:'L2_08.wav' },
+  { zh:'休息',   py:'xiūxí',      vi:'nghỉ ngơi',            img:'L2_09.png', wav:'L2_09.wav' },
+  { zh:'早上',   py:'zǎoshàng',   vi:'buổi sáng',            img:'L2_10.png', wav:'L2_10.wav' },
+  { zh:'晚上',   py:'wǎnshàng',   vi:'buổi tối',             img:'L2_11.png', wav:'L2_11.wav' },
+];
+
+const sentences = [
+  { zh:'現在幾點？',       py:'Xiànzài jǐ diǎn?',           vi:'Bây giờ mấy giờ?',              wav:'L2_12.wav' },
+  { zh:'現在七點。',       py:'Xiànzài qī diǎn.',            vi:'Bây giờ là bảy giờ.',           wav:'L2_13.wav' },
+  { zh:'我七點起床。',     py:'Wǒ qī diǎn qǐ chuáng.',      vi:'Tôi thức dậy lúc bảy giờ.',     wav:'L2_14.wav' },
+  { zh:'阿嬤十點睡覺。',   py:'Āmà shí diǎn shuì jiào.',    vi:'Bà đi ngủ lúc mười giờ.',       wav:'L2_15.wav' },
+  { zh:'吃飯時間到了。',   py:'Chī fàn shíjiān dào le.',     vi:'Đến giờ ăn rồi.',               wav:'L2_16.wav' },
+];
+
+const dialogueLines = [
+  { role:'蘭',   side:'right', zh:'阿嬤，現在幾點？',     py:'Āmà, xiànzài jǐ diǎn?',        vi:'Bà ơi, bây giờ mấy giờ?',         wav:'L2_17.wav' },
+  { role:'阿嬤', side:'left',  zh:'現在七點。',           py:'Xiànzài qī diǎn.',              vi:'Bây giờ là bảy giờ.',              wav:'L2_18.wav' },
+  { role:'蘭',   side:'right', zh:'吃飯時間到了。',       py:'Chī fàn shíjiān dào le.',       vi:'Đến giờ ăn rồi.',                  wav:'L2_19.wav' },
+  { role:'阿嬤', side:'left',  zh:'好，我要吃飯。',       py:'Hǎo, wǒ yào chī fàn.',          vi:'Được, tôi muốn ăn cơm.',           wav:'L2_20.wav' },
+];
+
+const ext1 = [
+  { zh:'早上', py:'zǎoshang', vi:'buổi sáng',  wav:'L2_21.wav' },
+  { zh:'中午', py:'zhōngwǔ',  vi:'buổi trưa',  wav:'L2_22.wav' },
+  { zh:'下午', py:'xiàwǔ',    vi:'buổi chiều', wav:'L2_23.wav' },
+  { zh:'晚上', py:'wǎnshang', vi:'buổi tối',   wav:'L2_24.wav' },
+  { zh:'半夜', py:'bànyè',    vi:'nửa đêm',    wav:'L2_25.wav' },
+];
+
+const ext2 = [
+  { cat:0, zh:'一天',     py:'yì tiān',           vi:'một ngày',              wav:'L2_26.wav' },
+  { cat:0, zh:'每天',     py:'měi tiān',           vi:'mỗi ngày',              wav:'L2_27.wav' },
+  { cat:0, zh:'今天',     py:'jīntiān',            vi:'hôm nay',               wav:'L2_28.wav' },
+  { cat:0, zh:'昨天',     py:'zuótiān',            vi:'hôm qua',               wav:'L2_29.wav' },
+  { cat:0, zh:'明天',     py:'míngtiān',           vi:'ngày mai',              wav:'L2_30.wav' },
+  { cat:1, zh:'時間很早', py:'shíjiān hěn zǎo',   vi:'Thời gian còn sớm',     wav:'L2_31.wav' },
+  { cat:1, zh:'時間很晚', py:'shíjiān hěn wǎn',   vi:'Thời gian muộn rồi',    wav:'L2_32.wav' },
+  { cat:1, zh:'慢慢來',   py:'màn màn lái',        vi:'Từ từ thôi',            wav:'L2_33.wav' },
+  { cat:1, zh:'快一點',   py:'kuài yīdiǎn',        vi:'Nhanh lên',             wav:'L2_34.wav' },
+  { cat:1, zh:'快遲到了', py:'kuài chídào le',     vi:'Sắp trễ rồi',           wav:'L2_35.wav' },
+  { cat:1, zh:'來得及',   py:'lái de jí',          vi:'kịp',                   wav:'L2_36.wav' },
+  { cat:1, zh:'來不及了', py:'lái bù jí le',       vi:'Không kịp rồi',         wav:'L2_37.wav' },
+  { cat:1, zh:'準時',     py:'zhǔnshí',            vi:'Đúng giờ',              wav:'L2_38.wav' },
+  { cat:2, zh:'一月',     py:'yī yuè',             vi:'tháng một',             wav:'L2_39.wav' },
+  { cat:2, zh:'二月',     py:'èr yuè',             vi:'tháng hai',             wav:'L2_40.wav' },
+  { cat:2, zh:'三月',     py:'sān yuè',            vi:'tháng ba',              wav:'L2_41.wav' },
+  { cat:2, zh:'四月',     py:'sì yuè',             vi:'tháng tư',              wav:'L2_42.wav' },
+  { cat:2, zh:'五月',     py:'wǔ yuè',             vi:'tháng năm',             wav:'L2_43.wav' },
+  { cat:2, zh:'六月',     py:'liù yuè',            vi:'tháng sáu',             wav:'L2_44.wav' },
+  { cat:2, zh:'七月',     py:'qī yuè',             vi:'tháng bảy',             wav:'L2_45.wav' },
+  { cat:2, zh:'八月',     py:'bā yuè',             vi:'tháng tám',             wav:'L2_46.wav' },
+  { cat:2, zh:'九月',     py:'jiǔ yuè',            vi:'tháng chín',            wav:'L2_47.wav' },
+  { cat:2, zh:'十月',     py:'shí yuè',            vi:'tháng mười',            wav:'L2_48.wav' },
+  { cat:2, zh:'十一月',   py:'shí yī yuè',         vi:'tháng mười một',        wav:'L2_49.wav' },
+  { cat:2, zh:'十二月',   py:'shí èr yuè',         vi:'tháng mười hai',        wav:'L2_50.wav' },
+  { cat:3, zh:'禮拜一',   py:'lǐbài yī',           vi:'Thứ hai',               wav:'L2_51.wav' },
+  { cat:3, zh:'禮拜二',   py:'lǐbài èr',           vi:'Thứ ba',                wav:'L2_52.wav' },
+  { cat:3, zh:'禮拜三',   py:'lǐbài sān',          vi:'Thứ tư',                wav:'L2_53.wav' },
+  { cat:3, zh:'禮拜四',   py:'lǐbài sì',           vi:'Thứ năm',               wav:'L2_54.wav' },
+  { cat:3, zh:'禮拜五',   py:'lǐbài wǔ',           vi:'Thứ sáu',               wav:'L2_55.wav' },
+  { cat:3, zh:'禮拜六',   py:'lǐbài liù',          vi:'Thứ bảy',               wav:'L2_56.wav' },
+  { cat:3, zh:'禮拜天',   py:'lǐbài tiān',         vi:'Chủ nhật',              wav:'L2_57.wav' },
+  { cat:4, zh:'早上九點', py:'zǎoshang jiǔ diǎn',  vi:'9 giờ sáng',            wav:'L2_58.wav' },
+  { cat:4, zh:'中午十二點',py:'zhōngwǔ shí\'èr diǎn',vi:'12 giờ trưa',         wav:'L2_59.wav' },
+  { cat:4, zh:'下午三點', py:'xiàwǔ sān diǎn',     vi:'3 giờ chiều',           wav:'L2_60.wav' },
+  { cat:4, zh:'晚上七點', py:'wǎnshang qī diǎn',   vi:'7 giờ tối',             wav:'L2_61.wav' },
+  { cat:4, zh:'半夜兩點', py:'bànyè liǎng diǎn',   vi:'2 giờ đêm',             wav:'L2_62.wav' },
+  { cat:4, zh:'十點半',   py:'shí diǎn bàn',       vi:'10 giờ rưỡi',           wav:'L2_63.wav' },
+  { cat:4, zh:'快五點了', py:'kuài wǔ diǎn le',     vi:'Gần 5 giờ rồi',         wav:'L2_64.wav' },
+  { cat:4, zh:'一個鐘頭', py:'yí ge zhōngtóu',     vi:'Một tiếng',             wav:'L2_65.wav' },
+  { cat:4, zh:'半個小時', py:'bàn ge xiǎoshí',     vi:'Nửa tiếng',             wav:'L2_66.wav' },
+  { cat:4, zh:'二十分鐘', py:'èr shí fēnzhōng',    vi:'20 phút',               wav:'L2_67.wav' },
+];
+
+const videoQuizzes = [
+  {
+    time: 3,
+    q: 'Khi người trong video nói "現在幾點？(Xiànzài jǐ diǎn?)", cô ấy có ý gì?',
+    opts: ['Bạn bao nhiêu tuổi?', 'Bây giờ mấy giờ?', 'Bạn tên là gì?'],
+    ans: 1,
+  },
+  {
+    time: 9,
+    q: 'Bây giờ là thời gian để làm gì?',
+    opts: ['tắm', 'ăn cơm', 'ngủ'],
+    ans: 1,
+  },
+  {
+    time: 12,
+    q: 'Bà nội/ngoại nói "我要吃飯。(Wǒ yào chī fàn.)" có nghĩa là gì?',
+    opts: ['Tôi là người Đài Loan.', 'Rất vui được gặp bạn.', 'Tôi muốn ăn cơm.'],
+    ans: 2,
+  },
+];
+
+const quizData = [
+  { type:'audio', wav:'L2_exercise_01.wav', q:'Từ này có nghĩa là gì?', opts:['tháng một','Một tiếng','Thứ hai'], ans:2, exp:'(A) "一月 (yī yuè)" là tháng một. (B) "一個鐘頭 (yí ge zhōngtóu)" là Một tiếng. (C) "禮拜一 (lǐbài yī)" là Thứ hai.' },
+  { type:'audio', wav:'L2_exercise_02.wav', q:'Từ này có nghĩa là gì?', opts:['hôm nay','hôm qua','ngày mai'], ans:0, exp:'(A) "今天 (jīntiān)" là hôm nay. (B) "昨天 (zuótiān)" là hôm qua. (C) "明天 (míngtiān)" là ngày mai.' },
+  { type:'audio', wav:'L2_exercise_03.wav', q:'Từ này có nghĩa là gì?', opts:['tháng một','tháng sáu','tháng mười một'], ans:0, exp:'(A) "一月 (yī yuè)" là tháng một. (B) "六月 (liù yuè)" là tháng sáu. (C) "十一月 (shí yī yuè)" là tháng mười một.' },
+  { type:'audio', wav:'L2_exercise_04.wav', q:'Câu này có nghĩa là gì?', opts:['Bây giờ là bảy giờ.','Tôi thức dậy lúc bảy giờ.','Tôi đi ngủ lúc mười giờ.'], ans:0, exp:'(A) "現在七點。(Xiànzài qī diǎn.)" là Bây giờ là bảy giờ. (B) "我七點起床。" là Tôi thức dậy lúc bảy giờ. (C) "我十點睡覺。" là Tôi đi ngủ lúc mười giờ.' },
+  { type:'image', img:'L2_exercise_05.png', q:'Ông đang làm gì thế?', opts:['洗澡 (xǐ zǎo)','吃飯 (chī fàn)','睡覺 (shuì jiào)'], ans:2, exp:'(A) "洗澡 (xǐ zǎo)" là tắm. (B) "吃飯 (chī fàn)" là ăn cơm. (C) "睡覺 (shuì jiào)" là ngủ.' },
+  { type:'image', img:'L2_exercise_06.png', q:'Bà đang làm gì thế?', opts:['洗澡 (xǐ zǎo)','吃飯 (chī fàn)','睡覺 (shuì jiào)'], ans:0, exp:'(A) "洗澡 (xǐ zǎo)" là tắm. (B) "吃飯 (chī fàn)" là ăn cơm. (C) "睡覺 (shuì jiào)" là ngủ.' },
+  { type:'text',  q:'Khi người lớn nói với bạn "時間很晚 (Shíjiān hěn wǎn)", điều đó có nghĩa là gì?', opts:['Vẫn còn sớm, chưa muốn đi ngủ.','Đã muộn rồi, muốn đi ngủ rồi.','Sắp muộn giờ rồi, muốn nhanh hơn một chút.'], ans:1, exp:'"時間很晚 (Shíjiān hěn wǎn)" có nghĩa là Thời gian đã muộn rồi. Khi người lớn nói câu này, rất có thể là họ đã mệt và muốn đi ngủ rồi.' },
+  { type:'text',  q:'Khi người lớn hỏi bạn: "Hôm nay là thứ mấy?". Hôm nay là thứ sáu, bạn nên trả lời như thế nào?', opts:['禮拜五 (lǐbài wǔ)','禮拜二 (lǐbài èr)','禮拜四 (lǐbài sì)'], ans:0, exp:'(A) "禮拜五 (lǐbài wǔ)" là Thứ sáu. (B) "禮拜二 (lǐbài èr)" là Thứ ba. (C) "禮拜四 (lǐbài sì)" là Thứ năm.' },
+  { type:'text',  q:'Bạn đưa người lớn đi khám bệnh, bác sĩ yêu cầu bạn đưa họ đi lấy máu trước và quay lại sau "20 phút". Cho hỏi, "20 phút" trong tiếng Trung nói như thế nào?', opts:['兩點 (liǎng diǎn)','半個小時 (bàn ge xiǎoshí)','二十分鐘 (èr shí fēnzhōng)'], ans:2, exp:'(A) "兩點 (liǎng diǎn)" là 2 giờ. (B) "半個小時 (bàn ge xiǎoshí)" là Nửa tiếng. (C) "二十分鐘 (èr shí fēnzhōng)" là 20 phút.' },
+  { type:'text',  q:'Bà hỏi bạn: "Bây giờ là mấy giờ?", bạn có thể trả lời như thế nào?', opts:['吃飯時間到了。(Chī fàn shíjiān dào le.)','現在十點。(Xiànzài shí diǎn.)','好，我要吃飯。(Hǎo, wǒ yào chī fàn.)'], ans:1, exp:'(A) "吃飯時間到了。" là Đến giờ ăn rồi. (B) "現在十點。(Xiànzài shí diǎn.)" là Bây giờ là mười giờ. (C) "好，我要吃飯。" là Vâng, tôi muốn ăn cơm.' },
+];
+
+/* ── AUDIO ─────────────────────────────────────────────────── */
+const globalAudio = document.getElementById('global-audio');
+window.playAudio = function(wav) {
+  globalAudio.src = BASE + '/audio/' + wav;
+  globalAudio.currentTime = 0;
+  globalAudio.play().catch(() => {});
+};
+
+/* ── TABS ─────────────────────────────────────────────────── */
+let activeTab = 'vocab';
+
+function switchTab(id) {
+  activeTab = id;
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.add('hidden'));
+  document.getElementById('sec-' + id).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    const on = b.dataset.tab === id;
+    b.classList.toggle('opacity-100', on);
+    b.classList.toggle('border-white', on);
+    b.classList.toggle('opacity-60', !on);
+    b.classList.toggle('border-transparent', !on);
+  });
+}
+
+document.querySelectorAll('.tab-btn').forEach(b => {
+  b.addEventListener('click', () => switchTab(b.dataset.tab));
+});
+switchTab('vocab');
+
+/* ── FLIP CARD BUILDER ─────────────────────────────────────── */
+function makeFlipCard(zh, py, vi, wav, color='teal') {
+  const colors = {
+    teal:   ['bg-teal-500',   'bg-teal-600',   'text-teal-100'],
+    orange: ['bg-orange-500', 'bg-orange-600', 'text-orange-100'],
+    yellow: ['bg-yellow-500', 'bg-yellow-600', 'text-yellow-100'],
+  };
+  const [bg, bgD, viC] = colors[color] || colors.teal;
+  const div = document.createElement('div');
+  div.className = 'flip-card h-28 cursor-pointer';
+  div.innerHTML = `
+    <div class="flip-card-inner">
+      <div class="flip-card-front ${bg} text-white p-3 flex flex-col justify-between rounded-2xl shadow-sm">
+        <div class="text-lg font-bold leading-tight">${zh}</div>
+        <div class="text-xs opacity-80 font-mono">${py}</div>
+      </div>
+      <div class="flip-card-back ${bgD} text-white p-3 flex flex-col justify-between rounded-2xl shadow-sm">
+        <div class="${viC} text-sm font-medium leading-snug">${vi}</div>
+        <button class="self-end bg-white/20 hover:bg-white/30 rounded-full w-8 h-8 flex items-center justify-center transition-colors"
+          onclick="event.stopPropagation(); playAudio('${wav}')">
+          🔊
+        </button>
+      </div>
+    </div>`;
+  div.addEventListener('click', () => div.classList.toggle('flipped'));
+  return div;
+}
+
+/* ── SECTION 1: 生詞 ─────────────────────────────────────── */
+const vocabButtonsEl = document.getElementById('vocab-buttons');
+const vocabDetailEmpty = document.getElementById('vocab-detail-empty');
+const vocabDetailContent = document.getElementById('vocab-detail-content');
+const vocabDetailVi = document.getElementById('vocab-detail-vi');
+const vocabDetailImg = document.getElementById('vocab-detail-img');
+const allVocabBtns = [];
+
+vocab.forEach(v => {
+  const btn = document.createElement('button');
+  const isLong = v.zh.length > 4;
+  btn.className = 'w-full flex items-center justify-between py-4 px-5 rounded-2xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-200 active:scale-[0.98]';
+  btn.innerHTML = `
+    <div class="text-left">
+      <div class="vocab-zh ${isLong ? 'text-xl' : 'text-2xl'} font-bold text-gray-800 leading-tight">${v.zh}</div>
+      <div class="vocab-py text-sm text-gray-400 mt-0.5" style="font-family:Arial,sans-serif">${v.py}</div>
+    </div>
+    <span class="text-xl text-gray-300 flex-shrink-0">🔊</span>
+  `;
+  btn.addEventListener('click', () => {
+    allVocabBtns.forEach(b => {
+      b.className = 'w-full flex items-center justify-between py-4 px-5 rounded-2xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-200 active:scale-[0.98]';
+      b.querySelector('.vocab-zh').style.color = '';
+      b.querySelector('.vocab-py').style.color = '';
+    });
+    btn.className = 'w-full flex items-center justify-between py-4 px-5 rounded-2xl border-2 border-teal-500 bg-teal-500 shadow-lg ring-4 ring-teal-100 transition-all duration-200 active:scale-[0.98]';
+    btn.querySelector('.vocab-zh').style.color = 'white';
+    btn.querySelector('.vocab-py').style.color = 'rgb(153 246 228)';
+    window.playAudio(v.wav);
+    vocabDetailEmpty.style.display = 'none';
+    vocabDetailContent.style.display = 'flex';
+    vocabDetailVi.textContent = v.vi;
+    vocabDetailImg.src = BASE + '/images/' + v.img;
+    vocabDetailImg.alt = v.zh;
+  });
+  allVocabBtns.push(btn);
+  vocabButtonsEl.appendChild(btn);
+});
+
+/* ── SECTION 2: 句型練習 ─────────────────────────────────── */
+const sentenceChat = document.getElementById('sentence-chat');
+const sentenceBtns = document.getElementById('sentence-btns');
+
+sentences.forEach(s => {
+  const btn = document.createElement('button');
+  btn.className = 'w-full bg-gray-50 hover:bg-blue-50 border border-gray-200 text-left px-4 py-3 rounded-xl transition-colors flex items-center justify-between active:scale-[0.98]';
+  btn.innerHTML = `
+    <span class="text-[#0068ff] font-medium text-base" style="font-family:Arial,sans-serif">${s.py}</span>
+    <span class="text-gray-300 text-sm flex-shrink-0">▶</span>
+  `;
+  btn.addEventListener('click', () => {
+    window.playAudio(s.wav);
+    const bubble = document.createElement('div');
+    bubble.className = 'flex justify-end w-full';
+    bubble.innerHTML = `
+      <div class="bg-[#e5efff] rounded-2xl rounded-tr-none p-3 max-w-[85%] shadow-sm border border-blue-100">
+        <div class="flex justify-between items-start gap-3 mb-1">
+          <div class="text-lg font-bold text-gray-800 tracking-wide whitespace-pre-line">${s.zh}</div>
+          <button onclick="window.playAudio('${s.wav}')" class="w-8 h-8 rounded-full bg-blue-100 hover:bg-[#0068ff] hover:text-white text-[#0068ff] flex items-center justify-center flex-shrink-0 transition-colors text-sm">🔊</button>
+        </div>
+        <div class="text-[#0068ff] text-sm font-medium mb-2 whitespace-pre-line" style="font-family:Arial,sans-serif">${s.py}</div>
+        <div class="text-gray-600 text-sm border-t border-blue-200/60 pt-2 whitespace-pre-line">${s.vi}</div>
+      </div>
+    `;
+    sentenceChat.appendChild(bubble);
+    sentenceChat.scrollTop = sentenceChat.scrollHeight;
+  });
+  sentenceBtns.appendChild(btn);
+});
+
+/* ── SECTION 3: 影片互動 ─────────────────────────────────── */
+const video = document.getElementById('dialogue-video');
+const playOverlay = document.getElementById('video-play-overlay');
+const playBtn = document.getElementById('video-play-btn');
+const quizOverlay = document.getElementById('video-quiz-overlay');
+const vqQuestion = document.getElementById('vq-question');
+const vqOptions = document.getElementById('vq-options');
+const vqFeedback = document.getElementById('vq-feedback');
+const vqContinue = document.getElementById('vq-continue');
+
+let vqAnswered = new Set();
+let currentVQ = null;
+
+playBtn.addEventListener('click', () => {
+  playOverlay.classList.add('hidden');
+  video.play();
+});
+video.addEventListener('play', () => playOverlay.classList.add('hidden'));
+video.addEventListener('pause', () => {
+  if (!currentVQ) playOverlay.classList.remove('hidden');
+});
+
+video.addEventListener('timeupdate', () => {
+  const t = video.currentTime;
+  for (const vq of videoQuizzes) {
+    if (!vqAnswered.has(vq.time) && t >= vq.time && t < vq.time + 0.5) {
+      video.pause();
+      showVideoQuiz(vq);
+      break;
+    }
+  }
+});
+
+function showVideoQuiz(vq) {
+  currentVQ = vq;
+  quizOverlay.classList.remove('hidden');
+  vqQuestion.textContent = vq.q;
+  vqOptions.innerHTML = '';
+  vqFeedback.classList.add('hidden');
+  vqContinue.classList.add('hidden');
+  vq.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-gray-100 hover:border-purple-300 text-sm transition-colors bg-white';
+    btn.textContent = String.fromCharCode(65+i) + '. ' + opt;
+    btn.addEventListener('click', () => {
+      vqOptions.querySelectorAll('button').forEach(b => b.disabled = true);
+      if (i === vq.ans) {
+        btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-green-400 bg-green-50 text-sm text-green-800';
+        vqFeedback.textContent = '✓ 正確！Chính xác!';
+        vqFeedback.className = 'mt-3 p-3 rounded-xl text-center text-sm font-bold bg-green-100 text-green-700';
+        vqContinue.classList.remove('hidden');
+      } else {
+        btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-red-400 bg-red-50 text-sm text-red-800';
+        vqOptions.querySelectorAll('button')[vq.ans].className =
+          'w-full text-left px-4 py-2.5 rounded-xl border-2 border-green-400 bg-green-50 text-sm text-green-800';
+        vqFeedback.textContent = '✗ 再試一次。答案是 ' + String.fromCharCode(65+vq.ans) + '. ' + vq.opts[vq.ans];
+        vqFeedback.className = 'mt-3 p-3 rounded-xl text-center text-sm font-bold bg-red-100 text-red-700';
+        vqContinue.classList.remove('hidden');
+      }
+      vqFeedback.classList.remove('hidden');
+      vqAnswered.add(vq.time);
+    });
+    vqOptions.appendChild(btn);
+  });
+}
+
+vqContinue.addEventListener('click', () => {
+  quizOverlay.classList.add('hidden');
+  currentVQ = null;
+  video.play();
+});
+
+/* ── SECTION 4: 情境對話 ─────────────────────────────────── */
+const dialogueListEl = document.getElementById('dialogue-list');
+dialogueLines.forEach(d => {
+  const isLeft = d.side === 'left';
+  const speakerColor = isLeft ? 'bg-orange-500' : 'bg-teal-600';
+  const card = document.createElement('div');
+  card.className = 'bg-white rounded-2xl shadow-sm border border-gray-200 p-4 cursor-pointer transition-all active:scale-[0.98]';
+  card.innerHTML = `
+    <div class="flex justify-between items-start mb-2">
+      <span class="px-3 py-1 rounded-full text-xs font-bold text-white ${speakerColor}">${d.role}</span>
+      <button onclick="event.stopPropagation(); window.playAudio('${d.wav}')" class="text-teal-600 bg-teal-50 hover:bg-teal-100 rounded-full w-8 h-8 flex items-center justify-center transition-colors text-sm">🔊</button>
+    </div>
+    <div class="text-xl font-bold text-gray-800 tracking-wide mb-1">${d.zh}</div>
+    <div class="text-base text-teal-700 font-medium mb-2" style="font-family:Arial,sans-serif">${d.py}</div>
+    <div class="text-sm text-gray-500 border-t border-gray-100 pt-2 flex items-start gap-2">
+      <span class="text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded mt-0.5 flex-shrink-0">VN</span>
+      <span>${d.vi}</span>
+    </div>
+  `;
+  card.addEventListener('click', () => window.playAudio(d.wav));
+  dialogueListEl.appendChild(card);
+});
+
+/* ── SECTION 5: 延伸學習1 ─────────────────────────────────── */
+const ext1Grid = document.getElementById('ext1-grid');
+ext1.forEach(v => ext1Grid.appendChild(makeFlipCard(v.zh, v.py, v.vi, v.wav, 'orange')));
+
+/* ── SECTION 6: 延伸學習2 ─────────────────────────────────── */
+let activeCat = 0;
+const ext2Grid = document.getElementById('ext2-grid');
+
+function renderExt2(cat) {
+  ext2Grid.innerHTML = '';
+  ext2.filter(v => v.cat === cat).forEach(v => ext2Grid.appendChild(makeFlipCard(v.zh, v.py, v.vi, v.wav, 'yellow')));
+}
+
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeCat = parseInt(btn.dataset.cat);
+    document.querySelectorAll('.cat-btn').forEach(b => {
+      b.classList.toggle('bg-yellow-400', b === btn);
+      b.classList.toggle('text-white', b === btn);
+      b.classList.toggle('border-yellow-400', b === btn);
+      b.classList.toggle('bg-white', b !== btn);
+      b.classList.toggle('text-gray-600', b !== btn);
+    });
+    renderExt2(activeCat);
+  });
+});
+document.querySelectorAll('.cat-btn')[0].click();
+
+/* ── SECTION 7: 練習題 ───────────────────────────────────── */
+let qIndex = 0;
+let qScore = 0;
+let qAnswered = false;
+const qAudio = new Audio();
+
+function updateScoreBar() {
+  document.getElementById('quiz-score').textContent = qScore;
+  document.getElementById('quiz-total').textContent = quizData.length;
+  document.getElementById('quiz-progress-bar').style.width = (qIndex / quizData.length * 100) + '%';
+}
+
+function loadQuestion(i) {
+  qAnswered = false;
+  const q = quizData[i];
+  document.getElementById('quiz-num').textContent = `第 ${i+1} / ${quizData.length} 題`;
+  document.getElementById('quiz-question-text').textContent = q.q;
+  document.getElementById('quiz-feedback-box').classList.add('hidden');
+  document.getElementById('quiz-next-btn').classList.add('hidden');
+  document.getElementById('quiz-done').classList.add('hidden');
+
+  const audioPrompt = document.getElementById('quiz-audio-prompt');
+  const imagePrompt = document.getElementById('quiz-image-prompt');
+  const playBtn2 = document.getElementById('quiz-play-btn');
+  audioPrompt.classList.add('hidden');
+  imagePrompt.classList.add('hidden');
+  if (q.type === 'audio') {
+    audioPrompt.classList.remove('hidden');
+    qAudio.src = BASE + '/audio/' + q.wav;
+    playBtn2.onclick = () => { qAudio.currentTime = 0; qAudio.play(); };
+  } else if (q.type === 'image') {
+    imagePrompt.classList.remove('hidden');
+    document.getElementById('quiz-image').src = BASE + '/images/' + q.img;
+  }
+
+  const optList = document.getElementById('quiz-options-list');
+  optList.innerHTML = '';
+  q.opts.forEach((opt, j) => {
+    const btn = document.createElement('button');
+    btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-gray-100 hover:border-rose-300 text-sm transition-colors bg-white';
+    btn.textContent = String.fromCharCode(65+j) + '. ' + opt;
+    btn.addEventListener('click', () => {
+      if (qAnswered) return;
+      qAnswered = true;
+      optList.querySelectorAll('button').forEach(b => b.disabled = true);
+      const correct = j === q.ans;
+      if (correct) {
+        btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-green-400 bg-green-50 text-sm text-green-800';
+        qScore++;
+      } else {
+        btn.className = 'w-full text-left px-4 py-2.5 rounded-xl border-2 border-red-400 bg-red-50 text-sm text-red-800';
+        optList.querySelectorAll('button')[q.ans].className =
+          'w-full text-left px-4 py-2.5 rounded-xl border-2 border-green-400 bg-green-50 text-sm text-green-800';
+      }
+      const fb = document.getElementById('quiz-feedback-box');
+      fb.classList.remove('hidden');
+      fb.className = 'mt-4 p-3 rounded-xl text-sm leading-relaxed ' +
+        (correct ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200');
+      fb.innerHTML = (correct ? '<strong>✓ 正確！Chính xác!</strong><br>' : '<strong>✗ 再試一次。</strong><br>') + q.exp;
+      document.getElementById('quiz-next-btn').classList.remove('hidden');
+      updateScoreBar();
+    });
+    optList.appendChild(btn);
+  });
+  updateScoreBar();
+}
+
+document.getElementById('quiz-next-btn').addEventListener('click', () => {
+  qIndex++;
+  if (qIndex >= quizData.length) {
+    document.getElementById('quiz-options-list').innerHTML = '';
+    document.getElementById('quiz-num').textContent = '';
+    document.getElementById('quiz-question-text').textContent = '';
+    document.getElementById('quiz-audio-prompt').classList.add('hidden');
+    document.getElementById('quiz-image-prompt').classList.add('hidden');
+    document.getElementById('quiz-feedback-box').classList.add('hidden');
+    document.getElementById('quiz-next-btn').classList.add('hidden');
+    document.getElementById('quiz-progress-bar').style.width = '100%';
+    document.getElementById('quiz-final-score').textContent = qScore;
+    document.getElementById('quiz-done').classList.remove('hidden');
+  } else {
+    loadQuestion(qIndex);
+  }
+});
+
+document.getElementById('quiz-restart').addEventListener('click', () => {
+  qIndex = 0; qScore = 0;
+  loadQuestion(0);
+});
+
+loadQuestion(0);
+
+</script>
+
+</Layout>

@@ -1,0 +1,627 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+const BASE = '/assets/course/l0';
+---
+
+<Layout title="第零課 互動課程 - WZULTC" description="第零課聲調、聲韻母互動課程">
+  <audio id="global-audio"></audio>
+
+  <!-- ═══ Sticky Header ═══════════════════════════════════════════ -->
+  <div class="sticky top-0 z-40 bg-teal-600 text-white shadow-lg">
+    <div class="max-w-3xl mx-auto flex items-center gap-3 px-4 py-3">
+      <a href="/course/00" class="p-1 hover:bg-white/20 rounded-lg transition-colors text-white flex-shrink-0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+      <div>
+        <p class="text-sm font-bold leading-tight">第零課：聲調・拼音</p>
+        <p class="text-xs opacity-80">Bài 0: Thanh điệu · Phiên âm</p>
+      </div>
+    </div>
+    <!-- Tab Bar -->
+    <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none">
+      <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full" id="tab-bar">
+        {[
+          { id:'tones',     zh:'聲調' },
+          { id:'initfinal', zh:'聲韻母' },
+          { id:'quiz1',     zh:'練習①' },
+          { id:'practical', zh:'拼音練習' },
+          { id:'extended',  zh:'延伸' },
+          { id:'quiz2',     zh:'練習②' },
+        ].map((t, i) => (
+          <button
+            class={`tab-btn px-4 py-2 text-xs font-medium border-b-2 transition-all whitespace-nowrap flex-1 md:flex-none md:px-5 ${i===0 ? 'opacity-100 border-white' : 'opacity-60 border-transparent'}`}
+            data-tab={t.id}
+            onclick={`switchTab('${t.id}')`}
+          >{t.zh}</button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Tab Content ════════════════════════════════════════════ -->
+  <div class="max-w-3xl mx-auto">
+
+  <!-- ── Tab 1: 聲調 ─────────────────────────────────────────── -->
+  <section id="sec-tones" class="tab-section -mx-4 md:mx-0 md:flex md:gap-6 md:items-start">
+    <div id="tone-list" class="overflow-y-auto px-4 pt-4 pb-3 space-y-3 max-h-[52vh] md:max-h-none md:flex-1"></div>
+    <div class="sticky bottom-0 md:bottom-auto md:top-24 bg-white rounded-t-3xl md:rounded-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.10)] md:shadow-sm border-t md:border border-gray-100 px-5 py-4 z-20 md:z-10 md:w-72 md:flex-shrink-0 md:mt-4">
+      <div id="tone-empty" class="flex flex-col items-center gap-1.5 py-4 text-gray-400">
+        <p class="text-3xl">☝️</p>
+        <p class="text-sm font-medium text-gray-500">請點選上方聲調</p>
+        <p class="text-xs">Nhấn vào thanh điệu phía trên</p>
+      </div>
+      <div id="tone-detail" style="display:none" class="flex flex-col gap-3">
+        <div class="flex items-start gap-4">
+          <img id="td-curve" src="" alt="" class="w-32 h-24 object-contain rounded-xl bg-emerald-50 border border-emerald-100 flex-shrink-0" />
+          <div class="flex-1 min-w-0">
+            <p id="td-name" class="text-sm font-bold text-emerald-700"></p>
+            <p id="td-desc" class="text-xs text-gray-500 mt-0.5"></p>
+            <p id="td-char" class="text-4xl font-black text-gray-800 leading-tight mt-1"></p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-gray-50 rounded-2xl px-4 py-3">
+          <img id="td-img" src="" alt="" class="w-20 h-20 object-contain rounded-xl bg-white border border-gray-100 flex-shrink-0" />
+          <div class="flex-1 min-w-0">
+            <p id="td-word" class="text-lg font-bold text-gray-800 leading-tight"></p>
+            <p id="td-pinyin" class="text-sm text-emerald-600 font-medium"></p>
+            <p id="td-trans" class="text-xs text-gray-500"></p>
+          </div>
+          <button onclick="window.playCurrentTone()" class="w-10 h-10 bg-emerald-500 hover:bg-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 transition-colors shadow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tab 2: 聲韻母 ─────────────────────────────────────────── -->
+  <section id="sec-initfinal" class="tab-section hidden -mx-4 md:mx-0 md:flex md:gap-6 md:items-start">
+    <!-- Left: toggle + grid -->
+    <div class="md:flex-1 md:min-w-0">
+    <!-- Toggle -->
+    <div class="flex gap-2 px-4 pt-4 pb-3 sticky top-[104px] z-10 bg-white border-b border-gray-100 md:static md:border-none md:bg-transparent md:pt-4 md:pb-2">
+      <button id="btn-initial" onclick="switchIF('initial')" class="flex-1 py-2 rounded-xl text-sm font-bold bg-sky-500 text-white transition-all">聲母 <span class="font-normal text-xs opacity-80">Phụ âm</span></button>
+      <button id="btn-final"   onclick="switchIF('final')"   class="flex-1 py-2 rounded-xl text-sm font-bold bg-gray-100 text-gray-500 transition-all">韻母 <span class="font-normal text-xs opacity-80">Vần</span></button>
+    </div>
+    <div id="if-grid" class="overflow-y-auto px-4 py-3 max-h-[44vh] md:max-h-none"></div>
+    </div>
+    <div class="sticky bottom-0 md:bottom-auto md:top-24 bg-white rounded-t-3xl md:rounded-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.10)] md:shadow-sm border-t md:border border-gray-100 px-5 py-4 z-20 md:z-10 md:w-72 md:flex-shrink-0 md:mt-4">
+      <div id="if-empty" class="flex flex-col items-center gap-1.5 py-3 text-gray-400">
+        <p class="text-3xl">☝️</p>
+        <p class="text-sm font-medium text-gray-500">請點選上方拼音字母</p>
+        <p class="text-xs">Nhấn vào ký hiệu phiên âm phía trên</p>
+      </div>
+      <div id="if-detail" style="display:none" class="flex gap-3 items-center">
+        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+          <p id="ifd-letter" class="text-4xl font-black text-sky-600 leading-none"></p>
+          <p id="ifd-vn"     class="text-xs text-gray-400 text-center leading-tight"></p>
+        </div>
+        <div class="w-px self-stretch bg-gray-200"></div>
+        <img id="ifd-img" src="" alt="" class="w-20 h-20 object-contain rounded-2xl bg-gray-50 border border-gray-100 flex-shrink-0" />
+        <div class="flex-1 min-w-0">
+          <p id="ifd-word" class="text-lg font-bold text-gray-800 leading-tight"></p>
+          <p id="ifd-pinyin" class="text-sm font-medium text-sky-600"></p>
+          <p id="ifd-trans" class="text-xs text-gray-500"></p>
+        </div>
+        <button onclick="window.playCurrentIF()" class="w-10 h-10 bg-sky-500 hover:bg-sky-600 rounded-full flex items-center justify-center flex-shrink-0 transition-colors shadow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tab 3: 練習① ─────────────────────────────────────────── -->
+  <section id="sec-quiz1" class="tab-section hidden">
+    <div id="q1-score-bar" class="flex items-center gap-3 px-4 py-3 bg-white/90 backdrop-blur sticky top-[104px] z-10 border-b border-gray-100">
+      <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div id="q1-progress" class="h-2 bg-teal-500 rounded-full transition-all" style="width:0%"></div>
+      </div>
+      <span id="q1-score-text" class="text-xs font-bold text-gray-500 flex-shrink-0">0 / 10</span>
+    </div>
+    <div id="quiz1-list" class="px-4 py-4 space-y-4 pb-8"></div>
+    <div id="q1-summary" style="display:none" class="px-4 py-8 text-center">
+      <p class="text-4xl mb-2">🎉</p>
+      <p class="text-xl font-bold text-gray-800">Hoàn thành!</p>
+      <p id="q1-final-score" class="text-lg text-teal-600 font-bold mt-1"></p>
+      <button onclick="resetQuiz(1)" class="mt-4 px-6 py-2 bg-teal-500 text-white rounded-xl text-sm font-bold">Làm lại / 重新作答</button>
+    </div>
+  </section>
+
+  <!-- ── Tab 4: 拼音練習 ───────────────────────────────────────── -->
+  <section id="sec-practical" class="tab-section hidden">
+    <div class="relative w-full bg-gray-200 overflow-hidden" style="height:55vw; max-height:46vh">
+      <img src={`${BASE}/images/L0_scene.png`} alt="拼音練習場景" class="w-full h-full object-cover" />
+      <div id="hotspot-container"></div>
+    </div>
+    <div id="practical-detail" class="px-4 py-4">
+      <div id="prac-empty" class="flex flex-col items-center gap-2 py-6 text-gray-400">
+        <p class="text-3xl">👆</p>
+        <p class="text-sm font-medium text-gray-500">點擊圖片上的按鈕</p>
+        <p class="text-xs">Nhấn vào các nút trên hình ảnh</p>
+      </div>
+      <div id="prac-word" style="display:none" class="flex items-center gap-4 bg-teal-50 rounded-2xl px-5 py-4">
+        <img id="prac-img" src="" alt="" class="w-20 h-20 object-contain rounded-2xl bg-white border border-teal-100 flex-shrink-0" />
+        <div class="flex-1 min-w-0">
+          <p id="prac-zh"     class="text-2xl font-bold text-gray-800 leading-tight"></p>
+          <p id="prac-pinyin" class="text-base font-medium text-teal-600"></p>
+          <p id="prac-vn"     class="text-sm text-gray-500"></p>
+        </div>
+        <button onclick="window.playCurrentPrac()" class="w-12 h-12 bg-teal-500 hover:bg-teal-600 rounded-full flex items-center justify-center flex-shrink-0 transition-colors shadow-md">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tab 5: 延伸學習 ───────────────────────────────────────── -->
+  <section id="sec-extended" class="tab-section hidden">
+    <div class="py-3 border-b border-gray-100 mb-3">
+      <p class="text-sm font-bold text-gray-700">日常回應語 <span class="font-normal text-xs text-gray-400">Câu trả lời thông thường</span></p>
+    </div>
+    <div id="extended-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-8"></div>
+  </section>
+
+  <!-- ── Tab 6: 練習② ─────────────────────────────────────────── -->
+  <section id="sec-quiz2" class="tab-section hidden">
+    <div id="q2-score-bar" class="flex items-center gap-3 px-4 py-3 bg-white/90 backdrop-blur sticky top-[104px] z-10 border-b border-gray-100">
+      <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div id="q2-progress" class="h-2 bg-teal-500 rounded-full transition-all" style="width:0%"></div>
+      </div>
+      <span id="q2-score-text" class="text-xs font-bold text-gray-500 flex-shrink-0">0 / 5</span>
+    </div>
+    <div id="quiz2-list" class="px-4 py-4 space-y-4 pb-8"></div>
+    <div id="q2-summary" style="display:none" class="px-4 py-8 text-center">
+      <p class="text-4xl mb-2">🎉</p>
+      <p class="text-xl font-bold text-gray-800">Hoàn thành!</p>
+      <p id="q2-final-score" class="text-lg text-teal-600 font-bold mt-1"></p>
+      <button onclick="resetQuiz(2)" class="mt-4 px-6 py-2 bg-teal-500 text-white rounded-xl text-sm font-bold">Làm lại / 重新作答</button>
+    </div>
+  </section>
+  </div><!-- /max-w-md -->
+
+<style>
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+  :global(.flip-card) { perspective: 800px; }
+  :global(.flip-card-inner) {
+    position: relative; width: 100%; height: 100%;
+    transition: transform 0.45s ease;
+    transform-style: preserve-3d;
+  }
+  :global(.flip-card.flipped .flip-card-inner) { transform: rotateY(180deg); }
+  :global(.flip-card-front), :global(.flip-card-back) {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  :global(.flip-card-back) { transform: rotateY(180deg); }
+  :global(.hotspot-btn) {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(13,148,136,0.9);
+    color: white;
+    font-size: 10px; font-weight: bold;
+    border: 2px solid white;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    animation: pulse-dot 2s infinite;
+    box-shadow: 0 0 0 0 rgba(13,148,136,0.5);
+    line-height: 1.1; text-align: center;
+    white-space: nowrap;
+  }
+  :global(.hotspot-btn.active) { background: rgba(5,95,85,0.95); box-shadow: 0 0 0 4px rgba(13,148,136,0.3); }
+  @keyframes pulse-dot {
+    0%   { box-shadow: 0 0 0 0 rgba(13,148,136,0.5); }
+    70%  { box-shadow: 0 0 0 10px rgba(13,148,136,0); }
+    100% { box-shadow: 0 0 0 0 rgba(13,148,136,0); }
+  }
+</style>
+
+<script define:vars={{ BASE }}>
+const audio = document.getElementById('global-audio');
+
+window.playAudio = function(file) {
+  audio.src = BASE + '/audio/' + file;
+  audio.currentTime = 0;
+  audio.play().catch(() => {});
+};
+
+// ════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════
+
+const TONES = [
+  { id:1, name:'第一聲', vn:'Thanh 1 · Thanh thứ nhất', mark:'－', char:'mā', desc:'Giọng cao, đều',        word:'媽媽', pinyin:'mā ma',   trans:'Mẹ (người nhà)',     toneImg:'L0_tone1.png', exImg:'L0_37.png', audio:'L0_37.wav' },
+  { id:2, name:'第二聲', vn:'Thanh 2 · Thanh thứ hai',  mark:'ˊ',  char:'má', desc:'Giọng lên cao',        word:'腳麻', pinyin:'jiǎo má',  trans:'Tê chân',            toneImg:'L0_tone2.png', exImg:'L0_38.png', audio:'L0_38.wav' },
+  { id:3, name:'第三聲', vn:'Thanh 3 · Thanh thứ ba',   mark:'ˇ',  char:'mǎ', desc:'Giọng xuống rồi lên', word:'馬桶', pinyin:'mǎ tǒng',  trans:'Bồn cầu',            toneImg:'L0_tone3.png', exImg:'L0_39.png', audio:'L0_39.wav' },
+  { id:4, name:'第四聲', vn:'Thanh 4 · Thanh thứ tư',   mark:'ˋ',  char:'mà', desc:'Giọng hạ thấp nhanh', word:'罵人', pinyin:'mà rén',   trans:'Mắng / La rầy',     toneImg:'L0_tone4.png', exImg:'L0_40.png', audio:'L0_40.wav' },
+  { id:5, name:'輕聲',   vn:'Thanh nhẹ',                mark:'·',  char:'ma', desc:'Giọng nhẹ và ngắn',   word:'痛嗎', pinyin:'tòng ma',  trans:'(Có) đau không?',   toneImg:'L0_tone5.png', exImg:'L0_41.png', audio:'L0_41.wav' },
+];
+
+const INITIALS = [
+  { pinyin:'b',  group:'b / p',            vn:'pơ',              word:'幫忙', wp:'bāng máng', trans:'Giúp đỡ',                  img:'L0_01.png', audio:'L0_01.wav' },
+  { pinyin:'p',  group:'b / p',            vn:'pơ (bật hơi)',    word:'拍背', wp:'pāi bèi',   trans:'Vỗ lưng',                  img:'L0_02.png', audio:'L0_02.wav' },
+  { pinyin:'m',  group:'m / f',            vn:'mơ',              word:'毛巾', wp:'máo jīn',   trans:'Khăn mặt / Khăn tắm',      img:'L0_03.png', audio:'L0_03.wav' },
+  { pinyin:'f',  group:'m / f',            vn:'phơ',             word:'復健', wp:'fù jiàn',   trans:'Phục hồi chức năng',       img:'L0_04.png', audio:'L0_04.wav' },
+  { pinyin:'d',  group:'d / t',            vn:'tơ',              word:'打針', wp:'dǎ zhēn',   trans:'Tiêm / Chích',             img:'L0_05.png', audio:'L0_05.wav' },
+  { pinyin:'t',  group:'d / t',            vn:'thơ (bật hơi)',   word:'痛',   wp:'tòng',      trans:'Đau',                      img:'L0_06.png', audio:'L0_06.wav' },
+  { pinyin:'n',  group:'n / l',            vn:'nơ',              word:'拿',   wp:'ná',        trans:'Lấy / Cầm',                img:'L0_07.png', audio:'L0_07.wav' },
+  { pinyin:'l',  group:'n / l',            vn:'lơ',              word:'輪椅', wp:'lún yǐ',    trans:'Xe lăn',                   img:'L0_08.png', audio:'L0_08.wav' },
+  { pinyin:'g',  group:'g / k / h',        vn:'cơ',              word:'阿公', wp:'ā gōng',    trans:'Ông',                      img:'L0_09.png', audio:'L0_09.wav' },
+  { pinyin:'k',  group:'g / k / h',        vn:'khơ (bật hơi)',   word:'咳嗽', wp:'ké sòu',    trans:'Ho',                       img:'L0_10.png', audio:'L0_10.wav' },
+  { pinyin:'h',  group:'g / k / h',        vn:'hơ',              word:'換衣服',wp:'huàn yī fú',trans:'Thay quần áo',           img:'L0_11.png', audio:'L0_11.wav' },
+  { pinyin:'zh', group:'zh / ch / sh / r', vn:'trư',             word:'枕頭', wp:'zhěn tou',  trans:'Cái gối',                  img:'L0_12.png', audio:'L0_12.wav' },
+  { pinyin:'ch', group:'zh / ch / sh / r', vn:'trư (bật hơi)',   word:'吃藥', wp:'chī yào',   trans:'Uống thuốc',               img:'L0_13.png', audio:'L0_13.wav' },
+  { pinyin:'sh', group:'zh / ch / sh / r', vn:'sư',              word:'舒服', wp:'shū fú',    trans:'Thoải mái / Dễ chịu',      img:'L0_14.png', audio:'L0_14.wav' },
+  { pinyin:'r',  group:'zh / ch / sh / r', vn:'rư',              word:'熱水', wp:'rè shuǐ',   trans:'Nước nóng',                img:'L0_15.png', audio:'L0_15.wav' },
+  { pinyin:'z',  group:'z / c / s',        vn:'chư',             word:'走路', wp:'zǒu lù',    trans:'Đi bộ',                    img:'L0_16.png', audio:'L0_16.wav' },
+  { pinyin:'c',  group:'z / c / s',        vn:'chư (bật hơi)',   word:'擦澡', wp:'cā zǎo',    trans:'Lau người',                img:'L0_17.png', audio:'L0_17.wav' },
+  { pinyin:'s',  group:'z / c / s',        vn:'xư',              word:'散步', wp:'sàn bù',    trans:'Đi dạo',                   img:'L0_18.png', audio:'L0_18.wav' },
+  { pinyin:'j',  group:'j / q / x',        vn:'chi',             word:'剪指甲',wp:'jiǎn zhǐ jiǎ',trans:'Cắt móng tay',       img:'L0_19.png', audio:'L0_19.wav' },
+  { pinyin:'q',  group:'j / q / x',        vn:'chi (bật hơi)',   word:'起床', wp:'qǐ chuáng', trans:'Thức dậy',                 img:'L0_20.png', audio:'L0_20.wav' },
+  { pinyin:'x',  group:'j / q / x',        vn:'xi',              word:'洗澡', wp:'xǐ zǎo',    trans:'Tắm',                      img:'L0_21.png', audio:'L0_21.wav' },
+];
+
+const FINALS = [
+  { pinyin:'a',   group:'a / o / e / ê',      vn:'a',                 word:'阿嬤', wp:'ā mà',      trans:'Bà',                   img:'L0_22.png',   audio:'L0_22.wav'   },
+  { pinyin:'o',   group:'a / o / e / ê',      vn:'o',                 word:'脖子', wp:'bó zi',     trans:'Cổ',                   img:'L0_23.png',   audio:'L0_23.wav'   },
+  { pinyin:'e',   group:'a / o / e / ê',      vn:'ơ',                 word:'餓',   wp:'è',         trans:'Đói',                  img:'L0_24.png',   audio:'L0_24.wav'   },
+  { pinyin:'ê',   group:'a / o / e / ê',      vn:'ê',                 word:'噎到', wp:'yē dào',    trans:'Nghẹn / Sặc',          img:'L0_25.png',   audio:'L0_25.wav'   },
+  { pinyin:'i',   group:'i / u / ü',          vn:'i',                 word:'點滴', wp:'diǎn dī',   trans:'Truyền dịch',          img:'L0_26-1.png', audio:'L0_26-1.wav' },
+  { pinyin:'yi',  group:'i / u / ü',          vn:'i (đứng đầu)',      word:'醫院', wp:'yī yuàn',   trans:'Bệnh viện',            img:'L0_26-2.png', audio:'L0_26-2.wav' },
+  { pinyin:'u',   group:'i / u / ü',          vn:'u',                 word:'吐',   wp:'tù',        trans:'Nôn / Ói',             img:'L0_27-1.png', audio:'L0_27-1.wav' },
+  { pinyin:'wu',  group:'i / u / ü',          vn:'u (đứng đầu)',      word:'無力', wp:'wú lì',     trans:'Không có sức / Yếu',   img:'L0_27-8.png', audio:'L0_27-2.wav' },
+  { pinyin:'ü',   group:'i / u / ü',          vn:'uy',                word:'女兒', wp:'nǚ ér',     trans:'Con gái',              img:'L0_28-1.png', audio:'L0_28-1.wav' },
+  { pinyin:'yu',  group:'i / u / ü',          vn:'uy (đứng đầu)',     word:'浴室', wp:'yù shì',    trans:'Phòng tắm',            img:'L0_28-2.png', audio:'L0_28-2.wav' },
+  { pinyin:'ü*',  group:'i / u / ü',          vn:'uy (sau j/q/x)',    word:'舉手', wp:'jǔ shǒu',   trans:'Giơ tay / Nhấc tay',   img:'L0_28-3.png', audio:'L0_28-3.wav' },
+  { pinyin:'ai',  group:'ai / ei / ao / ou',  vn:'ai',                word:'慢慢來',wp:'màn màn lái',trans:'Cứ từ từ / Chậm thôi',img:'L0_29.png',  audio:'L0_29.wav'   },
+  { pinyin:'ei',  group:'ai / ei / ao / ou',  vn:'ây',                word:'棉被', wp:'mián bèi',  trans:'Chăn bông / Mền',      img:'L0_30.png',   audio:'L0_30.wav'   },
+  { pinyin:'ao',  group:'ai / ei / ao / ou',  vn:'ao',                word:'尿布', wp:'niào bù',   trans:'Tã / Bỉm',             img:'L0_31.png',   audio:'L0_31.wav'   },
+  { pinyin:'ou',  group:'ai / ei / ao / ou',  vn:'âu',                word:'頭痛', wp:'tóu tòng',  trans:'Đau đầu',              img:'L0_32.png',   audio:'L0_32.wav'   },
+  { pinyin:'an',  group:'an / en / ang / eng', vn:'an',               word:'吃飯', wp:'chī fàn',   trans:'Ăn cơm',               img:'L0_33.png',   audio:'L0_33.wav'   },
+  { pinyin:'en',  group:'an / en / ang / eng', vn:'ân',               word:'胸悶', wp:'xiōng mēn', trans:'Tức ngực',             img:'L0_34.png',   audio:'L0_34.wav'   },
+  { pinyin:'ang', group:'an / en / ang / eng', vn:'ang',              word:'躺下', wp:'tǎng xià',  trans:'Nằm xuống',            img:'L0_35.png',   audio:'L0_35.wav'   },
+  { pinyin:'eng', group:'an / en / ang / eng', vn:'âng',              word:'冷',   wp:'lěng',      trans:'Lạnh',                 img:'L0_36.png',   audio:'L0_36.wav'   },
+];
+
+const PRACTICAL = [
+  { zh:'護士', pinyin:'hù shì',    vn:'y tá',        audio:'L0_45.wav', img:'L0_45.png', x:12, y:47 },
+  { zh:'飯',   pinyin:'fàn',       vn:'cơm',         audio:'L0_42.wav', img:'L0_42.png', x:23, y:64 },
+  { zh:'起床', pinyin:'qǐ chuáng', vn:'thức dậy',    audio:'L0_46.wav', img:'L0_46.png', x:30, y:53 },
+  { zh:'醫生', pinyin:'yī shēng',  vn:'bác sĩ',      audio:'L0_44.wav', img:'L0_44.png', x:53, y:42 },
+  { zh:'吃藥', pinyin:'chī yào',   vn:'uống thuốc',  audio:'L0_47.wav', img:'L0_47.png', x:78, y:53 },
+  { zh:'水',   pinyin:'shuǐ',      vn:'nước',        audio:'L0_43.wav', img:'L0_43.png', x:95, y:68 },
+];
+
+const EXTENDED = [
+  { zh:'等一下', pinyin:'děng yí xià', vn:'Đợi một chút',      audio:'L0_48.wav', img:'L0_48.png' },
+  { zh:'沒問題', pinyin:'méi wèn tí',  vn:'Không vấn đề',      audio:'L0_49.wav', img:'L0_49.png' },
+  { zh:'好的',   pinyin:'hǎo de',      vn:'Được rồi',          audio:'L0_50.wav', img:'L0_50.png' },
+  { zh:'可以',   pinyin:'kě yǐ',       vn:'Có thể / được',     audio:'L0_51.wav', img:'L0_51.png' },
+  { zh:'不可以', pinyin:'bù kě yǐ',    vn:'Không được',        audio:'L0_52.wav', img:'L0_52.png' },
+  { zh:'加油',   pinyin:'jiā yóu',     vn:'Cố lên!',           audio:'L0_53.wav', img:'L0_53.png' },
+];
+
+const QUIZ1 = [
+  { type:'image', q:'Xin hỏi bạn nên xưng hô với người này như thế nào?', qCh:'', media:'L0_exercise1_01.png', opts:['女兒 (nǚ ér)','阿嬤 (ā mà)','阿公 (ā gōng)'], ans:2, ex:'(A) 「女兒 nǚ ér」là Con gái。(B) 「阿嬤 ā mà」là Bà。' },
+  { type:'image', q:'Xin hỏi cái này là gì?',                              qCh:'',      media:'L0_exercise1_02.png', opts:['棉被 (mián bèi)','尿布 (niào bù)','枕頭 (zhěn tou)'], ans:1, ex:'(A) 「棉被 mián bèi」là Chăn bông/Mền。(C) 「枕頭 zhěn tou」là Cái gối。' },
+  { type:'image', q:'Xin hỏi y tá đang làm gì?',                           qCh:'',        media:'L0_exercise1_03.png', opts:['點滴 (diǎn dī)','吃藥 (chī yào)','打針 (dǎ zhēn)'], ans:2, ex:'(A) 「點滴 diǎn dī」là Truyền dịch。(B) 「吃藥 chī yào」là Uống thuốc。' },
+  { type:'image', q:'Xin hỏi cô ấy đang làm gì cho ông?',                  qCh:'',    media:'L0_exercise1_04.png', opts:['擦澡 (cā zǎo)','走路 (zǒu lù)','拍背 (pāi bèi)'], ans:0, ex:'(B) 「走路 zǒu lù」là Đi bộ。(C) 「拍背 pāi bèi」là Vỗ lưng。' },
+  { type:'image', q:'Xin hỏi bà đang làm gì?',                             qCh:'',        media:'L0_exercise1_05.png', opts:['吃藥 (chī yào)','吃飯 (chī fàn)','起床 (qǐ chuáng)'], ans:1, ex:'(A) 「吃藥 chī yào」là Uống thuốc。(C) 「起床 qǐ chuáng」là Thức dậy。' },
+  { type:'audio', q:'Con gái của ông nói với bạn "幫忙 (bāng máng)", xin hỏi có nghĩa là gì?', qCh:'', media:'L0_exercise1_06.wav', opts:['Giúp đỡ','Vỗ lưng','Lau người'], ans:0, ex:'(B) Vỗ lưng là「拍背 pāi bèi」。(C) Lau người là「擦澡 cā zǎo」。' },
+  { type:'audio', q:'Xin hỏi bà nói "冷 (lěng)" có nghĩa là gì?',           qCh:'', media:'L0_exercise1_07.wav', opts:['Tê chân','Thoải mái / Dễ chịu','Lạnh'], ans:2, ex:'(A) Tê chân là「腳麻 jiǎo má」。(B) Thoải mái/Dễ chịu là「舒服 shū fú」。' },
+  { type:'audio', q:'Bạn nghe thấy ông nói "餓 (è)" và xoa bụng. Xin hỏi ý của ông là gì?', qCh:'', media:'L0_exercise1_08.wav', opts:['Đói','Nôn / Ói','Đau'], ans:0, ex:'(B) Nôn/Ói là「吐 tù」。(C) Đau là「痛 tòng」。' },
+  { type:'text',  q:'Ông có vẻ đang bị đau lưng, bạn sẽ hỏi ông "(Có) đau không?" như thế nào?', qCh:'', media:null, opts:['躺下 (tǎng xià)','痛嗎 (tòng ma)','咳嗽 (ké sòu)'], ans:1, ex:'(A) 「躺下 tǎng xià」là Nằm xuống。(C) 「咳嗽 ké sòu」là Ho。' },
+  { type:'text',  q:'Bà đang rất vội, bạn sẽ nói "Cứ từ từ / Chậm thôi" như thế nào?', qCh:'', media:null, opts:['慢慢來 (màn màn lái)','剪指甲 (jiǎn zhǐ jiǎ)','脖子 (bó zi)'], ans:0, ex:'(B) 「剪指甲 jiǎn zhǐ jiǎ」là Cắt móng tay。(C) 「脖子 bó zi」là Cổ。' },
+];
+
+const QUIZ2 = [
+  { type:'image', q:'Xin hỏi công việc của anh ấy là gì?',                           qCh:'', media:'L0_exercise2_01.png', opts:['醫生 (yī shēng)','阿公 (ā gōng)','阿嬤 (ā mà)'], ans:0, ex:'(B) 「阿公 ā gōng」là Ông。(C) 「阿嬤 ā mà」là Bà。' },
+  { type:'audio', q:'Bà nói bà muốn uống "水 (shuǐ)", xin hỏi "水 (shuǐ)" có nghĩa là gì?', qCh:'', media:'L0_exercise2_02.wav', opts:['護士 (hù shì)','飯 (fàn)','水 (shuǐ)'], ans:2, ex:'(A) 「護士 hùshì」là y tá。(B) 「飯 fàn」là cơm。' },
+  { type:'text',  q:'Người nhà của ông nhờ bạn giúp đỡ, bạn trả lời "Không vấn đề" như thế nào?', qCh:'', media:null, opts:['等一下 (děng yí xià)','沒問題 (méi wèn tí)','不可以 (bù kě yǐ)'], ans:1, ex:'(A) 「等一下 děng yí xià」là Đợi một chút。(C) 「不可以 bù kě yǐ」là Không được。' },
+  { type:'text',  q:'Bác sĩ dặn bà không được ăn ngọt, nhưng bà muốn ăn kẹo, bạn nên nói gì?', qCh:'', media:null, opts:['好的 (hǎo de)','不可以 (bù kě yǐ)','加油 (jiā yóu)'], ans:1, ex:'(A) 「好的 hǎo de」là Được rồi。(C) 「加油 jiā yóu」là Cố lên!。' },
+  { type:'text',  q:'Bạn muốn động viên ông tiếp tục đi bộ, bạn sẽ nói gì?',         qCh:'', media:null, opts:['可以 (kě yǐ)','等一下 (děng yí xià)','加油 (jiā yóu)'], ans:2, ex:'(A) 「可以 kě yǐ」là Có thể/được。(B) 「等一下 děng yí xià」là Đợi một chút。' },
+];
+
+// ════════════════════════════════════════
+// TAB SWITCHING
+// ════════════════════════════════════════
+
+const TAB_IDS = ['tones','initfinal','quiz1','practical','extended','quiz2'];
+let currentTab = 'tones';
+
+window.switchTab = function(id) {
+  currentTab = id;
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.add('hidden'));
+  document.getElementById('sec-' + id).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    const active = b.dataset.tab === id;
+    b.classList.toggle('opacity-100', active);
+    b.classList.toggle('border-white', active);
+    b.classList.toggle('opacity-60', !active);
+    b.classList.toggle('border-transparent', !active);
+  });
+};
+
+// ════════════════════════════════════════
+// TAB 1: TONES
+// ════════════════════════════════════════
+
+let currentToneAudio = null;
+
+function renderTones() {
+  const list = document.getElementById('tone-list');
+  const markColors = ['bg-emerald-50 text-emerald-800', 'bg-sky-50 text-sky-800', 'bg-amber-50 text-amber-800', 'bg-red-50 text-red-800', 'bg-gray-50 text-gray-600'];
+  list.innerHTML = TONES.map((t, i) => `
+    <button onclick="showTone(${i})" class="w-full flex items-center gap-4 bg-white rounded-2xl shadow-sm border border-gray-100 px-4 py-4 hover:border-emerald-200 transition-all text-left active:scale-[0.98]">
+      <div class="w-14 h-14 rounded-2xl ${markColors[i]} flex items-center justify-center flex-shrink-0">
+        <span class="text-2xl font-black">${t.mark}</span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="font-bold text-gray-800">${t.name}</p>
+        <p class="text-xs text-gray-400">${t.vn}</p>
+      </div>
+      <div class="text-right flex-shrink-0">
+        <p class="text-2xl font-black text-gray-700">${t.char}</p>
+      </div>
+      <svg class="flex-shrink-0 text-gray-300" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  `).join('');
+}
+
+window.showTone = function(i) {
+  const t = TONES[i];
+  currentToneAudio = t.audio;
+  document.getElementById('tone-empty').style.display = 'none';
+  const d = document.getElementById('tone-detail');
+  d.style.display = 'flex';
+  document.getElementById('td-curve').src  = `${BASE}/images/${t.toneImg}`;
+  document.getElementById('td-name').textContent  = `${t.name} · ${t.vn}`;
+  document.getElementById('td-desc').textContent  = t.desc;
+  document.getElementById('td-char').textContent  = t.char;
+  document.getElementById('td-img').src    = `${BASE}/images/${t.exImg}`;
+  document.getElementById('td-word').textContent  = t.word;
+  document.getElementById('td-pinyin').textContent = t.pinyin;
+  document.getElementById('td-trans').textContent  = t.trans;
+  window.playAudio(t.audio);
+};
+
+window.playCurrentTone = function() {
+  if (currentToneAudio) window.playAudio(currentToneAudio);
+};
+
+// ════════════════════════════════════════
+// TAB 2: INITIALS & FINALS
+// ════════════════════════════════════════
+
+let currentIFAudio = null;
+let currentIF = 'initial';
+
+window.switchIF = function(mode) {
+  currentIF = mode;
+  const isInit = mode === 'initial';
+  document.getElementById('btn-initial').className = `flex-1 py-2 rounded-xl text-sm font-bold transition-all ${isInit ? 'bg-sky-500 text-white' : 'bg-gray-100 text-gray-500'}`;
+  document.getElementById('btn-final').className   = `flex-1 py-2 rounded-xl text-sm font-bold transition-all ${!isInit ? 'bg-indigo-500 text-white' : 'bg-gray-100 text-gray-500'}`;
+  document.getElementById('if-empty').style.display = '';
+  document.getElementById('if-detail').style.display = 'none';
+  renderIFGrid(isInit ? INITIALS : FINALS, isInit ? 'sky' : 'indigo');
+};
+
+const IF_BTN_CLS = {
+  sky:    'px-4 py-2 rounded-xl font-bold text-sky-700 bg-sky-50 border border-sky-200 hover:bg-sky-100 transition-colors text-sm',
+  indigo: 'px-4 py-2 rounded-xl font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition-colors text-sm',
+};
+
+function renderIFGrid(items, color) {
+  const grid = document.getElementById('if-grid');
+  const groups = [...new Set(items.map(it => it.group))];
+  grid.innerHTML = groups.map(g => {
+    const gItems = items.filter(it => it.group === g);
+    return `
+      <div class="mb-4">
+        <p class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">${g}</p>
+        <div class="flex flex-wrap gap-2">
+          ${gItems.map(it => {
+            const realIdx = items.indexOf(it);
+            return `<button onclick="showIF(${realIdx})" class="${IF_BTN_CLS[color]}">${it.pinyin}</button>`;
+          }).join('')}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+window.showIF = function(i) {
+  const items = currentIF === 'initial' ? INITIALS : FINALS;
+  const color  = currentIF === 'initial' ? 'sky' : 'indigo';
+  const it = items[i];
+  currentIFAudio = it.audio;
+  document.getElementById('if-empty').style.display = 'none';
+  const d = document.getElementById('if-detail');
+  d.style.display = 'flex';
+  const letterEl = document.getElementById('ifd-letter');
+  letterEl.textContent = it.pinyin;
+  letterEl.className = `text-4xl font-black ${color === 'sky' ? 'text-sky-600' : 'text-indigo-600'} leading-none`;
+  document.getElementById('ifd-vn').textContent   = it.vn;
+  document.getElementById('ifd-img').src          = `${BASE}/images/${it.img}`;
+  document.getElementById('ifd-word').textContent = it.word;
+  document.getElementById('ifd-pinyin').textContent = it.wp;
+  document.getElementById('ifd-trans').textContent   = it.trans;
+  const playBtn = document.querySelector('#if-detail button');
+  if (playBtn) playBtn.className = `w-10 h-10 ${color === 'sky' ? 'bg-sky-500 hover:bg-sky-600' : 'bg-indigo-500 hover:bg-indigo-600'} rounded-full flex items-center justify-center flex-shrink-0 transition-colors shadow`;
+  window.playAudio(it.audio);
+};
+
+window.playCurrentIF = function() {
+  if (currentIFAudio) window.playAudio(currentIFAudio);
+};
+
+// ════════════════════════════════════════
+// TAB 3 & 6: QUIZ
+// ════════════════════════════════════════
+
+const quizState = { 1: { score:0, answered:0 }, 2: { score:0, answered:0 } };
+
+function renderQuiz(questions, num) {
+  const list = document.getElementById(`quiz${num}-list`);
+  list.innerHTML = questions.map((q, qi) => {
+    const typeIcon = q.type === 'image' ? '🖼️' : q.type === 'audio' ? '🔊' : '📝';
+    const mediaHtml = q.type === 'image'
+      ? `<img src="${BASE}/images/${q.media}" alt="" class="w-full rounded-2xl object-contain max-h-52 border border-gray-100" />`
+      : q.type === 'audio'
+      ? `<button onclick="window.playAudio('${q.media}')" class="w-full flex items-center justify-center gap-3 bg-sky-50 border border-sky-200 rounded-2xl py-4 hover:bg-sky-100 transition-colors">
+          <div class="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <span class="text-sm font-bold text-sky-700">播放題目音檔 / Phát âm</span>
+        </button>`
+      : '';
+    return `
+      <div class="quiz-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden" id="q${num}-card-${qi}" data-num="${num}" data-qi="${qi}" data-ans="${q.ans}" data-done="0">
+        <div class="px-4 pt-4 pb-3">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-7 h-7 rounded-full bg-teal-50 text-teal-700 text-xs font-bold flex items-center justify-center flex-shrink-0">${qi+1}</span>
+            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-medium">${typeIcon}</span>
+          </div>
+          <p class="text-sm text-gray-700 font-medium mb-1">${q.q}</p>
+          <p class="text-xs text-gray-400 mb-3">${q.qCh}</p>
+          ${mediaHtml ? `<div class="mb-3">${mediaHtml}</div>` : ''}
+          <div class="flex flex-col gap-2 md:grid md:grid-cols-3" id="q${num}-opts-${qi}">
+            ${q.opts.map((opt, oi) => `
+              <button onclick="answerQ(${num},${qi},${oi})"
+                class="w-full text-left px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                id="q${num}-opt-${qi}-${oi}">
+                <span class="font-bold text-gray-400 mr-1">${['A','B','C'][oi]}.</span> ${opt}
+              </button>`).join('')}
+          </div>
+          <div id="q${num}-explain-${qi}" style="display:none" class="mt-3 flex items-start gap-2 bg-amber-50 border border-amber-100 rounded-xl px-3 py-2">
+            <span class="text-amber-500 flex-shrink-0">💡</span>
+            <p class="text-xs text-amber-800">${q.ex}</p>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+window.answerQ = function(num, qi, chosen) {
+  const card = document.getElementById(`q${num}-card-${qi}`);
+  if (card.dataset.done === '1') return;
+  card.dataset.done = '1';
+  const questions = num === 1 ? QUIZ1 : QUIZ2;
+  const correct = parseInt(card.dataset.ans);
+  const isRight = chosen === correct;
+  const total = questions.length;
+  [0,1,2].forEach(oi => {
+    const btn = document.getElementById(`q${num}-opt-${qi}-${oi}`);
+    if (!btn) return;
+    btn.disabled = true;
+    if (oi === correct) {
+      btn.className = 'w-full text-left px-4 py-3 rounded-xl border text-sm font-medium bg-emerald-50 border-emerald-300 text-emerald-800';
+      btn.innerHTML = `<span class="font-bold mr-1">✓</span> ${questions[qi].opts[oi]}`;
+    } else if (oi === chosen && !isRight) {
+      btn.className = 'w-full text-left px-4 py-3 rounded-xl border text-sm font-medium bg-red-50 border-red-200 text-red-700';
+      btn.innerHTML = `<span class="font-bold mr-1">✗</span> ${questions[qi].opts[oi]}`;
+    } else {
+      btn.className = 'w-full text-left px-4 py-3 rounded-xl border text-sm font-medium bg-gray-50 border-gray-100 text-gray-400';
+    }
+  });
+  document.getElementById(`q${num}-explain-${qi}`).style.display = 'flex';
+  const st = quizState[num];
+  st.answered++;
+  if (isRight) st.score++;
+  updateScore(num, total);
+  if (st.answered === total) {
+    setTimeout(() => {
+      document.getElementById(`q${num}-summary`).style.display = '';
+      document.getElementById(`q${num}-final-score`).textContent = `${st.score} / ${total} điểm · 分`;
+    }, 600);
+  }
+};
+
+function updateScore(num, total) {
+  const st = quizState[num];
+  document.getElementById(`q${num}-score-text`).textContent = `${st.score} / ${total}`;
+  document.getElementById(`q${num}-progress`).style.width = `${(st.answered / total) * 100}%`;
+}
+
+window.resetQuiz = function(num) {
+  quizState[num] = { score:0, answered:0 };
+  const questions = num === 1 ? QUIZ1 : QUIZ2;
+  updateScore(num, questions.length);
+  document.getElementById(`q${num}-summary`).style.display = 'none';
+  renderQuiz(questions, num);
+};
+
+// ════════════════════════════════════════
+// TAB 4: PRACTICAL PINYIN
+// ════════════════════════════════════════
+
+let currentPracAudio = null;
+
+function renderPractical() {
+  const container = document.getElementById('hotspot-container');
+  container.innerHTML = PRACTICAL.map((p, i) => `
+    <button class="hotspot-btn" style="left:${p.x}%;top:${p.y}%;" onclick="showPrac(${i})" id="hspot-${i}">
+    </button>`).join('');
+}
+
+window.showPrac = function(i) {
+  const p = PRACTICAL[i];
+  currentPracAudio = p.audio;
+  document.querySelectorAll('.hotspot-btn').forEach((b, bi) => b.classList.toggle('active', bi === i));
+  document.getElementById('prac-empty').style.display = 'none';
+  const w = document.getElementById('prac-word');
+  w.style.display = 'flex';
+  document.getElementById('prac-img').src        = `${BASE}/images/${p.img}`;
+  document.getElementById('prac-zh').textContent     = p.zh;
+  document.getElementById('prac-pinyin').textContent = p.pinyin;
+  document.getElementById('prac-vn').textContent     = p.vn;
+  window.playAudio(p.audio);
+};
+
+window.playCurrentPrac = function() {
+  if (currentPracAudio) window.playAudio(currentPracAudio);
+};
+
+// ════════════════════════════════════════
+// TAB 5: EXTENDED LEARNING (flip cards)
+// ════════════════════════════════════════
+
+function renderExtended() {
+  const list = document.getElementById('extended-list');
+  list.innerHTML = EXTENDED.map((it, i) => `
+    <div class="flip-card h-32 rounded-2xl cursor-pointer" onclick="this.classList.toggle('flipped')" id="ext-${i}">
+      <div class="flip-card-inner rounded-2xl shadow-sm">
+        <div class="flip-card-front bg-teal-500 rounded-2xl flex items-center justify-between px-5">
+          <div>
+            <p class="text-white text-2xl font-black leading-tight">${it.zh}</p>
+            <p class="text-teal-100 text-sm font-medium">${it.pinyin}</p>
+          </div>
+          <button onclick="event.stopPropagation(); window.playAudio('${it.audio}')"
+            class="w-11 h-11 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center flex-shrink-0 transition-colors">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+        </div>
+        <div class="flip-card-back bg-teal-700 rounded-2xl flex items-center gap-4 px-5">
+          <img src="${BASE}/images/${it.img}" alt="" class="w-20 h-20 object-contain rounded-xl bg-white/10 flex-shrink-0" />
+          <div>
+            <p class="text-teal-100 text-xs font-medium uppercase tracking-wider mb-1">Tiếng Việt</p>
+            <p class="text-white text-xl font-bold leading-tight">${it.vn}</p>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+
+renderTones();
+switchIF('initial');
+renderQuiz(QUIZ1, 1);
+renderPractical();
+renderExtended();
+renderQuiz(QUIZ2, 2);
+</script>
+</Layout>
