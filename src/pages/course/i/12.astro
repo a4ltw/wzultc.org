@@ -1,0 +1,412 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+const BASE = '/assets/course/l12';
+---
+
+<Layout title="第十二課：整合情境實務演練 - WZULTC 台越照護華語" description="台越照護華語第十二課互動練習，包含生詞、句型、五大情境任務實務演練。">
+
+<div class="bg-rose-50 min-h-screen pb-24">
+
+  <!-- Header -->
+  <header class="bg-rose-600 text-white shadow-lg sticky top-0 z-30">
+    <div class="max-w-3xl mx-auto flex items-center justify-between gap-2 px-3 py-2.5">
+      <a href="/course" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
+        <span class="flex items-center gap-1">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          課程列表
+        </span>
+        <span class="text-[10px] opacity-70 font-normal">Danh sách</span>
+      </a>
+      <div class="text-center min-w-0">
+        <p class="text-sm font-bold leading-tight">第十二課：整合情境實務演練</p>
+        <p class="text-xs opacity-60 mt-0.5">Bài 12: Thực hành tình huống tổng hợp</p>
+      </div>
+      <a href="/course/12" class="flex flex-col items-center text-xs font-medium bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1.5 transition-colors flex-shrink-0">
+        <span class="flex items-center gap-1">
+          課程簡報
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+        <span class="text-[10px] opacity-70 font-normal">Bài giảng</span>
+      </a>
+    </div>
+    <div class="max-w-3xl mx-auto relative flex items-stretch">
+      <button id="tab-prev" class="hidden flex-shrink-0 px-2 bg-rose-600 border-t border-white/20 text-white text-lg font-bold hover:bg-rose-500 transition-colors">‹</button>
+      <div id="tab-scroll" class="overflow-x-auto scrollbar-none flex-1">
+        <div class="flex border-t border-white/20 min-w-max md:min-w-0 md:w-full">
+          {[
+            ['vocab',    '生詞',  'Từ vựng'],
+            ['sentence', '句型',  'Câu mẫu'],
+            ['task1',    '情境1', 'TH 1'],
+            ['task2',    '情境2', 'TH 2'],
+            ['task3',    '情境3', 'TH 3'],
+            ['task4',    '情境4', 'TH 4'],
+            ['task5',    '情境5', 'TH 5'],
+          ].map(([id, zh, vi]) => (
+            <button
+              class="tab-btn px-4 py-1.5 text-xs font-medium opacity-60 border-b-2 border-transparent transition-all text-center"
+              data-tab={id}
+            >
+              <div class="whitespace-nowrap">{zh}</div>
+              <div class="text-[10px] font-normal opacity-70 whitespace-nowrap">{vi}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+      <button id="tab-next" class="flex-shrink-0 px-2 bg-rose-600 border-t border-white/20 text-white text-lg font-bold hover:bg-rose-500 transition-colors">›</button>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 pt-4 space-y-0">
+
+    <!-- ===== SECTION 1: 生詞 ===== -->
+    <section id="sec-vocab" class="tab-section -mx-4 md:mx-0">
+      <div class="md:flex md:gap-6 md:items-start">
+      <div id="vocab-buttons" class="overflow-y-auto px-4 pt-4 pb-3 space-y-2 max-h-[54vh] md:max-h-none md:flex-1"></div>
+      <div class="sticky bottom-0 md:bottom-auto md:top-24 bg-white rounded-t-3xl md:rounded-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.08)] md:shadow-sm border-t md:border border-gray-100 px-5 py-5 z-20 md:z-10 md:w-72 md:flex-shrink-0 md:mt-4">
+        <div id="vocab-detail-empty" class="flex flex-col items-center gap-2 py-3 text-gray-400">
+          <p class="text-sm font-medium text-gray-500">請點選生詞</p>
+          <p class="text-xs">Nhấn vào từ vựng</p>
+        </div>
+        <div id="vocab-detail-content" style="display:none;" class="flex flex-col items-center gap-3">
+          <span class="text-xs font-semibold text-rose-600 bg-rose-50 px-3 py-1 rounded-full">Tiếng Việt (越南文)</span>
+          <p id="vocab-detail-vi" class="text-2xl font-bold text-rose-800 text-center leading-tight"></p>
+          <img id="vocab-detail-img" src="" alt="" class="w-36 h-36 object-contain rounded-2xl bg-gray-50 border border-gray-100" />
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 2: 句型練習 ===== -->
+    <section id="sec-sentence" class="tab-section hidden -mx-4 md:mx-0 md:rounded-2xl md:overflow-hidden">
+      <div class="flex flex-col" style="height:calc(100dvh - 8rem);">
+        <div id="sentence-chat" class="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-[#e2e6f2]">
+          <div class="flex justify-center">
+            <span class="bg-black/20 text-white text-xs px-3 py-1 rounded-full">點擊下方拼音，開始練習 / Nhấn pinyin để bắt đầu</span>
+          </div>
+        </div>
+        <div class="bg-white border-t border-gray-200 px-4 pt-3 pb-4 shadow-[0_-3px_10px_rgba(0,0,0,0.05)] flex-shrink-0">
+          <p class="text-xs text-gray-400 mb-2">👇 請點擊拼音來發送句子：</p>
+          <div id="sentence-btns" class="space-y-2 overflow-y-auto" style="max-height:32vh;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 3–7: 情境任務 1–5 ===== -->
+    {[1,2,3,4,5].map(n => (
+      <section id={`sec-task${n}`} class="tab-section hidden space-y-3">
+        <div class="bg-white rounded-2xl p-4 shadow-sm border-l-4 border-orange-500">
+          <h2 class="font-bold text-orange-800 mb-1" id={`task${n}-title`}>情境任務 {n}</h2>
+          <p class="text-xs text-gray-400">點圖上紅點跳字卡・翻卡看越南文・點 ▶ 聽發音</p>
+        </div>
+        <div class="bg-white rounded-2xl p-4 shadow-sm">
+          <div id={`task${n}-map`} class="relative rounded-xl overflow-hidden mb-4">
+            <img src={`${BASE}/images/L12_task${n}.png`} alt={`情境任務${n}插圖`} class="w-full h-auto block" loading="lazy" />
+          </div>
+        </div>
+        <div id={`task${n}-grid`} class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+      </section>
+    ))}
+
+  </main>
+</div>
+
+<audio id="global-audio"></audio>
+
+<style>
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+  :global(.flip-card) { perspective: 800px; }
+  :global(.flip-card-inner) { position: relative; width: 100%; height: 100%; transition: transform 0.45s ease; transform-style: preserve-3d; }
+  :global(.flip-card.flipped .flip-card-inner) { transform: rotateY(180deg); }
+  :global(.flip-card-front), :global(.flip-card-back) { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  :global(.flip-card-back) { transform: rotateY(180deg); }
+</style>
+
+<script is:inline define:vars={{ BASE }}>
+
+const vocab = [
+  { zh:'情境', py:'qíngjìng', vi:'tình huống',  img:'L12_01.png', wav:'L12_01.wav' },
+  { zh:'練習', py:'liànxí',   vi:'luyện tập',    img:'L12_02.png', wav:'L12_02.wav' },
+  { zh:'回顧', py:'huígù',    vi:'ôn lại',        img:'L12_03.png', wav:'L12_03.wav' },
+  { zh:'說明', py:'shuōmíng', vi:'giải thích',   img:'L12_04.png', wav:'L12_04.wav' },
+  { zh:'安撫', py:'ānfǔ',     vi:'trấn an',       img:'L12_05.png', wav:'L12_05.wav' },
+  { zh:'回報', py:'huíbào',   vi:'báo cáo',       img:'L12_06.png', wav:'L12_06.wav' },
+  { zh:'照護', py:'zhàohù',   vi:'chăm sóc',      img:'L12_07.png', wav:'L12_07.wav' },
+  { zh:'溝通', py:'gōutōng',  vi:'giao tiếp',     img:'L12_08.png', wav:'L12_08.wav' },
+  { zh:'配合', py:'pèihé',    vi:'phối hợp',      img:'L12_09.png', wav:'L12_09.wav' },
+  { zh:'完成', py:'wánchéng', vi:'hoàn thành',    img:'L12_10.png', wav:'L12_10.wav' },
+];
+
+const sentences = [
+  { zh:'哪裡不舒服？',         py:'Nǎlǐ bù shūfu?',               vi:'Khó chịu ở đâu?',                wav:'L12_11.wav' },
+  { zh:'請放心，我會照顧。',   py:'Qǐng fàngxīn, wǒ huì zhàogù.', vi:'Xin yên tâm, tôi sẽ chăm sóc.', wav:'L12_12.wav' },
+  { zh:'不要動，我幫你。',     py:'Bú yào dòng, wǒ bāng nǐ.',     vi:'Đừng cử động, tôi giúp bạn.',    wav:'L12_13.wav' },
+  { zh:'我來回報一下。',       py:'Wǒ lái huíbào yíxià.',          vi:'Tôi đến báo cáo một chút.',       wav:'L12_14.wav' },
+  { zh:'已經記錄了。',         py:'Yǐjīng jìlù le.',               vi:'Đã ghi chép rồi.',                wav:'L12_15.wav' },
+];
+
+const tasks = [
+  {
+    id: 1,
+    titleZh: '日常照護＋安撫',
+    titleVi: 'Chăm sóc hằng ngày & trấn an',
+    lines: [
+      { role:'蘭',   zh:'哪裡不舒服？',     py:'Nǎlǐ bù shūfu?',                   vi:'Bạn khó chịu ở đâu?',             wav:'L12_16.wav' },
+      { role:'阿嬤', zh:'有一點頭痛。',     py:'Yǒu yìdiǎn tóu tòng.',             vi:'Tôi hơi đau đầu.',                wav:'L12_17.wav' },
+      { role:'蘭',   zh:'不要怕，我陪你。', py:'Bú yào pà, wǒ péi nǐ.',            vi:'Đừng sợ, tôi ở bên bạn.',         wav:'L12_18.wav' },
+      { role:'蘭',   zh:'慢慢來，先坐一下。',py:'Mànmàn lái, xiān zuò yíxià.',     vi:'Từ từ thôi, ngồi xuống trước.',   wav:'L12_19.wav' },
+      { role:'蘭',   zh:'要不要喝一點水？', py:'Yào bú yào hē yìdiǎn shuǐ?',      vi:'Có muốn uống chút nước không?',   wav:'L12_20.wav' },
+      { role:'阿嬤', zh:'好，謝謝你。',     py:'Hǎo, xièxie nǐ.',                  vi:'Được, cảm ơn bạn.',               wav:'L12_21.wav' },
+    ],
+  },
+  {
+    id: 2,
+    titleZh: '醫療處置＋說明',
+    titleVi: 'Xử lý y tế & giải thích',
+    lines: [
+      { role:'護士', zh:'每天起床後喝一點溫水。',   py:'Měitiān qǐchuáng hòu hē yìdiǎn wēn shuǐ.', vi:'Mỗi ngày sau khi thức dậy uống một ít nước ấm.', wav:'L12_22.wav' },
+      { role:'護士', zh:'下午不要睡太久。',         py:'Xiàwǔ bú yào shuì tài jiǔ.',               vi:'Buổi chiều đừng ngủ quá lâu.',                   wav:'L12_23.wav' },
+      { role:'護士', zh:'高血壓藥每天吃一顆。',     py:'Gāo xuèyā yào měitiān chī yì kē.',         vi:'Thuốc cao huyết áp mỗi ngày uống một viên.',     wav:'L12_24.wav' },
+      { role:'護士', zh:'等醫生來看過再說。',       py:'Děng yīshēng lái kàn guò zài shuō.',       vi:'Đợi bác sĩ đến khám rồi hãy nói tiếp.',          wav:'L12_25.wav' },
+      { role:'醫生', zh:'現在情況穩定。',           py:'Xiànzài qíngkuàng wěndìng.',               vi:'Hiện tại tình trạng ổn định.',                   wav:'L12_26.wav' },
+      { role:'蘭',   zh:'我知道了。',               py:'Wǒ zhīdào le.',                             vi:'Tôi biết rồi.',                                   wav:'L12_27.wav' },
+    ],
+  },
+  {
+    id: 3,
+    titleZh: '緊急狀況',
+    titleVi: 'Tình huống khẩn cấp',
+    lines: [
+      { role:'蘭→阿公', zh:'不要動！',       py:'Bú yào dòng!',           vi:'Đừng cử động!',       wav:'L12_28.wav' },
+      { role:'蘭→美玲', zh:'他跌倒了。',     py:'Tā diédǎo le.',          vi:'Ông ấy bị té rồi.',   wav:'L12_29.wav' },
+      { role:'蘭→美玲', zh:'傷口流血了。',   py:'Shāngkǒu liú xiě le.',   vi:'Vết thương đang chảy máu.', wav:'L12_30.wav' },
+      { role:'美玲→蘭', zh:'快打電話！',     py:'Kuài dǎ diànhuà!',       vi:'Mau gọi điện!',       wav:'L12_31.wav' },
+      { role:'美玲→蘭', zh:'送急診！',       py:'Sòng jízhěn!',           vi:'Đưa vào cấp cứu!',    wav:'L12_32.wav' },
+      { role:'蘭→美玲', zh:'我馬上準備。',   py:'Wǒ mǎshàng zhǔnbèi.',   vi:'Tôi chuẩn bị ngay.', wav:'L12_33.wav' },
+    ],
+  },
+  {
+    id: 4,
+    titleZh: '家屬溝通',
+    titleVi: 'Giao tiếp với gia đình',
+    lines: [
+      { role:'蘭→爸爸', zh:'您好，我是照護員。', py:'Nín hǎo, wǒ shì zhàohùyuán.',   vi:'Chào anh/chị, tôi là nhân viên chăm sóc.', wav:'L12_34.wav' },
+      { role:'爸爸→蘭', zh:'他現在怎麼樣？',     py:'Tā xiànzài zěnme yàng?',         vi:'Bây giờ ông ấy thế nào?',                  wav:'L12_35.wav' },
+      { role:'蘭→爸爸', zh:'醫生來看過。',       py:'Yīshēng lái kàn guò.',           vi:'Bác sĩ đã đến khám.',                       wav:'L12_36.wav' },
+      { role:'蘭→爸爸', zh:'他已經醒了。',       py:'Tā yǐjīng xǐng le.',             vi:'Ông ấy đã tỉnh rồi.',                       wav:'L12_37.wav' },
+      { role:'蘭→爸爸', zh:'情況穩定。',         py:'Qíngkuàng wěndìng.',             vi:'Tình trạng ổn định.',                       wav:'L12_38.wav' },
+      { role:'阿公→爸爸',zh:'請放心。',          py:'Qǐng fàngxīn.',                  vi:'Xin yên tâm.',                              wav:'L12_39.wav' },
+    ],
+  },
+  {
+    id: 5,
+    titleZh: '記錄與回報',
+    titleVi: 'Ghi chép & báo cáo',
+    lines: [
+      { role:'蘭→媽媽', zh:'中午十二點半吃飯。', py:"Zhōngwǔ shí'èr diǎn bàn chī fàn.", vi:'Mười hai giờ rưỡi trưa ăn cơm.', wav:'L12_40.wav' },
+      { role:'蘭→媽媽', zh:'然後吃藥。',         py:'Ránhòu chī yào.',                  vi:'Sau đó uống thuốc.',              wav:'L12_41.wav' },
+      { role:'蘭→媽媽', zh:'下午睡了半個鐘頭。', py:'Xiàwǔ shuì le bàn ge zhōngtóu.',  vi:'Buổi chiều ngủ nửa tiếng.',      wav:'L12_42.wav' },
+      { role:'阿嬤→媽媽',zh:'現在不痛了。',      py:'Xiànzài bú tòng le.',              vi:'Bây giờ không còn đau nữa.',     wav:'L12_43.wav' },
+      { role:'蘭→媽媽', zh:'都已經記錄了。',     py:'Dōu yǐjīng jìlù le.',             vi:'Tất cả đều đã ghi chép rồi.',    wav:'L12_44.wav' },
+      { role:'蘭→媽媽', zh:'我來回報一下。',     py:'Wǒ lái huíbào yíxià.',            vi:'Tôi đến báo cáo một chút.',      wav:'L12_45.wav' },
+    ],
+  },
+];
+
+/* ── AUDIO ── */
+const globalAudio = document.getElementById('global-audio');
+window.playAudio = function(wav) {
+  globalAudio.src = BASE + '/audio/' + wav;
+  globalAudio.currentTime = 0;
+  globalAudio.play().catch(() => {});
+};
+
+/* ── TABS ── */
+function switchTab(id) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.add('hidden'));
+  document.getElementById('sec-' + id).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    const on = b.dataset.tab === id;
+    b.classList.toggle('opacity-100', on);
+    b.classList.toggle('border-white', on);
+    b.classList.toggle('opacity-60', !on);
+    b.classList.toggle('border-transparent', !on);
+  });
+}
+document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+switchTab('vocab');
+
+/* ── TAB SCROLL ── */
+const tabScroll = document.getElementById('tab-scroll');
+const tabPrev = document.getElementById('tab-prev');
+const tabNext = document.getElementById('tab-next');
+const TAB_STEP = 120;
+function updateTabNav() {
+  const atStart = tabScroll.scrollLeft <= 4;
+  const atEnd = tabScroll.scrollLeft + tabScroll.clientWidth >= tabScroll.scrollWidth - 4;
+  tabPrev.classList.toggle('hidden', atStart);
+  tabNext.classList.toggle('hidden', atEnd);
+}
+tabPrev.addEventListener('click', () => { tabScroll.scrollBy({ left: -TAB_STEP, behavior: 'smooth' }); });
+tabNext.addEventListener('click', () => { tabScroll.scrollBy({ left: TAB_STEP, behavior: 'smooth' }); });
+tabScroll.addEventListener('scroll', updateTabNav, { passive: true });
+updateTabNav();
+
+/* ── SECTION 1: 生詞 ── */
+const vocabButtonsEl = document.getElementById('vocab-buttons');
+const vocabDetailEmpty = document.getElementById('vocab-detail-empty');
+const vocabDetailContent = document.getElementById('vocab-detail-content');
+const vocabDetailVi = document.getElementById('vocab-detail-vi');
+const vocabDetailImg = document.getElementById('vocab-detail-img');
+const allVocabBtns = [];
+
+vocab.forEach(v => {
+  const btn = document.createElement('button');
+  const isLong = v.zh.length > 4;
+  btn.className = 'w-full flex items-center justify-between py-4 px-5 rounded-2xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-200 active:scale-[0.98]';
+  btn.innerHTML = `
+    <div class="text-left">
+      <div class="vocab-zh ${isLong ? 'text-xl' : 'text-2xl'} font-bold text-gray-800 leading-tight">${v.zh}</div>
+      <div class="vocab-py text-sm text-gray-400 mt-0.5" style="font-family:Arial,sans-serif">${v.py}</div>
+    </div>
+    <span class="text-xl text-gray-300 flex-shrink-0">🔊</span>`;
+  btn.addEventListener('click', () => {
+    allVocabBtns.forEach(b => {
+      b.className = 'w-full flex items-center justify-between py-4 px-5 rounded-2xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-200 active:scale-[0.98]';
+      b.querySelector('.vocab-zh').style.color = '';
+      b.querySelector('.vocab-py').style.color = '';
+    });
+    btn.className = 'w-full flex items-center justify-between py-4 px-5 rounded-2xl border-2 border-rose-500 bg-rose-500 shadow-lg ring-4 ring-rose-100 transition-all duration-200 active:scale-[0.98]';
+    btn.querySelector('.vocab-zh').style.color = 'white';
+    btn.querySelector('.vocab-py').style.color = 'rgb(253 164 175)';
+    window.playAudio(v.wav);
+    vocabDetailEmpty.style.display = 'none';
+    vocabDetailContent.style.display = 'flex';
+    vocabDetailVi.textContent = v.vi;
+    vocabDetailImg.src = BASE + '/images/' + v.img;
+    vocabDetailImg.alt = v.zh;
+  });
+  allVocabBtns.push(btn);
+  vocabButtonsEl.appendChild(btn);
+});
+
+/* ── SECTION 2: 句型練習 ── */
+const sentenceChat = document.getElementById('sentence-chat');
+const sentenceBtns = document.getElementById('sentence-btns');
+sentences.forEach(s => {
+  const btn = document.createElement('button');
+  btn.className = 'w-full bg-gray-50 hover:bg-blue-50 border border-gray-200 text-left px-4 py-3 rounded-xl transition-colors flex items-center justify-between active:scale-[0.98]';
+  btn.innerHTML = `<span class="text-[#0068ff] font-medium text-base" style="font-family:Arial,sans-serif">${s.py}</span><span class="text-gray-300 text-sm flex-shrink-0">▶</span>`;
+  btn.addEventListener('click', () => {
+    window.playAudio(s.wav);
+    const bubble = document.createElement('div');
+    bubble.className = 'flex justify-end w-full';
+    bubble.innerHTML = `
+      <div class="bg-[#e5efff] rounded-2xl rounded-tr-none p-3 max-w-[85%] shadow-sm border border-blue-100">
+        <div class="flex justify-between items-start gap-3 mb-1">
+          <div class="text-lg font-bold text-gray-800 tracking-wide whitespace-pre-line">${s.zh}</div>
+          <button onclick="window.playAudio('${s.wav}')" class="w-8 h-8 rounded-full bg-blue-100 hover:bg-[#0068ff] hover:text-white text-[#0068ff] flex items-center justify-center flex-shrink-0 transition-colors text-sm">🔊</button>
+        </div>
+        <div class="text-[#0068ff] text-sm font-medium mb-2" style="font-family:Arial,sans-serif">${s.py}</div>
+        <div class="text-gray-600 text-sm border-t border-blue-200/60 pt-2">${s.vi}</div>
+      </div>`;
+    sentenceChat.appendChild(bubble);
+    sentenceChat.scrollTop = sentenceChat.scrollHeight;
+  });
+  sentenceBtns.appendChild(btn);
+});
+
+/* ── SECTION 3–7: 情境任務 ── */
+if (!document.getElementById('task-pulse-style')) {
+  const ps = document.createElement('style');
+  ps.id = 'task-pulse-style';
+  ps.textContent = '@keyframes task-pulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.5)}70%{box-shadow:0 0 0 8px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}';
+  document.head.appendChild(ps);
+}
+
+const taskHotspots = [
+  { idx:0, x: 5, y: 9 },
+  { idx:1, x:36, y: 9 },
+  { idx:2, x:73, y: 9 },
+  { idx:3, x:26, y:59 },
+  { idx:4, x:61, y:59 },
+  { idx:5, x:93, y:59 },
+];
+
+tasks.forEach(task => {
+  const titleEl = document.getElementById(`task${task.id}-title`);
+  if (titleEl) titleEl.innerHTML = `情境任務 ${task.id}：${task.titleZh} <span class="font-normal text-sm text-gray-400">${task.titleVi}</span>`;
+
+  const grid = document.getElementById(`task${task.id}-grid`);
+  const map = document.getElementById(`task${task.id}-map`);
+
+  task.lines.forEach((line, i) => {
+    const roleColors = ['bg-blue-600','bg-rose-500','bg-purple-600','bg-teal-600','bg-orange-500','bg-indigo-600'];
+    const roleColor = roleColors[i % roleColors.length];
+    const card = document.createElement('div');
+    card.className = 'bg-white rounded-2xl shadow-sm border border-gray-200 p-4 cursor-pointer transition-all active:scale-[0.98]';
+    card.innerHTML = `
+      <div class="flex justify-between items-start mb-2">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-full bg-orange-100 text-orange-700 text-xs font-bold flex items-center justify-center flex-shrink-0">${i+1}</span>
+          <span class="px-3 py-1 rounded-full text-xs font-bold text-white ${roleColor}">${line.role}</span>
+        </div>
+        <button onclick="event.stopPropagation(); window.playAudio('${line.wav}')" class="text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-full w-8 h-8 flex items-center justify-center transition-colors text-sm">🔊</button>
+      </div>
+      <div class="text-xl font-bold text-gray-800 tracking-wide mb-1">${line.zh}</div>
+      <div class="text-base text-rose-700 font-medium mb-2" style="font-family:Arial,sans-serif">${line.py}</div>
+      <div class="text-sm text-gray-500 border-t border-gray-100 pt-2 flex items-start gap-2">
+        <span class="text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded mt-0.5 flex-shrink-0">VN</span>
+        <span>${line.vi}</span>
+      </div>`;
+    card.addEventListener('click', () => window.playAudio(line.wav));
+    grid.appendChild(card);
+  });
+
+  taskHotspots.forEach(({ idx, x, y }) => {
+    if (idx >= task.lines.length) return;
+    const h = document.createElement('button');
+    h.title = `${idx+1}. ${task.lines[idx].zh}`;
+    h.style.cssText = `position:absolute;left:${x}%;top:${y}%;width:24px;height:24px;border-radius:50%;background:rgba(239,68,68,0.92);border:2px solid white;transform:translate(-50%,-50%);cursor:pointer;animation:task-pulse 2s infinite;`;
+    h.addEventListener('click', () => {
+      const card = grid.children[idx];
+      if (!card) return;
+      card.scrollIntoView({ behavior:'smooth', block:'nearest' });
+      window.playAudio(task.lines[idx].wav);
+      card.style.outline = '3px solid #e11d48';
+      card.style.outlineOffset = '3px';
+      setTimeout(() => { card.style.outline=''; card.style.outlineOffset=''; }, 1500);
+    });
+    map.appendChild(h);
+  });
+});
+
+/* ── 校正模式 ── */
+if (new URLSearchParams(location.search).has('calibrate')) {
+  const taskN = parseInt(new URLSearchParams(location.search).get('task') || '1');
+  switchTab('task' + taskN);
+  const imgWrap = document.getElementById(`task${taskN}-map`);
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;top:56px;left:0;right:0;background:#f59e0b;color:#000;text-align:center;padding:8px 16px;font-weight:bold;z-index:9999;font-size:13px;';
+  banner.textContent = `🎯 校正模式｜情境任務 ${taskN}，點圖片位置 → 下方顯示座標`;
+  document.body.appendChild(banner);
+  const display = document.createElement('div');
+  display.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:14px 28px;border-radius:16px;font-size:20px;font-family:monospace;z-index:9999;display:none;text-align:center;min-width:160px;';
+  document.body.appendChild(display);
+  if (imgWrap) {
+    imgWrap.style.cursor = 'crosshair';
+    imgWrap.addEventListener('click', e => {
+      const r = imgWrap.getBoundingClientRect();
+      const x = Math.round((e.clientX - r.left) / r.width * 100);
+      const y = Math.round((e.clientY - r.top) / r.height * 100);
+      display.style.display = 'block';
+      display.innerHTML = 'x: <b>' + x + '</b>，y: <b>' + y + '</b>';
+      display.style.background = '#059669';
+      setTimeout(() => { display.style.background = '#1e293b'; }, 700);
+    });
+  }
+}
+
+</script>
+
+</Layout>
