@@ -1,0 +1,235 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// 第七課的元數據
+const course = {
+  id: '07',
+  title: '第七課',
+  titleVi: 'Bài học 7',
+  pages: 10,
+  audioStart: 3,
+  audioEnd: 10,
+  level: '基礎級',
+  gradient: 'from-rose-400 to-red-600',
+  linkColor: 'text-red-600 hover:text-red-700',
+  btnColor: 'bg-red-600 hover:bg-red-700'
+};
+
+const pageNumbers = Array.from({ length: course.pages }, (_, i) => i + 1);
+const basePath = `/assets/course/${course.id}`;
+---
+
+<Layout title={`${course.title} 互動教學網頁 - WZULTC`}>
+  <div class="fixed inset-0 z-50 flex flex-col bg-slate-900 text-white overflow-hidden">
+    <!-- Top Progress Bar & Exit -->
+    <div class="p-4 flex items-center justify-between z-10 bg-gradient-to-b from-black/50 to-transparent">
+      <a href="/course" class="p-2 hover:bg-white/10 rounded-full transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <div class="flex-grow mx-4">
+        <div class="h-1 w-full bg-white/20 rounded-full overflow-hidden">
+          <div id="progress-bar" class="h-full bg-red-500 transition-all duration-300" style="width: 10%"></div>
+        </div>
+      </div>
+      <div class="text-sm font-medium">
+        <span id="current-page">1</span> / {course.pages}
+      </div>
+    </div>
+
+    <!-- Content Area (Slides) -->
+    <div id="slider" class="flex-grow relative overflow-hidden flex touch-pan-y">
+      {pageNumbers.map((pageNum) => {
+        const pageStr = pageNum.toString().padStart(2, '0');
+        const hasAudio = pageNum >= course.audioStart && pageNum <= course.audioEnd;
+        return (
+          <div
+            class="slide absolute inset-0 w-full h-full flex flex-col items-center justify-center p-4 transition-transform duration-500 ease-out translate-x-full first:translate-x-0"
+            data-index={pageNum - 1}
+          >
+            <div class="relative w-full h-full max-w-2xl mx-auto flex flex-col items-center justify-center">
+               <img
+                src={`${basePath}/page-${pageStr}.jpg`}
+                alt={`第 ${pageNum} 頁`}
+                class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl bg-white"
+              />
+
+              {hasAudio && (
+                <div class="mt-6 w-full max-w-md bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+                  <div class="flex items-center gap-4">
+                    <button
+                      class="play-btn p-3 bg-red-500 hover:bg-red-600 rounded-full transition-all active:scale-95"
+                      data-audio-src={`${basePath}/${course.id}-${pageStr}.mp3`}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="pause-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                    </button>
+                    <div class="flex-grow">
+                      <div class="text-sm font-semibold mb-1">播放語音導讀</div>
+                      <div class="text-xs opacity-70">Nghe thuyết minh tiếng Hoa</div>
+                      <div class="audio-progress-bg mt-2 h-1 bg-white/20 rounded-full overflow-hidden">
+                        <div class="audio-progress-bar h-full bg-red-400 w-0"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Navigation Overlay (Hidden zones for tapping) -->
+    <div class="absolute inset-y-0 left-0 w-16 cursor-pointer z-20 flex items-center justify-center group" id="prev-zone">
+        <div class="opacity-0 group-hover:opacity-50 transition-opacity bg-black/30 p-2 rounded-r-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </div>
+    </div>
+    <div class="absolute inset-y-0 right-0 w-16 cursor-pointer z-20 flex items-center justify-center group" id="next-zone">
+        <div class="opacity-0 group-hover:opacity-50 transition-opacity bg-black/30 p-2 rounded-l-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+    </div>
+
+    <!-- Bottom Metadata -->
+    <div class="p-6 text-center z-10 bg-gradient-to-t from-black/50 to-transparent">
+      <h2 class="text-xl font-bold">{course.title}</h2>
+      <p class="text-sm opacity-80">{course.titleVi}</p>
+    </div>
+  </div>
+
+  <audio id="global-audio" preload="auto"></audio>
+
+  <style>
+    .slide {
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+  </style>
+
+  <script is:inline>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalPages = slides.length;
+    const progressBar = document.getElementById('progress-bar');
+    const currentPageSpan = document.getElementById('current-page');
+    const globalAudio = document.getElementById('global-audio');
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        if (index === currentIndex) {
+          slide.style.transform = 'translateX(0)';
+          slide.classList.add('active');
+        } else if (index < currentIndex) {
+          slide.style.transform = 'translateX(-100%)';
+          slide.classList.remove('active');
+        } else {
+          slide.style.transform = 'translateX(100%)';
+          slide.classList.remove('active');
+        }
+      });
+
+      // Update UI
+      const progress = ((currentIndex + 1) / totalPages) * 100;
+      progressBar.style.width = `${progress}%`;
+      currentPageSpan.innerText = currentIndex + 1;
+
+      // Stop audio on slide change
+      globalAudio.pause();
+      resetAudioUI();
+    }
+
+    function resetAudioUI() {
+        document.querySelectorAll('.play-icon').forEach(icon => icon.classList.remove('hidden'));
+        document.querySelectorAll('.pause-icon').forEach(icon => icon.classList.add('hidden'));
+        document.querySelectorAll('.audio-progress-bar').forEach(bar => bar.style.width = '0%');
+    }
+
+    function nextSlide() {
+      if (currentIndex < totalPages - 1) {
+        currentIndex++;
+        updateSlides();
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlides();
+      }
+    }
+
+    // Touch Handling
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.getElementById('slider').addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.getElementById('slider').addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    }
+
+    // Click Zones
+    document.getElementById('prev-zone').addEventListener('click', prevSlide);
+    document.getElementById('next-zone').addEventListener('click', nextSlide);
+
+    // Audio Controls
+    document.querySelectorAll('.play-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const audioSrc = btn.getAttribute('data-audio-src');
+        const playIcon = btn.querySelector('.play-icon');
+        const pauseIcon = btn.querySelector('.pause-icon');
+
+        if (globalAudio.src.includes(audioSrc) && !globalAudio.paused) {
+          globalAudio.pause();
+          playIcon.classList.remove('hidden');
+          pauseIcon.classList.add('hidden');
+        } else {
+          // New audio or resuming
+          if (!globalAudio.src.includes(audioSrc)) {
+             globalAudio.src = audioSrc;
+          }
+          globalAudio.play();
+          resetAudioUI();
+          playIcon.classList.add('hidden');
+          pauseIcon.classList.remove('hidden');
+        }
+      });
+    });
+
+    // Audio Progress Update
+    globalAudio.addEventListener('timeupdate', () => {
+        if (globalAudio.duration) {
+            const progress = (globalAudio.currentTime / globalAudio.duration) * 100;
+            const activeSlide = document.querySelector('.slide.active');
+            const activeProgressBar = activeSlide?.querySelector('.audio-progress-bar');
+            if (activeProgressBar) {
+                activeProgressBar.style.width = `${progress}%`;
+            }
+        }
+    });
+
+    globalAudio.addEventListener('ended', () => {
+        resetAudioUI();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Initial State
+    updateSlides();
+  </script>
+</Layout>

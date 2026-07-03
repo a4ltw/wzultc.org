@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const quizzes = [
+  {
+    title: '尿管照護知識測驗',
+    subtitle: '居家護理衛教・尿管篇',
+    questions: 12,
+    href: '/quiz/catheter',
+    color: 'teal',
+    description: '測驗您對留置尿管居家照護的認識，涵蓋尿袋管理、清潔步驟、感染預防等重要照護知識。',
+    tags: ['是非題 6 題', '選擇題 6 題'],
+  },
+];
+---
+
+<Layout title="衛教測驗 - WZULTC" description="WZULTC 計畫衛教知識互動測驗，提供長照照護員自我評量工具">
+  <div class="container mx-auto px-4 py-12 max-w-4xl">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">衛教測驗</h1>
+      <p class="text-xl text-gray-600">照護知識自我評量</p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {quizzes.map((quiz) => (
+        <a href={quiz.href} class="group block bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
+          <div class="bg-gradient-to-r from-teal-500 to-sky-500 px-6 py-5">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-white text-xs font-semibold bg-white/20 px-2 py-0.5 rounded-full">
+                共 {quiz.questions} 題
+              </span>
+            </div>
+            <h2 class="text-white text-xl font-bold leading-snug">{quiz.title}</h2>
+            <p class="text-white/80 text-sm mt-1">{quiz.subtitle}</p>
+          </div>
+          <div class="px-6 py-5">
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">{quiz.description}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {quiz.tags.map(tag => (
+                <span class="text-xs bg-teal-50 text-teal-700 border border-teal-200 px-3 py-1 rounded-full font-medium">{tag}</span>
+              ))}
+            </div>
+            <div class="flex items-center text-teal-600 font-semibold text-sm group-hover:gap-2 transition-all">
+              開始測驗
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>

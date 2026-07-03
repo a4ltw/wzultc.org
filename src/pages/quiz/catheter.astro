@@ -1,0 +1,259 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="尿管照護知識測驗 - WZULTC" description="居家護理照護衛教互動測驗，尿管篇，共 12 題，是非題與選擇題">
+
+  <div class="container mx-auto px-4 py-8 max-w-2xl">
+
+    <!-- Breadcrumb -->
+    <nav class="mb-6 text-sm text-gray-500 flex items-center gap-1">
+      <a href="/quiz" class="hover:text-teal-600 transition-colors">衛教測驗</a>
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+      <span class="text-gray-800 font-medium">尿管照護篇</span>
+    </nav>
+
+    <!-- Quiz -->
+    <div id="qz-root">
+      <div class="text-center mb-6">
+        <span class="inline-block text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full mb-3">居家護理衛教</span>
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 leading-snug">尿管照護知識測驗</h1>
+        <p class="text-gray-500 text-sm mt-2">是非題 6 題・選擇題 6 題・共 12 題</p>
+      </div>
+
+      <div class="mb-5">
+        <div class="flex justify-between items-center mb-2">
+          <span id="qz-progress-text" class="text-sm font-medium text-gray-500">第 1 題 / 共 12 題</span>
+          <span id="qz-score" class="text-sm font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-0.5 rounded-full">得分：0</span>
+        </div>
+        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div id="qz-bar" class="h-full bg-gradient-to-r from-teal-400 to-sky-400 rounded-full transition-all duration-500" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
+        <span id="qz-type" class="inline-block text-xs font-bold px-3 py-1 rounded-full mb-4"></span>
+        <p id="qz-question" class="text-lg md:text-xl font-semibold text-gray-800 leading-relaxed mb-6"></p>
+        <div id="qz-options" class="flex flex-col gap-3"></div>
+        <div id="qz-feedback" class="hidden mt-5 p-4 rounded-xl border-l-4 text-sm leading-relaxed">
+          <p id="qz-feedback-title" class="font-bold mb-1 text-base"></p>
+          <p id="qz-feedback-body"></p>
+        </div>
+        <button id="qz-next" class="hidden mt-5 w-full py-3.5 bg-gradient-to-r from-teal-500 to-sky-500 hover:from-teal-600 hover:to-sky-600 text-white font-bold rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"></button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="qz-results" class="hidden bg-white rounded-2xl shadow-md p-8 text-center">
+      <div id="qz-results-icon" class="text-6xl mb-3"></div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-1">測驗完成！</h2>
+      <div class="text-5xl font-black text-teal-600 my-4" id="qz-final-score">0</div>
+      <p class="text-gray-500 mb-3">/ 12 題答對</p>
+      <div class="h-3 bg-gray-200 rounded-full overflow-hidden mx-auto max-w-xs mb-6">
+        <div id="qz-results-bar" class="h-full bg-gradient-to-r from-teal-400 to-sky-400 rounded-full transition-all duration-1000" style="width:0%"></div>
+      </div>
+      <p id="qz-results-comment" class="text-gray-600 bg-gray-50 rounded-xl p-4 mb-6 leading-relaxed text-sm"></p>
+      <div class="flex gap-3 justify-center flex-wrap">
+        <button id="qz-restart-btn" class="px-6 py-3 bg-gradient-to-r from-teal-500 to-sky-500 hover:from-teal-600 hover:to-sky-600 text-white font-bold rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg">重新測驗</button>
+        <a href="/quiz" class="px-6 py-3 border-2 border-teal-500 text-teal-600 font-bold rounded-xl hover:bg-teal-50 transition-all">其他測驗</a>
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<style is:global>
+  /* Interactive states applied by JS — must be global */
+  #qz-options button {
+    width: 100%; padding: 13px 16px;
+    border: 2px solid #e5e7eb; border-radius: 12px;
+    background: #f9fafb; cursor: pointer;
+    font-size: 1rem; font-family: inherit; color: #1e293b;
+    text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.5;
+    transition: border-color .15s, background .15s, transform .15s, opacity .15s;
+  }
+  #qz-options button:hover:not(:disabled) { border-color: #14b8a6; background: #f0fdfa; transform: translateX(4px); }
+  #qz-options button:disabled { cursor: not-allowed; }
+  #qz-options button .ql {
+    min-width: 28px; height: 28px; border-radius: 50%;
+    background: #e5e7eb; display: flex; align-items: center; justify-content: center;
+    font-size: .8rem; font-weight: 700; flex-shrink: 0;
+    transition: background .15s, color .15s;
+  }
+  #qz-options button:hover:not(:disabled) .ql { background: #14b8a6; color: #fff; }
+  #qz-options button.qz-correct                { border-color: #10b981; background: #ecfdf5; }
+  #qz-options button.qz-correct .ql            { background: #10b981; color: #fff; }
+  #qz-options button.qz-wrong                  { border-color: #ef4444; background: #fef2f2; opacity: .6; }
+  #qz-options button.qz-wrong .ql              { background: #ef4444; color: #fff; }
+  #qz-options button.qz-revealed               { border-color: #10b981; background: #ecfdf5; }
+  #qz-options button.qz-revealed .ql           { background: #10b981; color: #fff; }
+
+  #qz-type.qz-tf { background: #dbeafe; color: #1d4ed8; }
+  #qz-type.qz-mc { background: #f3e8ff; color: #7c3aed; }
+
+  #qz-feedback.qz-ok    { display: block !important; background: #ecfdf5; border-color: #10b981; color: #064e3b; }
+  #qz-feedback.qz-retry { display: block !important; background: #fffbeb; border-color: #f59e0b; color: #78350f; }
+  #qz-feedback.qz-fail  { display: block !important; background: #fef2f2; border-color: #ef4444; color: #7f1d1d; }
+
+  #qz-feedback { animation: qzPop .25s ease; }
+  @keyframes qzPop { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+</style>
+
+<script is:inline>
+(function () {
+  var questions = [
+    { type:'tf', question:'集尿袋（尿袋）的位置應保持低於膀胱，以利尿液流出並防止逆流。', answer:true,
+      explanation:'尿袋必須維持在膀胱以下，重力可幫助尿液順利流出。若尿袋高於膀胱，尿液可能逆流回膀胱，大幅增加感染風險。外出時也記得保持此位置。' },
+    { type:'tf', question:'清潔尿道口時，可以來回反覆擦拭，清潔效果更徹底。', answer:false,
+      explanation:'正確做法是由尿道口向外「單一方向」擦拭，一根棉棒用完即丟，不可來回擦。來回擦拭反而會將外側的細菌帶入尿道口，造成感染。' },
+    { type:'tf', question:'尿液出現混濁或有異味，屬於正常現象，可以先觀察幾天再決定是否就醫。', answer:false,
+      explanation:'尿液混濁、顏色異常或有異味，都是尿路感染的早期警訊，應「立即」通知醫護人員。自行等待觀察可能讓感染加重，甚至引發敗血症。' },
+    { type:'tf', question:'留置尿管期間，每天仍應攝取足夠水分（約 1,500–2,000 毫升），除非醫師另有指示。', answer:true,
+      explanation:'充足水分能稀釋尿液、沖洗尿道，有效降低細菌滋生與感染機會。若醫師因病況有限水指示（如嚴重腎臟病），則依醫囑調整。' },
+    { type:'tf', question:'集尿袋可暫時放在地板上，只要不被踩到就沒問題。', answer:false,
+      explanation:'集尿袋絕對不能接觸地面。地板上有大量細菌，可能沿著管路逆行感染。應將尿袋固定掛在低於膀胱的床欄或支架上，隨時保持懸空。' },
+    { type:'tf', question:'若尿管不慎自行脫落，應立刻嘗試自行插回，避免尿液無法排出。', answer:false,
+      explanation:'尿管脫落時，千萬不可自行插管！自行插管容易造成尿道損傷、出血或引入細菌。應立即聯絡醫護人員或前往急診，由專業人員處理。' },
+    { type:'mc', question:'居家留置尿管（矽膠材質），通常多久需要由醫護人員更換一次？',
+      options:['每天更換','每週更換','每 2–4 週更換','每三個月更換'], answer:2,
+      explanation:'矽膠尿管一般建議每 2–4 週由醫護人員更換一次。超過這個時間，尿管容易堆積結石、細菌大量繁殖；更換過於頻繁，則可能反覆傷害尿道黏膜。' },
+    { type:'mc', question:'下列哪種情形，需要「立即就醫」？',
+      options:['尿液顏色淡黃、清澈，無異味','每天尿量穩定約 1,500 毫升','出現血尿、高燒（38.5°C 以上）或下腹劇烈疼痛','尿道口有少量透明無味的分泌物'], answer:2,
+      explanation:'血尿、高燒（38.5°C 以上）和下腹劇痛，是嚴重尿路感染或出血的危險訊號，須立即就醫。A、B、D 在留置尿管期間屬於相對正常的範圍，但仍需持續觀察。' },
+    { type:'mc', question:'集尿袋應在幾分滿時就及時排空？',
+      options:['完全裝滿才排空','裝至 1/2 滿時排空','裝至 2/3 滿時排空','裝至 3/4 滿時排空'], answer:2,
+      explanation:'集尿袋裝至約 2/3 滿就應排空。若裝得太滿，尿液的重量會拉扯尿管造成不適，同時增加尿液逆流回膀胱的風險，提高感染機率。' },
+    { type:'mc', question:'女性病患應將尿管固定在哪個位置？',
+      options:['下腹部（恥骨上方）','大腿內側','腰部兩側','不需要固定尿管'], answer:1,
+      explanation:'女性的尿管應用低敏膠布固定於大腿內側；男性則固定於下腹部或大腿前側。固定可避免尿管因活動而拉扯尿道，減少疼痛與黏膜損傷。' },
+    { type:'mc', question:'關於居家尿管照護，下列哪一項做法是「正確」的？',
+      options:['每天打開尿管與集尿袋的接頭清洗，保持衛生','清潔尿道口時，使用優碘（碘伏）消毒更安全','每天以清水或生理食鹽水清潔尿道口，早晚各一次','尿液量偏少時，可用手捏壓尿管幫助尿液排出'], answer:2,
+      explanation:'每天早晚各以清水或生理食鹽水清潔尿道口一次，是正確的居家照護方式。不可隨意開啟接頭（破壞密閉系統會讓細菌趁虛而入）；優碘會刺激黏膜不建議常規使用；捏壓尿管可能損傷管內壁，應交由醫護人員處理。' },
+    { type:'mc', question:'留置尿管常見的泌尿道感染症狀，下列哪一組描述最正確？',
+      options:['尿液透明淡黃、每日尿量約 1,500 毫升','體溫 36.5°C，病人沒有特別不舒服','尿液混濁有臭味、尿道口紅腫，合併發燒或畏寒','尿管通暢，尿液持續穩定流出'], answer:2,
+      explanation:'尿液混濁有臭味、尿道口紅腫，加上發燒或畏寒，是泌尿道感染的典型症狀組合。若出現以上情形，應立即就醫，由醫師評估是否需要使用抗生素治療，切勿自行觀察等待。' },
+  ];
+
+  var state = { cur: 0, score: 0, attempts: 0, answered: false };
+
+  function load() {
+    state.attempts = 0;
+    state.answered = false;
+    var q = questions[state.cur], total = questions.length;
+
+    document.getElementById('qz-progress-text').textContent = '第 ' + (state.cur + 1) + ' 題 / 共 ' + total + ' 題';
+    document.getElementById('qz-score').textContent = '得分：' + state.score;
+    document.getElementById('qz-bar').style.width = ((state.cur / total) * 100) + '%';
+
+    var badge = document.getElementById('qz-type');
+    badge.textContent = q.type === 'tf' ? '是非題' : '選擇題';
+    badge.className = 'inline-block text-xs font-bold px-3 py-1 rounded-full mb-4 ' + (q.type === 'tf' ? 'qz-tf' : 'qz-mc');
+
+    document.getElementById('qz-question').textContent = q.question;
+
+    var fb = document.getElementById('qz-feedback');
+    fb.className = 'hidden mt-5 p-4 rounded-xl border-l-4 text-sm leading-relaxed';
+
+    var nxt = document.getElementById('qz-next');
+    nxt.classList.add('hidden');
+    nxt.textContent = state.cur === total - 1 ? '查看結果 →' : '下一題 →';
+
+    var container = document.getElementById('qz-options');
+    container.innerHTML = '';
+
+    function makeBtn(label, text, correct) {
+      var btn = document.createElement('button');
+      btn.innerHTML = '<span class="ql">' + label + '</span><span>' + text + '</span>';
+      btn.onclick = function () { answer(btn, correct); };
+      return btn;
+    }
+
+    if (q.type === 'tf') {
+      container.appendChild(makeBtn('○', '是（True）', q.answer === true));
+      container.appendChild(makeBtn('✕', '否（False）', q.answer === false));
+    } else {
+      var labels = ['A', 'B', 'C', 'D'];
+      for (var i = 0; i < q.options.length; i++) {
+        container.appendChild(makeBtn(labels[i], q.options[i], i === q.answer));
+      }
+    }
+  }
+
+  function answer(btn, isCorrect) {
+    if (state.answered) return;
+    state.attempts++;
+    var q = questions[state.cur];
+    var allBtns = document.querySelectorAll('#qz-options button');
+
+    if (isCorrect) {
+      state.answered = true;
+      btn.classList.add('qz-correct');
+      allBtns.forEach(function (b) { b.disabled = true; });
+      state.score++;
+      document.getElementById('qz-score').textContent = '得分：' + state.score;
+      feedback('ok', '✓ 答對了！', q.explanation);
+      document.getElementById('qz-next').classList.remove('hidden');
+    } else {
+      btn.classList.add('qz-wrong');
+      btn.disabled = true;
+      if (state.attempts === 1) {
+        feedback('retry', '✗ 答錯囉，請再想想看！', '提示：仔細回想衛教課程的說明，重新選擇正確答案。');
+      } else {
+        state.answered = true;
+        allBtns.forEach(function (b) { b.disabled = true; });
+        allBtns[q.type === 'tf' ? (q.answer === true ? 0 : 1) : q.answer].classList.add('qz-revealed');
+        feedback('fail', '✗ 很可惜，答案如上方綠色標示。', q.explanation);
+        document.getElementById('qz-next').classList.remove('hidden');
+      }
+    }
+  }
+
+  function feedback(type, title, body) {
+    var fb = document.getElementById('qz-feedback');
+    document.getElementById('qz-feedback-title').textContent = title;
+    document.getElementById('qz-feedback-body').textContent = body;
+    fb.className = 'mt-5 p-4 rounded-xl border-l-4 text-sm leading-relaxed qz-' + type;
+  }
+
+  function next() {
+    state.cur++;
+    if (state.cur >= questions.length) { showResults(); return; }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    load();
+  }
+
+  function showResults() {
+    document.getElementById('qz-root').classList.add('hidden');
+    document.getElementById('qz-results').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('qz-final-score').textContent = state.score;
+    var pct = state.score / questions.length;
+    setTimeout(function () {
+      document.getElementById('qz-results-bar').style.width = (pct * 100) + '%';
+    }, 100);
+    var icon, comment;
+    if (pct >= 0.917)     { icon = '🏆'; comment = '太厲害了！您對尿管居家護理有非常深入的了解，請繼續維持這樣的照護品質！'; }
+    else if (pct >= 0.75) { icon = '👍'; comment = '表現很不錯！建議再複習一下答錯的幾題，讓照護更加安全到位。'; }
+    else if (pct >= 0.5)  { icon = '📚'; comment = '還有進步的空間！建議重新閱讀衛教資料，加深對尿管照護的了解，再試一次吧。'; }
+    else                  { icon = '💪'; comment = '加油！尿管照護非常重要，建議仔細複習所有衛教內容，了解正確步驟後，再重新測驗看看！'; }
+    document.getElementById('qz-results-icon').textContent = icon;
+    document.getElementById('qz-results-comment').textContent = comment;
+  }
+
+  function restart() {
+    state.cur = 0; state.score = 0;
+    document.getElementById('qz-root').classList.remove('hidden');
+    document.getElementById('qz-results').classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    load();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    load();
+    document.getElementById('qz-next').addEventListener('click', next);
+    document.getElementById('qz-restart-btn').addEventListener('click', restart);
+  });
+})();
+</script>
