@@ -88,18 +88,31 @@ const facultyTeam = [
 
 // 研究助理與志工
 const supportTeam = [
-  { name: '李世國', title: '文藻外語大學', role: '研究助理' },
-  { name: '李昀庭', title: '文藻外語大學', role: '研究助理' },
-  { name: '李瑀婕', title: '文藻外語大學', role: '研究助理' },
-  { name: '陳佳彣', title: '文藻外語大學', role: '研究助理' },
-  { name: '洪麗雲', title: '文藻外語大學', role: '活動志工' },
+  { name: '李世國', title: '文藻外語大學', role: '研究助理', image: '/assets/team/li-shiguo.jpg' },
+  { name: '李昀庭', title: '文藻外語大學', role: '研究助理', image: '/assets/team/li-yunting.jpg' },
+  { name: '李瑀婕', title: '文藻外語大學', role: '研究助理', image: '/assets/team/li-yujie.jpg' },
+  { name: '陳佳彣', title: '文藻外語大學', role: '研究助理', image: '/assets/team/chen-jiawen.jpg' },
+  { name: '洪麗雲', title: '文藻外語大學', role: '活動志工', image: '/assets/team/hong-liyun.jpg' },
 ];
 
 // 華語學伴及志工
 const languagePartners = [
-  '阮文海', '武玄莊', '阮氏美幸', '黎玉映', '阮氏嬌鶯', '陳芳兒',
-  '阮氏明月', '黎金欣', '李氏錦雲', '黃玉雪疆', '鄧氏玉', '黎玉海',
-  '阮氏紅兒', '吳俊賢', '阮氏青玄', 'Nicholas Nataniel Uganda 沈仁愛',
+  { name: '阮文海',   image: '/assets/team/ruan-wenhai.jpg' },
+  { name: '阮氏美幸', image: '/assets/team/placeholder.jpg' },
+  { name: '李氏錦雲', image: '/assets/team/placeholder.jpg' },
+  { name: '黃玉雪疆', image: '/assets/team/huang-xuexiang.jpg' },
+  { name: '武玄莊',   image: '/assets/team/placeholder.jpg' },
+  { name: '鄧氏玉',   image: '/assets/team/placeholder.jpg' },
+  { name: '阮氏嬌鶯', image: '/assets/team/ruan-jiaosheng.jpg' },
+  { name: '陳芳兒',   image: '/assets/team/placeholder.jpg' },
+  { name: '阮氏明月', image: '/assets/team/ruan-mingyue.jpg' },
+  { name: '黎金欣',   image: '/assets/team/placeholder.jpg' },
+  { name: '黎玉映',   image: '/assets/team/li-yuying.jpg' },
+  { name: '黎玉海',   image: '/assets/team/placeholder.jpg' },
+  { name: '阮氏紅兒', image: '/assets/team/placeholder.jpg' },
+  { name: '吳俊賢',   image: '/assets/team/placeholder.jpg' },
+  { name: '阮氏青玄', image: '/assets/team/ruan-qingxuan.jpg' },
+  { name: 'Nicholas Nataniel Uganda 沈仁愛', image: '/assets/team/placeholder.jpg' },
 ];
 ---
 
@@ -173,7 +186,7 @@ const languagePartners = [
         {supportTeam.map((member) => (
           <div class="text-center p-3 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50">
             <img
-              src="/assets/team/placeholder.jpg"
+              src={member.image}
               alt={member.name}
               class="w-12 h-12 rounded-full mx-auto mb-2 object-cover"
             />
@@ -191,14 +204,14 @@ const languagePartners = [
         華語學伴及志工
       </h2>
       <div class="flex flex-wrap justify-center gap-4">
-        {languagePartners.map((name) => (
+        {languagePartners.map((p) => (
           <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 border border-cyan-200">
             <img
-              src="/assets/team/placeholder.jpg"
-              alt={name}
+              src={p.image}
+              alt={p.name}
               class="w-8 h-8 rounded-full object-cover"
             />
-            <span class="text-gray-800 font-medium">{name}</span>
+            <span class="text-gray-800 font-medium">{p.name}</span>
           </div>
         ))}
       </div>
