@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import videosData from '../data/videos.json';
+import courseTitlesData from '../data/courseTitles.json';
 
 type VideoInfo = {
   title: string;
@@ -10,6 +11,13 @@ type VideoInfo = {
   count: number;
   youtubeId?: string;
 };
+
+// 課程標題（各語言），去除括號內的中文說明
+const courseTitles = courseTitlesData as Record<string, Record<string, string>>;
+function cleanTitle(t: string): string {
+  // 去除結尾的 (中文說明) 括號
+  return t.replace(/\s*[（(][^）)]*[）)]\s*$/, '').trim();
+}
 
 const COURSE_ORDER = ['Y01','Y02','Y03','A01','A02','B01','B02','C01','C02','C03','C04','F01','F02','F03','D01','D02','D03','D04','D05','D06','D07','D08'];
 
@@ -22,10 +30,10 @@ const SERIES_LABEL: Record<string, string> = {
   D: '失智症照護',
 };
 
-const TYPE_LABEL: Record<string, string> = {
-  S: '簡報',
-  P: '流程圖',
-  V: '影片',
+const TYPE_LABEL: Record<string, Record<string, string>> = {
+  S: { ZH: '簡報', VI: 'Bài trình bày', ID: 'Presentasi' },
+  P: { ZH: '流程圖', VI: 'Sơ đồ', ID: 'Diagram Alur' },
+  V: { ZH: '影片', VI: 'Video', ID: 'Video' },
 };
 
 const LANG_COLOR: Record<string, string> = {
@@ -97,7 +105,16 @@ for (const course of COURSE_ORDER) {
               <div class="course-card bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" data-langs={courseLangs}>
                 <div class="bg-gradient-to-r from-blue-50 to-cyan-50 px-5 py-3 border-b border-gray-100">
                   <span class="font-mono text-xs text-blue-500 font-bold mr-2">{course}</span>
-                  <span class="font-semibold text-gray-800">{title}</span>
+                  {(['ZH','VI','ID'] as const).map(lng => {
+                    const t = courseTitles[course]?.[lng];
+                    const display = t ? cleanTitle(t) : title;
+                    return (
+                      <span class="course-title font-semibold text-gray-800" data-title-lang={lng}
+                        style={lng !== 'ZH' ? 'display:none' : ''}>
+                        {display}
+                      </span>
+                    );
+                  })}
                 </div>
                 {/* 嵌入影片區（各語言各一個，依語言篩選顯示） */}
                 {sorted.filter(([, info]) => info.type === 'V' && info.youtubeId).map(([code, info]) => (
@@ -121,15 +138,18 @@ for (const course of COURSE_ORDER) {
                     {sorted.filter(([, info]) => info.type !== 'V').map(([code, info]) => {
                       const typeStr = code.split('-')[2] ?? '';
                       const typeBase = typeStr[0];
+                      const typeLabels = TYPE_LABEL[typeBase] ?? { ZH: typeStr, VI: typeStr, ID: typeStr };
                       return (
                         <a
                           href={`/skills/${code}`}
                           data-badge-lang={info.lang}
+                          data-type-zh={typeLabels['ZH']}
+                          data-type-vi={typeLabels['VI']}
+                          data-type-id={typeLabels['ID']}
                           class={`skill-badge inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm font-medium transition-all hover:shadow-sm hover:-translate-y-0.5 ${LANG_COLOR[info.lang]} border-current/20`}
                         >
-                          <span class="opacity-60 text-xs">{TYPE_LABEL[typeBase] ?? typeStr}</span>
+                          <span class="badge-type opacity-60 text-xs">{typeLabels[info.lang] ?? typeLabels['ZH']}</span>
                           <span>{info.langLabel}</span>
-                          <span class="opacity-50 text-xs">{info.count}頁</span>
                         </a>
                       );
                     })}
@@ -159,6 +179,21 @@ for (const course of COURSE_ORDER) {
       btn.classList.toggle('bg-white/10',   !on);
       btn.classList.toggle('text-white/90', !on);
       btn.classList.toggle('border-white/60',!on);
+    });
+
+    // 課程標題切換
+    document.querySelectorAll('.course-title').forEach(el => {
+      el.style.display = el.dataset.titleLang === lang ? '' : 'none';
+    });
+
+    // Badge type label 切換
+    const langKey = lang.toLowerCase();
+    document.querySelectorAll('.badge-type').forEach(el => {
+      const badge = el.closest('.skill-badge');
+      if (!badge) return;
+      const label = badge.dataset[`type${lang.charAt(0)}${lang.slice(1).toLowerCase()}`]
+                 || badge.dataset['typeZh'] || '';
+      el.textContent = label;
     });
 
     // S/P badges

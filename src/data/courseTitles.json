@@ -1,0 +1,112 @@
+{
+  "Y01": {
+    "ZH": "居家護理照護衛教-鼻胃管篇",
+    "VI": "Giáo dục Chăm sóc Điều dưỡng tại nhà - Phần Ống thông Mũi-Dạ dày (居家護理照護衛教-鼻胃管篇)",
+    "ID": "Edukasi Perawatan Rumah - Bagian Selang Nasogastrik (NGT) (居家護理照護衛教-鼻胃管篇)"
+  },
+  "Y02": {
+    "ZH": "居家護理照護衛教-尿管篇",
+    "VI": "Giáo dục Chăm sóc Điều dưỡng tại nhà - Phần Ống thông Tiểu (居家護理照護衛教-尿管篇)",
+    "ID": "Edukasi Perawatan Rumah - Bagian Kateter Urin (居家護理照護衛教-尿管篇)"
+  },
+  "Y03": {
+    "ZH": "口腔清潔、進食照護與吞嚥運動",
+    "VI": "Vệ sinh Răng miệng, Chăm sóc Ăn uống và Bài tập Nuốt (口腔清潔、進食照護與吞嚥運動)",
+    "ID": "Kebersihan Mulut, Perawatan Makan dan Latihan Menelan (口腔清潔、進食照護與吞嚥運動)"
+  },
+  "A01": {
+    "ZH": "正確洗手（溼洗手與乾洗手）",
+    "VI": "Rửa tay đúng cách (正確洗手（溼洗手與乾洗手）)",
+    "ID": "Cara Mencuci Tangan yang Benar (正確洗手（溼洗手與乾洗手）)"
+  },
+  "A02": {
+    "ZH": "穿脫防護衣",
+    "VI": "Mặc và cởi đồ bảo hộ (穿脫防護衣)",
+    "ID": "Memakai dan Melepas APD (穿脫防護衣)"
+  },
+  "B01": {
+    "ZH": "氧氣鋼瓶操作",
+    "VI": "Thao tác bình oxy (氧氣鋼瓶操作)",
+    "ID": "Pengoperasian Tabung Oksigen (氧氣鋼瓶操作)"
+  },
+  "B02": {
+    "ZH": "人工造口袋（雙片式）更換",
+    "VI": "Thay túi hậu môn nhân tạo (hai mảnh) (人工造口袋（雙片式）更換)",
+    "ID": "Penggantian Kantong Stoma (Dua Keping) (人工造口袋（雙片式）更換)"
+  },
+  "C01": {
+    "ZH": "翻身與預防壓傷",
+    "VI": "Lật người và phòng ngừa loét tỳ đè (翻身與預防壓傷)",
+    "ID": "Membalik Tubuh dan Mencegah Luka Dekubitus (翻身與預防壓傷)"
+  },
+  "C02": {
+    "ZH": "安全移位與使用輔具",
+    "VI": "Di chuyển an toàn và sử dụng dụng cụ hỗ trợ (安全移位與使用輔具)",
+    "ID": "Mobilisasi Aman dan Penggunaan Alat Bantu (安全移位與使用輔具)"
+  },
+  "C03": {
+    "ZH": "預防攣縮",
+    "VI": "Phòng ngừa co rút cơ (預防攣縮)",
+    "ID": "Pencegahan Kontraktur (預防攣縮)"
+  },
+  "C04": {
+    "ZH": "安全使用約束帶與保護長者",
+    "VI": "Sử dụng đai cố định an toàn và bảo vệ người cao tuổi (安全使用約束帶與保護長者)",
+    "ID": "Penggunaan Restrain Aman dan Perlindungan Lansia (安全使用約束帶與保護長者)"
+  },
+  "F01": {
+    "ZH": "床上淋浴",
+    "VI": "Tắm trên giường (床上淋浴)",
+    "ID": "Mandi di Atas Tempat Tidur (床上淋浴)"
+  },
+  "F02": {
+    "ZH": "修剪指甲操作技術（含手指攣縮者）",
+    "VI": "Kỹ thuật cắt móng tay (kể cả ngón tay co rút) (修剪指甲操作技術（含手指攣縮者）)",
+    "ID": "Teknik Menggunting Kuku (termasuk Jari Kontraktur) (修剪指甲操作技術（含手指攣縮者）)"
+  },
+  "F03": {
+    "ZH": "排泄照護與會陰清潔",
+    "VI": "Chăm sóc bài tiết và vệ sinh vùng kín (排泄照護與會陰清潔)",
+    "ID": "Perawatan Eliminasi dan Kebersihan Perineum (排泄照護與會陰清潔)"
+  },
+  "D01": {
+    "ZH": "認識失智症",
+    "VI": "認識失智症（待翻譯）",
+    "ID": "認識失智症（待翻譯）"
+  },
+  "D02": {
+    "ZH": "失智者之日常生活促進與活動安排",
+    "VI": "失智者之日常生活促進與活動安排（待翻譯）",
+    "ID": "失智者之日常生活促進與活動安排（待翻譯）"
+  },
+  "D03": {
+    "ZH": "失智者之日常生活照顧",
+    "VI": "失智者之日常生活照顧（待翻譯）",
+    "ID": "失智者之日常生活照顧（待翻譯）"
+  },
+  "D04": {
+    "ZH": "安全看視",
+    "VI": "安全看視（待翻譯）",
+    "ID": "安全看視（待翻譯）"
+  },
+  "D05": {
+    "ZH": "與失智者溝通之原則與技巧",
+    "VI": "與失智者溝通之原則與技巧（待翻譯）",
+    "ID": "與失智者溝通之原則與技巧（待翻譯）"
+  },
+  "D06": {
+    "ZH": "失智者口腔保健",
+    "VI": "失智者口腔保健（待翻譯）",
+    "ID": "失智者口腔保健（待翻譯）"
+  },
+  "D07": {
+    "ZH": "失智者之營養原則與飲食建議",
+    "VI": "失智者之營養原則與飲食建議（待翻譯）",
+    "ID": "失智者之營養原則與飲食建議（待翻譯）"
+  },
+  "D08": {
+    "ZH": "失智者之精神行為問題的照顧態度及危機處理",
+    "VI": "失智者之精神行為問題的照顧態度及危機處理（待翻譯）",
+    "ID": "失智者之精神行為問題的照顧態度及危機處理（待翻譯）"
+  }
+}
