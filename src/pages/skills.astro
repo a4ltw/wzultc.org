@@ -10,7 +10,6 @@ type VideoInfo = {
   count: number;
 };
 
-// 課程顯示順序
 const COURSE_ORDER = ['Y01','Y02','Y03','A01','A02','B01','B02','C01','C02','C03','C04','F01','F02','F03','D01','D02','D03','D04','D05','D06','D07','D08'];
 
 const SERIES_LABEL: Record<string, string> = {
@@ -25,6 +24,7 @@ const SERIES_LABEL: Record<string, string> = {
 const TYPE_LABEL: Record<string, string> = {
   S: '簡報',
   P: '流程圖',
+  V: '影片',
 };
 
 const LANG_COLOR: Record<string, string> = {
@@ -33,7 +33,6 @@ const LANG_COLOR: Record<string, string> = {
   ID: 'bg-red-100 text-red-700',
 };
 
-// 按課程分組
 const grouped: Record<string, { title: string; codes: [string, VideoInfo][] }> = {};
 for (const [code, info] of Object.entries(videosData) as [string, VideoInfo][]) {
   const course = code.split('-')[0];
@@ -41,7 +40,6 @@ for (const [code, info] of Object.entries(videosData) as [string, VideoInfo][]) 
   grouped[course].codes.push([code, info]);
 }
 
-// 排序 codes: S 優先，然後按 lang ZH/VI/ID，再按 P 編號
 function sortCodes(codes: [string, VideoInfo][]) {
   return codes.sort(([a], [b]) => {
     const aType = a.split('-')[2]?.[0] ?? '';
@@ -56,7 +54,6 @@ function sortCodes(codes: [string, VideoInfo][]) {
   });
 }
 
-// 按系列分組
 const seriesGroups: Record<string, string[]> = {};
 for (const course of COURSE_ORDER) {
   if (!grouped[course]) continue;
@@ -70,16 +67,22 @@ for (const course of COURSE_ORDER) {
   <div class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-10 text-center px-4">
     <h1 class="text-3xl md:text-4xl font-bold mb-3">長照專技教材</h1>
     <p class="text-lg opacity-90">Tài liệu kỹ thuật chăm sóc dài hạn ／ Materi teknis perawatan jangka panjang</p>
-    <div class="flex justify-center gap-4 mt-4 flex-wrap text-sm">
-      <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-300 inline-block"></span> 中文</span>
-      <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-yellow-300 inline-block"></span> Tiếng Việt</span>
-      <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-red-300 inline-block"></span> Bahasa Indonesia</span>
+    <div class="flex justify-center gap-3 mt-5 flex-wrap">
+      <button data-lang="ZH" class="lang-btn active px-5 py-2 rounded-full font-semibold text-sm border-2 border-white bg-white text-blue-600 transition-all">
+        中文
+      </button>
+      <button data-lang="VI" class="lang-btn px-5 py-2 rounded-full font-semibold text-sm border-2 border-white/60 text-white/90 bg-white/10 hover:bg-white/20 transition-all">
+        Tiếng Việt
+      </button>
+      <button data-lang="ID" class="lang-btn px-5 py-2 rounded-full font-semibold text-sm border-2 border-white/60 text-white/90 bg-white/10 hover:bg-white/20 transition-all">
+        Bahasa Indonesia
+      </button>
     </div>
   </div>
 
   <div class="container mx-auto px-4 py-10 max-w-5xl">
     {Object.entries(seriesGroups).map(([series, courses]) => (
-      <section class="mb-12">
+      <section class="series-section mb-12" data-series={series}>
         <h2 class="text-xl font-bold text-gray-700 mb-4 border-l-4 border-blue-500 pl-3">
           {SERIES_LABEL[series] ?? series}
         </h2>
@@ -87,8 +90,9 @@ for (const course of COURSE_ORDER) {
           {courses.map((course) => {
             const { title, codes } = grouped[course];
             const sorted = sortCodes([...codes]);
+            const courseLangs = [...new Set(sorted.map(([c]) => c.split('-')[1]))].join(' ');
             return (
-              <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+              <div class="course-card bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" data-langs={courseLangs}>
                 <div class="bg-gradient-to-r from-blue-50 to-cyan-50 px-5 py-3 border-b border-gray-100">
                   <span class="font-mono text-xs text-blue-500 font-bold mr-2">{course}</span>
                   <span class="font-semibold text-gray-800">{title}</span>
@@ -99,8 +103,9 @@ for (const course of COURSE_ORDER) {
                     const typeBase = typeStr[0];
                     return (
                       <a
-                        href={`/videos/${code}`}
-                        class={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm font-medium transition-all hover:shadow-sm hover:-translate-y-0.5 ${LANG_COLOR[info.lang]} border-current/20`}
+                        href={`/skills/${code}`}
+                        data-badge-lang={info.lang}
+                        class={`skill-badge inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm font-medium transition-all hover:shadow-sm hover:-translate-y-0.5 ${LANG_COLOR[info.lang]} border-current/20`}
                       >
                         <span class="opacity-60 text-xs">{TYPE_LABEL[typeBase] ?? typeStr}</span>
                         <span>{info.langLabel}</span>
@@ -117,3 +122,47 @@ for (const course of COURSE_ORDER) {
     ))}
   </div>
 </Layout>
+
+<script is:inline>
+  const buttons = document.querySelectorAll('.lang-btn');
+  const cards = document.querySelectorAll('.course-card');
+  const sections = document.querySelectorAll('.series-section');
+
+  function filterLang(lang) {
+    // 更新按鈕樣式
+    buttons.forEach(btn => {
+      const on = btn.dataset.lang === lang;
+      btn.classList.toggle('bg-white', on);
+      btn.classList.toggle('text-blue-600', on);
+      btn.classList.toggle('border-white', on);
+      btn.classList.toggle('active', on);
+      btn.classList.toggle('bg-white/10', !on);
+      btn.classList.toggle('text-white/90', !on);
+      btn.classList.toggle('border-white/60', !on);
+    });
+
+    // 顯示/隱藏 badges
+    document.querySelectorAll('.skill-badge').forEach(badge => {
+      badge.style.display = badge.dataset.badgeLang === lang ? '' : 'none';
+    });
+
+    // 若 card 無任何可見 badge，隱藏 card
+    cards.forEach(card => {
+      const hasBadge = card.dataset.langs.split(' ').includes(lang);
+      card.style.display = hasBadge ? '' : 'none';
+    });
+
+    // 若 section 內無任何可見 card，隱藏 section
+    sections.forEach(section => {
+      const hasVisible = [...section.querySelectorAll('.course-card')].some(c => c.style.display !== 'none');
+      section.style.display = hasVisible ? '' : 'none';
+    });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => filterLang(btn.dataset.lang));
+  });
+
+  // 預設顯示中文
+  filterLang('ZH');
+</script>

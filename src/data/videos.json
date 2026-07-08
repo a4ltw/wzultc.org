@@ -558,5 +558,133 @@
     "langLabel": "中文",
     "type": "P",
     "count": 1
+  },
+  "Y01-ZH-V": {
+    "title": "居家護理照護衛教-鼻胃管篇",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "XFuY9lVEhuk"
+  },
+  "Y02-ZH-V": {
+    "title": "居家護理照護衛教-尿管篇",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "23_UlcGaDfI"
+  },
+  "Y03-ZH-V": {
+    "title": "口腔清潔、進食照護與吞嚥運動",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "_K2JZYlVzns"
+  },
+  "Y01-VI-V": {
+    "title": "居家護理照護衛教-鼻胃管篇",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "yhh1IY1DbGQ"
+  },
+  "Y02-VI-V": {
+    "title": "居家護理照護衛教-尿管篇",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "kiB1Nrw-XPc"
+  },
+  "Y03-VI-V": {
+    "title": "口腔清潔、進食照護與吞嚥運動",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "WDODYsRczcY"
+  },
+  "A01-VI-V": {
+    "title": "正確洗手（溼洗手與乾洗手）",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "soXI4plE9Z8"
+  },
+  "A02-VI-V": {
+    "title": "穿脫防護衣",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "db0HuzSJwRQ"
+  },
+  "B01-VI-V": {
+    "title": "氧氣鋼瓶操作",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "ADtgtbw0BvE"
+  },
+  "B02-VI-V": {
+    "title": "人工造口袋（雙片式）更換",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "h98TQ3csNSo"
+  },
+  "C01-VI-V": {
+    "title": "翻身與預防壓傷",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "uHLYbFA9k7M"
+  },
+  "C02-VI-V": {
+    "title": "安全移位與使用輔具",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "Lwx7nRca0U0"
+  },
+  "C04-VI-V": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "XbvBRyKTDhc"
+  },
+  "F01-VI-V": {
+    "title": "床上淋浴",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "Tk0QIV3-vUM"
+  },
+  "F02-VI-V": {
+    "title": "修剪指甲操作技術（含手指攣縮者）",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "9dz7G4aDZfg"
+  },
+  "F03-VI-V": {
+    "title": "排泄照護與會陰清潔",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "NZZNuGVRg_4"
   }
 }
