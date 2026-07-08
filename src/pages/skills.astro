@@ -99,39 +99,42 @@ for (const course of COURSE_ORDER) {
                   <span class="font-mono text-xs text-blue-500 font-bold mr-2">{course}</span>
                   <span class="font-semibold text-gray-800">{title}</span>
                 </div>
-                <div class="px-5 py-4 flex flex-wrap gap-2">
-                  {sorted.map(([code, info]) => {
-                    const typeStr = code.split('-')[2] ?? '';
-                    const typeBase = typeStr[0];
-                    if (typeBase === 'V' && info.youtubeId) {
+                {/* 嵌入影片區（各語言各一個，依語言篩選顯示） */}
+                {sorted.filter(([, info]) => info.type === 'V' && info.youtubeId).map(([code, info]) => (
+                  <div class="vid-embed border-b border-gray-100" data-embed-lang={info.lang}>
+                    <div class="relative w-full" style="padding-top:56.25%">
+                      <iframe
+                        class="absolute inset-0 w-full h-full"
+                        src={`https://www.youtube.com/embed/${info.youtubeId}`}
+                        title={`${info.title}（${info.langLabel}）`}
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        loading="lazy"
+                      ></iframe>
+                    </div>
+                  </div>
+                ))}
+                {/* S / P badges */}
+                {sorted.some(([, info]) => info.type !== 'V') && (
+                  <div class="px-5 py-4 flex flex-wrap gap-2">
+                    {sorted.filter(([, info]) => info.type !== 'V').map(([code, info]) => {
+                      const typeStr = code.split('-')[2] ?? '';
+                      const typeBase = typeStr[0];
                       return (
-                        <button
+                        <a
+                          href={`/skills/${code}`}
                           data-badge-lang={info.lang}
-                          data-yt={info.youtubeId}
-                          data-title={`${info.title}（${info.langLabel}）`}
-                          class={`skill-badge vid-trigger inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm font-medium transition-all hover:shadow-sm hover:-translate-y-0.5 cursor-pointer ${LANG_COLOR[info.lang]} border-current/20`}
+                          class={`skill-badge inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm font-medium transition-all hover:shadow-sm hover:-translate-y-0.5 ${LANG_COLOR[info.lang]} border-current/20`}
                         >
-                          <svg class="w-3.5 h-3.5 opacity-70" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z"/>
-                          </svg>
-                          <span class="opacity-60 text-xs">{TYPE_LABEL[typeBase]}</span>
+                          <span class="opacity-60 text-xs">{TYPE_LABEL[typeBase] ?? typeStr}</span>
                           <span>{info.langLabel}</span>
-                        </button>
+                          <span class="opacity-50 text-xs">{info.count}頁</span>
+                        </a>
                       );
-                    }
-                    return (
-                      <a
-                        href={`/skills/${code}`}
-                        data-badge-lang={info.lang}
-                        class={`skill-badge inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm font-medium transition-all hover:shadow-sm hover:-translate-y-0.5 ${LANG_COLOR[info.lang]} border-current/20`}
-                      >
-                        <span class="opacity-60 text-xs">{TYPE_LABEL[typeBase] ?? typeStr}</span>
-                        <span>{info.langLabel}</span>
-                        {typeBase !== 'V' && <span class="opacity-50 text-xs">{info.count}頁</span>}
-                      </a>
-                    );
-                  })}
-                </div>
+                    })}
+                  </div>
+                )}
               </div>
             );
           })}
@@ -140,29 +143,9 @@ for (const course of COURSE_ORDER) {
     ))}
   </div>
 
-  <!-- Video modal -->
-  <div id="vid-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 p-4" role="dialog" aria-modal="true">
-    <div class="relative w-full max-w-3xl bg-black rounded-2xl overflow-hidden shadow-2xl">
-      <div class="flex items-center justify-between px-4 py-3 bg-gray-900">
-        <span id="vid-modal-title" class="text-white text-sm font-medium truncate pr-4"></span>
-        <button id="vid-modal-close" class="text-gray-400 hover:text-white transition-colors shrink-0" aria-label="關閉">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
-      <div class="relative w-full" style="padding-top:56.25%">
-        <iframe id="vid-modal-iframe" class="absolute inset-0 w-full h-full"
-          src="" title="" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
 </Layout>
 
 <script is:inline>
-  // ── Language filter ──
   const langBtns = document.querySelectorAll('.lang-btn');
   const cards    = document.querySelectorAll('.course-card');
   const sections = document.querySelectorAll('.series-section');
@@ -170,23 +153,31 @@ for (const course of COURSE_ORDER) {
   function filterLang(lang) {
     langBtns.forEach(btn => {
       const on = btn.dataset.lang === lang;
-      btn.classList.toggle('bg-white',      on);
-      btn.classList.toggle('text-blue-600', on);
-      btn.classList.toggle('border-white',  on);
+      btn.classList.toggle('bg-white',       on);
+      btn.classList.toggle('text-blue-600',  on);
+      btn.classList.toggle('border-white',   on);
       btn.classList.toggle('bg-white/10',   !on);
       btn.classList.toggle('text-white/90', !on);
       btn.classList.toggle('border-white/60',!on);
     });
 
+    // S/P badges
     document.querySelectorAll('.skill-badge').forEach(b => {
       b.style.display = b.dataset.badgeLang === lang ? '' : 'none';
     });
 
+    // 嵌入影片
+    document.querySelectorAll('.vid-embed').forEach(v => {
+      v.style.display = v.dataset.embedLang === lang ? '' : 'none';
+    });
+
+    // 卡片：有該語言內容才顯示
     cards.forEach(card => {
       const has = card.dataset.langs.split(' ').includes(lang);
       card.style.display = has ? '' : 'none';
     });
 
+    // 系列區塊
     sections.forEach(sec => {
       const has = [...sec.querySelectorAll('.course-card')].some(c => c.style.display !== 'none');
       sec.style.display = has ? '' : 'none';
@@ -195,33 +186,4 @@ for (const course of COURSE_ORDER) {
 
   langBtns.forEach(btn => btn.addEventListener('click', () => filterLang(btn.dataset.lang)));
   filterLang('ZH');
-
-  // ── Video modal ──
-  const modal    = document.getElementById('vid-modal');
-  const iframe   = document.getElementById('vid-modal-iframe');
-  const titleEl  = document.getElementById('vid-modal-title');
-  const closeBtn = document.getElementById('vid-modal-close');
-
-  function openModal(ytId, title) {
-    iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
-    titleEl.textContent = title;
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    iframe.src = '';
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.vid-trigger').forEach(btn => {
-    btn.addEventListener('click', () => openModal(btn.dataset.yt, btn.dataset.title));
-  });
-
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
