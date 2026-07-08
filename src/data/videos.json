@@ -686,5 +686,45 @@
     "type": "V",
     "count": 1,
     "youtubeId": "NZZNuGVRg_4"
+  },
+  "A01-ZH-V": {
+    "title": "正確洗手（溼洗手與乾洗手）",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "soXI4plE9Z8"
+  },
+  "A02-ZH-V": {
+    "title": "穿脫防護衣",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "db0HuzSJwRQ"
+  },
+  "B01-ZH-V": {
+    "title": "氧氣鋼瓶操作",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "ADtgtbw0BvE"
+  },
+  "C01-ZH-V": {
+    "title": "翻身與預防壓傷",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "uHLYbFA9k7M"
+  },
+  "C02-ZH-V": {
+    "title": "安全移位與使用輔具",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "Lwx7nRca0U0"
   }
 }
