@@ -2,305 +2,33 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="教學影片 - WZULTC" description="文藻跨語照護計畫教學影片資源">
-  <div class="container mx-auto px-4 py-12 max-w-3xl space-y-14">
+<Layout title="影片資源 - WZULTC" description="文藻跨語照護計畫影片與教材資源中心">
+  <div class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-10 text-center px-4">
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">影片與教材資源</h1>
+    <p class="text-lg opacity-90">Tài nguyên video và tài liệu học tập</p>
+  </div>
 
-    <!-- ── 區塊 1：健康檢查流程 ── -->
-    <div>
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">健康檢查流程</h2>
-        <p class="text-gray-500">Quy trình khám sức khỏe</p>
-        <p class="text-gray-500">Proses Pemeriksaan Kesehatan</p>
+  <div class="container mx-auto px-4 py-12 max-w-3xl space-y-6">
+    <a href="/videos/general" class="block bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+      <div class="bg-gradient-to-r from-sky-500 to-teal-500 px-6 py-4">
+        <h2 class="text-xl font-bold text-white">一般影片</h2>
+        <p class="text-white/80 text-sm mt-1">健康檢查流程、跨文化講座、活動花絮</p>
       </div>
+      <div class="px-6 py-4 flex justify-between items-center">
+        <p class="text-gray-600 text-sm">衛教影片 ‧ 跨文化溝通系列 ‧ 活動紀錄</p>
+        <span class="text-teal-500 group-hover:translate-x-1 transition-transform">→</span>
+      </div>
+    </a>
 
-      <div class="flex justify-center gap-3 mb-6">
-        <button data-group="pcp" data-vid="43TIuD-CdCc" data-url="https://wzultc.org/video/pcp-zh"
-          class="vid-btn px-6 py-2.5 rounded-full font-semibold text-sm transition-all border-2 border-sky-500 bg-sky-500 text-white">
-          中文
-        </button>
-        <button data-group="pcp" data-vid="gfExMdsj7ho" data-url="https://wzultc.org/video/pcp-vi"
-          class="vid-btn px-6 py-2.5 rounded-full font-semibold text-sm transition-all border-2 border-sky-500 text-sky-600 bg-white hover:bg-sky-50">
-          越南語
-        </button>
-        <button data-group="pcp" data-vid="ewp13sfnF48" data-url="https://wzultc.org/video/pcp-id"
-          class="vid-btn px-6 py-2.5 rounded-full font-semibold text-sm transition-all border-2 border-sky-500 text-sky-600 bg-white hover:bg-sky-50">
-          印尼語
-        </button>
+    <a href="/videos/skills" class="block bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+      <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-6 py-4">
+        <h2 class="text-xl font-bold text-white">長照專技教材</h2>
+        <p class="text-white/80 text-sm mt-1">Tài liệu kỹ thuật chăm sóc ／ Materi teknis perawatan</p>
       </div>
-
-      <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-        <div class="relative w-full" style="padding-top: 56.25%;">
-          <iframe id="frame-pcp" class="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/43TIuD-CdCc"
-            title="健康檢查流程" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-        </div>
-        <div class="px-6 py-4 flex items-center gap-2 text-sm text-gray-500 border-t border-gray-100">
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-          </svg>
-          <span>短網址：</span>
-          <a id="url-pcp" href="https://wzultc.org/video/pcp-zh" class="text-blue-600 hover:underline font-mono">https://wzultc.org/video/pcp-zh</a>
-        </div>
+      <div class="px-6 py-4 flex justify-between items-center">
+        <p class="text-gray-600 text-sm">簡報 ‧ 流程圖 ‧ 中文／越南語／印尼語</p>
+        <span class="text-blue-500 group-hover:translate-x-1 transition-transform">→</span>
       </div>
-    </div>
-
-    <!-- ── 區塊 2：基礎照護技能 ── -->
-    <div>
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">基礎照護技能（中越字卡）</h2>
-        <p class="text-gray-500">Kỹ năng chăm sóc cơ bản (Thẻ từ Hoa-Việt)</p>
-      </div>
-
-      <div class="flex flex-col gap-2 mb-6">
-        <button data-group="care" data-vid="soXI4plE9Z8" data-url="https://wzultc.org/video/A01"
-          class="vid-btn w-full text-left px-5 py-3 rounded-xl font-medium text-sm transition-all border-2 border-teal-500 bg-teal-500 text-white">
-          <span class="font-bold">A01</span> · 正確洗手（溼洗手與乾洗手）
-        </button>
-        <button data-group="care" data-vid="db0HuzSJwRQ" data-url="https://wzultc.org/video/A02"
-          class="vid-btn w-full text-left px-5 py-3 rounded-xl font-medium text-sm transition-all border-2 border-teal-500 text-teal-700 bg-white hover:bg-teal-50">
-          <span class="font-bold">A02</span> · 穿脫防護衣
-        </button>
-        <button data-group="care" data-vid="ADtgtbw0BvE" data-url="https://wzultc.org/video/B01"
-          class="vid-btn w-full text-left px-5 py-3 rounded-xl font-medium text-sm transition-all border-2 border-teal-500 text-teal-700 bg-white hover:bg-teal-50">
-          <span class="font-bold">B01</span> · 氧氣鋼瓶操作
-        </button>
-        <button data-group="care" data-vid="uHLYbFA9k7M" data-url="https://wzultc.org/video/C01"
-          class="vid-btn w-full text-left px-5 py-3 rounded-xl font-medium text-sm transition-all border-2 border-teal-500 text-teal-700 bg-white hover:bg-teal-50">
-          <span class="font-bold">C01</span> · 翻身與預防壓傷
-        </button>
-        <button data-group="care" data-vid="Lwx7nRca0U0" data-url="https://wzultc.org/video/C02"
-          class="vid-btn w-full text-left px-5 py-3 rounded-xl font-medium text-sm transition-all border-2 border-teal-500 text-teal-700 bg-white hover:bg-teal-50">
-          <span class="font-bold">C02</span> · 安全移位與使用輔具
-        </button>
-      </div>
-
-      <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-        <div class="relative w-full" style="padding-top: 56.25%;">
-          <iframe id="frame-care" class="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/soXI4plE9Z8"
-            title="基礎照護技能" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-        </div>
-        <div class="px-6 py-4 flex items-center gap-2 text-sm text-gray-500 border-t border-gray-100">
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-          </svg>
-          <span>短網址：</span>
-          <a id="url-care" href="https://wzultc.org/video/A01" class="text-blue-600 hover:underline font-mono">https://wzultc.org/video/A01</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── 區塊 3：高雄榮總衛教影片 ── -->
-    <div>
-      <div class="text-center mb-8">
-        <p class="text-xs font-semibold tracking-widest text-rose-400 uppercase mb-2">高雄榮民總醫院 授權</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">衛教影片</h2>
-        <p class="text-gray-500">授權原版 × 文藻越語再製</p>
-      </div>
-
-      <!-- 第一層：主題 -->
-      <div class="flex flex-wrap justify-center gap-2 mb-3">
-        <button data-topic="oral"
-          class="topic-btn px-5 py-2 rounded-full text-sm font-semibold transition-all border-2 border-rose-500 bg-rose-500 text-white">
-          口腔清潔・進食・吞嚥
-        </button>
-        <button data-topic="cath"
-          class="topic-btn px-5 py-2 rounded-full text-sm font-semibold transition-all border-2 border-rose-500 text-rose-700 bg-white hover:bg-rose-50">
-          居家護理 尿管篇
-        </button>
-        <button data-topic="ngt"
-          class="topic-btn px-5 py-2 rounded-full text-sm font-semibold transition-all border-2 border-rose-500 text-rose-700 bg-white hover:bg-rose-50">
-          居家護理 鼻胃管篇
-        </button>
-      </div>
-
-      <!-- 第二層：版本 -->
-      <div class="flex justify-center gap-3 mb-6">
-        <button data-ver="zh"
-          class="ver-btn px-5 py-2 rounded-full text-sm font-semibold transition-all border-2 border-gray-400 bg-gray-700 text-white">
-          中文原版
-        </button>
-        <button data-ver="vi"
-          class="ver-btn px-5 py-2 rounded-full text-sm font-semibold transition-all border-2 border-gray-400 text-gray-600 bg-white hover:bg-gray-50">
-          越語字幕字卡
-        </button>
-      </div>
-
-      <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-        <div class="relative w-full" style="padding-top: 56.25%;">
-          <iframe id="frame-vghmc" class="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/_K2JZYlVzns"
-            title="衛教影片" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-        </div>
-        <div class="px-6 py-4 flex items-center gap-2 text-sm text-gray-500 border-t border-gray-100">
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-          </svg>
-          <span>短網址：</span>
-          <a id="url-vghmc" href="https://wzultc.org/video/oral-zh" class="text-blue-600 hover:underline font-mono">https://wzultc.org/video/oral-zh</a>
-        </div>
-      </div>
-    <!-- ── 區塊 4：跨文化講座 ── -->
-    <div>
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">跨文化講座</h2>
-        <p class="text-gray-500">醫護人員跨文化溝通系列</p>
-      </div>
-
-      <!-- 文化選擇按鈕 -->
-      <div class="flex flex-wrap justify-center gap-3 mb-5">
-        <button data-lec="id"
-          class="lec-btn px-5 py-2 rounded-full text-sm font-semibold transition-all border-2 border-violet-500 bg-violet-500 text-white">
-          🇮🇩 印尼
-        </button>
-        <button data-lec="th"
-          class="lec-btn px-5 py-2 rounded-full text-sm font-semibold transition-all border-2 border-violet-500 text-violet-700 bg-white hover:bg-violet-50">
-          🇹🇭 泰國
-        </button>
-        <button data-lec="vi"
-          class="lec-btn px-5 py-2 rounded-full text-sm font-semibold transition-all border-2 border-violet-500 text-violet-700 bg-white hover:bg-violet-50">
-          🇻🇳 越南
-        </button>
-        <button data-lec="ph"
-          class="lec-btn px-5 py-2 rounded-full text-sm font-semibold transition-all border-2 border-violet-500 text-violet-700 bg-white hover:bg-violet-50">
-          🇵🇭 菲律賓
-        </button>
-      </div>
-
-      <!-- 講題與講者 -->
-      <div class="mb-4 text-center px-2">
-        <p id="lec-title" class="text-gray-800 font-medium leading-snug mb-1">跨文化醫療溝通：提升醫護人員對印尼文化背景的理解與實踐</p>
-        <p id="lec-speaker" class="text-sm text-violet-600">魏愛妮（Yufita Ng）</p>
-      </div>
-
-      <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-        <div class="relative w-full" style="padding-top: 56.25%;">
-          <iframe id="frame-lec" class="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/vqMtYoL-cMM"
-            title="跨文化講座" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-        </div>
-        <div class="px-6 py-4 flex items-center gap-2 text-sm text-gray-500 border-t border-gray-100">
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-          </svg>
-          <span>短網址：</span>
-          <a id="url-lec" href="https://wzultc.org/video/ccl-id" class="text-blue-600 hover:underline font-mono">https://wzultc.org/video/ccl-id</a>
-        </div>
-      </div>
-    </div>
-
+    </a>
   </div>
 </Layout>
-
-<script is:inline>
-  /* ── 跨文化講座 ── */
-  const lectures = {
-    id: { vid: 'vqMtYoL-cMM', url: 'https://wzultc.org/video/ccl-id', title: '跨文化醫療溝通：提升醫護人員對印尼文化背景的理解與實踐', speaker: '魏愛妮（Yufita Ng）' },
-    th: { vid: 'hjQe_-D5GqA', url: 'https://wzultc.org/video/ccl-th', title: '臨床實踐中的文化安全：連結泰國傳統價值觀與台灣醫療服務', speaker: '陳正娟（Anthika Manowong）' },
-    vi: { vid: 'n4gryq5iYnc', url: 'https://wzultc.org/video/ccl-vi', title: '點頭不等於理解：越南病患的文化與醫療溝通', speaker: '阮氏玉蘭' },
-    ph: { vid: 'aW5auRpYFLc', url: 'https://wzultc.org/video/ccl-ph', title: '台灣醫護人員應了解的菲律賓外籍工作者照護重點：有效溝通的實用策略', speaker: '葉佰賢（Aiden Yeh）' },
-  };
-
-  document.querySelectorAll('.lec-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const lec = lectures[btn.dataset.lec];
-      document.getElementById('frame-lec').src = `https://www.youtube.com/embed/${lec.vid}`;
-      document.getElementById('lec-title').textContent = lec.title;
-      document.getElementById('lec-speaker').textContent = lec.speaker;
-      const urlEl = document.getElementById('url-lec');
-      urlEl.href = lec.url; urlEl.textContent = lec.url;
-      document.querySelectorAll('.lec-btn').forEach(b => {
-        const on = b === btn;
-        b.classList.toggle('bg-violet-500', on); b.classList.toggle('text-white', on);
-        b.classList.toggle('text-violet-700', !on); b.classList.toggle('bg-white', !on);
-      });
-    });
-  });
-
-  /* ── 高雄榮總 雙層切換 ── */
-  const vghmc = {
-    oral: { zh: '_K2JZYlVzns', vi: 'oT_qFTb1HIU' },
-    cath: { zh: '23_UlcGaDfI', vi: '-yZwJCEzW9k' },
-    ngt:  { zh: 'XFuY9lVEhuk', vi: 'tBpFEgdqq_M' },
-  };
-  const vghmcUrls = {
-    oral: { zh: 'https://wzultc.org/video/oral-zh', vi: 'https://wzultc.org/video/oral-vi' },
-    cath: { zh: 'https://wzultc.org/video/cath-zh', vi: 'https://wzultc.org/video/cath-vi' },
-    ngt:  { zh: 'https://wzultc.org/video/ngt-zh',  vi: 'https://wzultc.org/video/ngt-vi'  },
-  };
-  let vTopic = 'oral', vVer = 'zh';
-
-  function updateVghmc() {
-    const id  = vghmc[vTopic][vVer];
-    const url = vghmcUrls[vTopic][vVer];
-    document.getElementById('frame-vghmc').src = `https://www.youtube.com/embed/${id}`;
-    const urlEl = document.getElementById('url-vghmc');
-    urlEl.href = url; urlEl.textContent = url;
-  }
-
-  document.querySelectorAll('.topic-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      vTopic = btn.dataset.topic;
-      document.querySelectorAll('.topic-btn').forEach(b => {
-        const on = b === btn;
-        b.classList.toggle('bg-rose-500', on); b.classList.toggle('text-white', on);
-        b.classList.toggle('text-rose-700', !on); b.classList.toggle('bg-white', !on);
-      });
-      updateVghmc();
-    });
-  });
-
-  document.querySelectorAll('.ver-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      vVer = btn.dataset.ver;
-      document.querySelectorAll('.ver-btn').forEach(b => {
-        const on = b === btn;
-        b.classList.toggle('bg-gray-700', on); b.classList.toggle('text-white', on);
-        b.classList.toggle('text-gray-600', !on); b.classList.toggle('bg-white', !on);
-      });
-      updateVghmc();
-    });
-  });
-
-  document.querySelectorAll('.vid-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const group  = btn.dataset.group;
-      const vid    = btn.dataset.vid;
-      const url    = btn.dataset.url;
-      const isSkye = group === 'pcp';
-      const active = isSkye ? 'bg-sky-500' : 'bg-teal-500';
-      const activeTxt = 'text-white';
-      const inactive = isSkye ? 'text-sky-600 bg-white hover:bg-sky-50' : 'text-teal-600 bg-white hover:bg-teal-50';
-
-      // 更新影片
-      document.getElementById('frame-' + group).src = `https://www.youtube.com/embed/${vid}`;
-      const urlEl = document.getElementById('url-' + group);
-      urlEl.href = url;
-      urlEl.textContent = url;
-
-      // 更新按鈕樣式
-      document.querySelectorAll(`.vid-btn[data-group="${group}"]`).forEach(b => {
-        const on = b === btn;
-        if (isSkye) {
-          b.classList.toggle('bg-sky-500',  on);
-          b.classList.toggle('text-white',  on);
-          b.classList.toggle('text-sky-600', !on);
-          b.classList.toggle('bg-white',    !on);
-        } else {
-          b.classList.toggle('bg-teal-500',  on);
-          b.classList.toggle('text-white',   on);
-          b.classList.toggle('text-teal-700', !on);
-          b.classList.toggle('bg-white',     !on);
-        }
-      });
-    });
-  });
-</script>
