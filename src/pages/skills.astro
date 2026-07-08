@@ -148,8 +148,7 @@ for (const course of COURSE_ORDER) {
                           data-type-id={typeLabels['ID']}
                           class={`skill-badge inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm font-medium transition-all hover:shadow-sm hover:-translate-y-0.5 ${LANG_COLOR[info.lang]} border-current/20`}
                         >
-                          <span class="badge-type opacity-60 text-xs">{typeLabels[info.lang] ?? typeLabels['ZH']}</span>
-                          <span>{info.langLabel}</span>
+                          <span class="badge-type text-sm">{typeLabels[info.lang] ?? typeLabels['ZH']}</span>
                         </a>
                       );
                     })}
