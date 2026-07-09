@@ -726,5 +726,77 @@
     "type": "V",
     "count": 1,
     "youtubeId": "Lwx7nRca0U0"
+  },
+  "Y01-ID-V": {
+    "title": "居家護理照護衛教-鼻胃管篇",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "heZBF5Mzjy4"
+  },
+  "Y02-ID-V": {
+    "title": "居家護理照護衛教-尿管篇",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "SGwieeNoT1w"
+  },
+  "Y03-ID-V": {
+    "title": "口腔清潔、進食照護與吞嚥運動",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "SKmqDwkFl_k"
+  },
+  "B02-ID-V": {
+    "title": "人工造口袋（雙片式）更換",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "_VYCcpBaDdU"
+  },
+  "C03-ID-V": {
+    "title": "預防攣縮",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "uX0ZX2X_qyg"
+  },
+  "C04-ID-V": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "m4w2l16t_Io"
+  },
+  "F01-ID-V": {
+    "title": "床上淋浴",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "DeWVclOb6f4"
+  },
+  "F02-ID-V": {
+    "title": "修剪指甲操作技術（含手指攣縮者）",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "EsbeLjtHkUA"
+  },
+  "F03-ID-V": {
+    "title": "排泄照護與會陰清潔",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "uf98_Xf07ho"
   }
 }
