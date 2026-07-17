@@ -559,6 +559,132 @@
     "type": "P",
     "count": 1
   },
+  "A02-VI-P1": {
+    "title": "穿脫防護衣",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "A02-VI-P2": {
+    "title": "穿脫防護衣",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "A02-ID-P1": {
+    "title": "穿脫防護衣",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 1
+  },
+  "A02-ID-P2": {
+    "title": "穿脫防護衣",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 1
+  },
+  "B01-VI-P": {
+    "title": "氧氣鋼瓶操作",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "B02-VI-P": {
+    "title": "人工造口袋（雙片式）更換",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "C01-VI-P": {
+    "title": "翻身與預防壓傷",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "C02-VI-P1": {
+    "title": "安全移位與使用輔具",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "C04-VI-P1": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "C04-VI-P2": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "C04-VI-P3": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "C04-VI-P4": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "C04-ID-P1": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 1
+  },
+  "C04-ID-P2": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 1
+  },
+  "F01-VI-P2": {
+    "title": "床上淋浴",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "F01-VI-P3": {
+    "title": "床上淋浴",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "F02-VI-P1": {
+    "title": "修剪指甲操作技術（含手指攣縮者）",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "F02-VI-P2": {
+    "title": "修剪指甲操作技術（含手指攣縮者）",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
   "Y01-ZH-V": {
     "title": "居家護理照護衛教-鼻胃管篇",
     "lang": "ZH",
