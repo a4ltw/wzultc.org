@@ -661,7 +661,7 @@
     "langLabel": "Tiếng Việt",
     "type": "V",
     "count": 1,
-    "youtubeId": "XbvBRyKTDhc"
+    "youtubeId": "A1OLv_E9l3g"
   },
   "F01-VI-V": {
     "title": "床上淋浴",
@@ -669,7 +669,7 @@
     "langLabel": "Tiếng Việt",
     "type": "V",
     "count": 1,
-    "youtubeId": "Tk0QIV3-vUM"
+    "youtubeId": "T3Ic4LSj6Es"
   },
   "F02-VI-V": {
     "title": "修剪指甲操作技術（含手指攣縮者）",
@@ -693,7 +693,7 @@
     "langLabel": "中文",
     "type": "V",
     "count": 1,
-    "youtubeId": "soXI4plE9Z8"
+    "youtubeId": "6LbtPfXcCZE"
   },
   "A02-ZH-V": {
     "title": "穿脫防護衣",
@@ -701,7 +701,7 @@
     "langLabel": "中文",
     "type": "V",
     "count": 1,
-    "youtubeId": "db0HuzSJwRQ"
+    "youtubeId": "rERRZoUIhvQ"
   },
   "B01-ZH-V": {
     "title": "氧氣鋼瓶操作",
@@ -709,7 +709,7 @@
     "langLabel": "中文",
     "type": "V",
     "count": 1,
-    "youtubeId": "ADtgtbw0BvE"
+    "youtubeId": "hFH09GHwnBw"
   },
   "C01-ZH-V": {
     "title": "翻身與預防壓傷",
@@ -717,7 +717,7 @@
     "langLabel": "中文",
     "type": "V",
     "count": 1,
-    "youtubeId": "uHLYbFA9k7M"
+    "youtubeId": "M2m6o78RSHk"
   },
   "C02-ZH-V": {
     "title": "安全移位與使用輔具",
@@ -773,7 +773,7 @@
     "langLabel": "Bahasa Indonesia",
     "type": "V",
     "count": 1,
-    "youtubeId": "m4w2l16t_Io"
+    "youtubeId": "Hv0AliAXjfU"
   },
   "F01-ID-V": {
     "title": "床上淋浴",
@@ -797,6 +797,294 @@
     "langLabel": "Bahasa Indonesia",
     "type": "V",
     "count": 1,
-    "youtubeId": "uf98_Xf07ho"
+    "youtubeId": "EOYo-fQfHkU"
+  },
+  "B02-ZH-V": {
+    "title": "人工造口袋（雙片式）更換",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "_NockIJ2qgA"
+  },
+  "C03-ZH-V": {
+    "title": "預防攣縮",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "x6mvNIJyfmo"
+  },
+  "C04-ZH-V": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "5WkIDoLnDRo"
+  },
+  "F01-ZH-V": {
+    "title": "床上淋浴",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "DhGh464ZTfE"
+  },
+  "F02-ZH-V": {
+    "title": "修剪指甲操作技術（含手指攣縮者）",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "bqBJPd_0GNc"
+  },
+  "F03-ZH-V": {
+    "title": "排泄照護與會陰清潔",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "FUbZn60ZTY8"
+  },
+  "D01-ZH-V": {
+    "title": "認識失智症",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "7JfHW8Q404Q"
+  },
+  "D02-ZH-V": {
+    "title": "失智者之日常生活促進與活動安排",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "e8zYGctuIoI"
+  },
+  "D03-ZH-V": {
+    "title": "失智者之日常生活照顧",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "Ghzx_-mpkL8"
+  },
+  "D04-ZH-V": {
+    "title": "安全看視",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "eHAkO8NV8OA"
+  },
+  "D05-ZH-V": {
+    "title": "與失智者溝通之原則與技巧",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "zxWg6E2v8rg"
+  },
+  "D06-ZH-V": {
+    "title": "失智者口腔保健",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "6BpmoibdGmY"
+  },
+  "D07-ZH-V": {
+    "title": "失智者之營養原則與飲食建議",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "WDhq-mat9DU"
+  },
+  "D08-ZH-V": {
+    "title": "失智者之精神行為問題的照顧態度及危機處理",
+    "lang": "ZH",
+    "langLabel": "中文",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "CKXUL0LRrPg"
+  },
+  "C03-VI-V": {
+    "title": "預防攣縮",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "rqjS3wxScZ8"
+  },
+  "D01-VI-V": {
+    "title": "認識失智症",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "Esz-44eWPkY"
+  },
+  "D02-VI-V": {
+    "title": "失智者之日常生活促進與活動安排",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "ZyX2jRYmrlc"
+  },
+  "D03-VI-V": {
+    "title": "失智者之日常生活照顧",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "xxFuZ7aCK4M"
+  },
+  "D04-VI-V": {
+    "title": "安全看視",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "B2gHEl2s7Go"
+  },
+  "D05-VI-V": {
+    "title": "與失智者溝通之原則與技巧",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "_dMI4mlv6Io"
+  },
+  "D06-VI-V": {
+    "title": "失智者口腔保健",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "H2hzKixrUdM"
+  },
+  "D07-VI-V": {
+    "title": "失智者之營養原則與飲食建議",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "6rpOHd1dph4"
+  },
+  "D08-VI-V": {
+    "title": "失智者之精神行為問題的照顧態度及危機處理",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "XvsO3FCcMyY"
+  },
+  "A01-ID-V": {
+    "title": "正確洗手（溼洗手與乾洗手）",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "K452k7e41SI"
+  },
+  "A02-ID-V": {
+    "title": "穿脫防護衣",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "WCtjQogNLwI"
+  },
+  "B01-ID-V": {
+    "title": "氧氣鋼瓶操作",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "MwYSq0tPNWU"
+  },
+  "C01-ID-V": {
+    "title": "翻身與預防壓傷",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "f90z05T_tU8"
+  },
+  "C02-ID-V": {
+    "title": "安全移位與使用輔具",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "Mho2ox7pzws"
+  },
+  "D01-ID-V": {
+    "title": "認識失智症",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "0ZCS7S736S8"
+  },
+  "D02-ID-V": {
+    "title": "失智者之日常生活促進與活動安排",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "-i0qNWaJelM"
+  },
+  "D03-ID-V": {
+    "title": "失智者之日常生活照顧",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "IbuOgDXIIRQ"
+  },
+  "D04-ID-V": {
+    "title": "安全看視",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "Jsv77iC0ijk"
+  },
+  "D05-ID-V": {
+    "title": "與失智者溝通之原則與技巧",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "qL9UlA8ZvAE"
+  },
+  "D06-ID-V": {
+    "title": "失智者口腔保健",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "m2o7PGurPvc"
+  },
+  "D07-ID-V": {
+    "title": "失智者之營養原則與飲食建議",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "xbE6PrXsSJ8"
+  },
+  "D08-ID-V": {
+    "title": "失智者之精神行為問題的照顧態度及危機處理",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "V",
+    "count": 1,
+    "youtubeId": "PzSxl8H3PYU"
   }
 }
