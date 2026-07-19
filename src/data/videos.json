@@ -419,6 +419,13 @@
     "type": "P",
     "count": 1
   },
+  "B02-ID-P": {
+    "title": "人工造口袋（雙片式）更換",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 1
+  },
   "C01-ID-P": {
     "title": "翻身與預防壓傷",
     "lang": "ID",
@@ -757,6 +764,48 @@
   },
   "C04-ID-P2": {
     "title": "安全使用約束帶與保護長者",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 1
+  },
+  "C04-ID-P3": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 1
+  },
+  "C04-ID-P4": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 1
+  },
+  "F01-VI-P1": {
+    "title": "床上淋浴",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "P",
+    "count": 1
+  },
+  "F01-ID-S": {
+    "title": "床上淋浴",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "S",
+    "count": 15
+  },
+  "F01-ID-P1": {
+    "title": "床上淋浴",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 1
+  },
+  "F01-ID-P2": {
+    "title": "床上淋浴",
     "lang": "ID",
     "langLabel": "Bahasa Indonesia",
     "type": "P",
