@@ -188,6 +188,104 @@
     "type": "S",
     "count": 15
   },
+  "A02-VI-S": {
+    "title": "穿脫防護衣",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "S",
+    "count": 13
+  },
+  "A02-ID-S": {
+    "title": "穿脫防護衣",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "S",
+    "count": 13
+  },
+  "B01-VI-S": {
+    "title": "氧氣鋼瓶操作",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "S",
+    "count": 11
+  },
+  "B02-VI-S": {
+    "title": "人工造口袋（雙片式）更換",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "S",
+    "count": 11
+  },
+  "B02-ID-S": {
+    "title": "人工造口袋（雙片式）更換",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "S",
+    "count": 11
+  },
+  "C01-VI-S": {
+    "title": "翻身與預防壓傷",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "S",
+    "count": 12
+  },
+  "C02-VI-S": {
+    "title": "安全移位與使用輔具",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "S",
+    "count": 13
+  },
+  "C04-VI-S": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "S",
+    "count": 13
+  },
+  "C04-ID-S": {
+    "title": "安全使用約束帶與保護長者",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "S",
+    "count": 13
+  },
+  "F01-VI-S": {
+    "title": "床上淋浴",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "S",
+    "count": 15
+  },
+  "F02-VI-S": {
+    "title": "修剪指甲操作技術（含手指攣縮者）",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "S",
+    "count": 12
+  },
+  "F02-ID-S": {
+    "title": "修剪指甲操作技術（含手指攣縮者）",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "S",
+    "count": 12
+  },
+  "F03-VI-S": {
+    "title": "排泄照護與會陰清潔",
+    "lang": "VI",
+    "langLabel": "Tiếng Việt",
+    "type": "S",
+    "count": 15
+  },
+  "F03-ID-S": {
+    "title": "排泄照護與會陰清潔",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "S",
+    "count": 15
+  },
   "D01-ZH-S": {
     "title": "認識失智症",
     "lang": "ZH",
@@ -446,6 +544,13 @@
     "langLabel": "中文",
     "type": "P",
     "count": 1
+  },
+  "F03-ID-P": {
+    "title": "排泄照護與會陰清潔",
+    "lang": "ID",
+    "langLabel": "Bahasa Indonesia",
+    "type": "P",
+    "count": 4
   },
   "Y01-ID-P": {
     "title": "居家護理照護衛教-鼻胃管篇",
